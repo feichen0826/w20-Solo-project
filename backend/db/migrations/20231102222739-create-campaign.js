@@ -9,48 +9,42 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
-        type: Sequelize.INTEGER
+      userId: {
+        type: Sequelize.INTEGER,
+        references:{
+          model:'Users'
+        },
+        onDelete:'CASCADE'
       },
       title: {
         type: Sequelize.STRING,
-        allowNull:false
       },
       description: {
-        type: Sequelize.TEXT,
-        allowNull:false
+        type: Sequelize.TEXT
       },
-      funding_goal: {
-        type: Sequelize.DECIMAL,
-        allowNull:false
+      fundingGoal: {
+        type: Sequelize.DECIMAL
       },
-      current_funding: {
-        type: Sequelize.DECIMAL,
-        allowNull:false
+      currentFunding: {
+        type: Sequelize.DECIMAL
       },
-      num_backers: {
-        type: Sequelize.INTEGER,
-        allowNull:false
+      numBackers: {
+        type: Sequelize.INTEGER
       },
-      start_date: {
-        type: Sequelize.DATE,
-        allowNull:false
+      startDate: {
+        type: Sequelize.DATE
       },
-      end_date: {
-        type: Sequelize.DATE,
-        allowNull:false
+      endDate: {
+        type: Sequelize.DATE
       },
       story: {
-        type: Sequelize.TEXT,
-        allowNull:false
+        type: Sequelize.TEXT
       },
-      img_url: {
-        type: Sequelize.STRING,
-        allowNull:false
+      imgUrl: {
+        type: Sequelize.STRING
       },
       categories: {
-        type: Sequelize.STRING,
-        allowNull:false
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

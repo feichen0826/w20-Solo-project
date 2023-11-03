@@ -11,19 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Campaign.belongsToMany(models.Category,{
+        through:models.CampaignCategory,
+        foreignKey:'campaignId',
+        otherKey:'categoryId'
+      })
     }
   }
   Campaign.init({
-    user_id: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
-    funding_goal: DataTypes.DECIMAL,
-    current_funding: DataTypes.DECIMAL,
-    num_backers: DataTypes.INTEGER,
-    start_date: DataTypes.DATE,
-    end_date: DataTypes.DATE,
+    fundingGoal: DataTypes.DECIMAL,
+    currentFunding: DataTypes.DECIMAL,
+    numBackers: DataTypes.INTEGER,
+    startDate: DataTypes.DATE,
+    endDate: DataTypes.DATE,
     story: DataTypes.TEXT,
-    img_url: DataTypes.STRING,
+    imgUrl: DataTypes.STRING,
     categories: DataTypes.STRING
   }, {
     sequelize,

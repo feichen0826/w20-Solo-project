@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasMany(models.Campaign,{
-        foreignKey:'user_id',
+        foreignKey:'userId',
         onDelete:'CASCADE',
         hooks:true,
       })
