@@ -1,11 +1,9 @@
 const express = require('express');
-const app = express();
-app.use(express.json());
-
+const router = express.Router();
 const {Campaign} = require('../../db/models')
 
 // Define a route to get all campaigns
-app.get('/campaigns', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const campaigns = await Campaign.findAll();
     res.json(campaigns);
@@ -16,7 +14,7 @@ app.get('/campaigns', async (req, res) => {
 });
 
 // Define a route to get a single campaign by its ID
-app.get('/campaigns/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const campaignId = req.params.id;
 
   try {
@@ -34,7 +32,7 @@ app.get('/campaigns/:id', async (req, res) => {
 });
 
 // Define a route to create a new campaign
-app.post('/campaigns', async (req, res) => {
+router.post('/', async (req, res) => {
   const newCampaignData = req.body;
 
   try {
@@ -47,7 +45,7 @@ app.post('/campaigns', async (req, res) => {
 });
 
 // Define a route to update a campaign by its ID
-app.put('/campaigns/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   const campaignId = req.params.id;
   const updatedCampaignData = req.body;
 
@@ -69,7 +67,7 @@ app.put('/campaigns/:id', async (req, res) => {
 });
 
 // Define a route to delete a campaign by its ID
-app.delete('/campaigns/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const campaignId = req.params.id;
 
   try {
@@ -88,8 +86,4 @@ app.delete('/campaigns/:id', async (req, res) => {
   }
 });
 
-// Start the Express server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+module.exports = router
