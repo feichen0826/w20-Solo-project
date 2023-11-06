@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {Campaign} = require('../../db/models')
 
-// Define a route to get all campaigns
+//get all campaigns
 router.get('/', async (req, res) => {
   try {
     const campaigns = await Campaign.findAll();
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Define a route to get a single campaign by its ID
+// get a single campaign by its ID
 router.get('/:id', async (req, res) => {
   const campaignId = req.params.id;
 
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Define a route to create a new campaign
+// create a new campaign
 router.post('/', async (req, res) => {
   const newCampaignData = req.body;
 
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Define a route to update a campaign by its ID
+// update a campaign by its ID
 router.put('/:id', async (req, res) => {
   const campaignId = req.params.id;
   const updatedCampaignData = req.body;

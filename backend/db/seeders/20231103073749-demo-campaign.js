@@ -2,6 +2,11 @@
 
 const {Campaign} = require('../models')
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -22,8 +27,7 @@ module.exports = {
 
           Join us in celebrating art, culture, and human expression. Your contribution makes a difference in the lives of artists and the world of art. Let's make this exhibition a memorable experience for everyone.
         `,
-        imgUrl: 'art-exhibition.jpg',
-        categories: 'Art',
+        imgUrl: 'https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/jhlufy86nh8rmutllcip',
       },
       {
         userId: 2,
@@ -41,8 +45,7 @@ module.exports = {
 
           Be a part of the tech revolution and help us shape the future of gadgets. Your contribution fuels our passion for innovation, and together, we can create products that change the way we live and work.
         `,
-        imgUrl: 'tech-innovation.jpg',
-        categories: 'Technology',
+        imgUrl: 'https://c0.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/rputlrha5gc0dnkz69v0',
       },
       {
         userId: 3,
@@ -60,8 +63,7 @@ module.exports = {
 
           Join us in the journey towards a more sustainable and stylish future. Your support is not just for fashion; it's for a greener world where style meets sustainability.
         `,
-        imgUrl: 'eco-fashion.jpg',
-        categories: 'Fashion',
+        imgUrl: 'https://c0.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/murf6tkaeweesjyntkyg',
       },
       {
         userId: 3,
@@ -75,8 +77,7 @@ module.exports = {
         story: `
           Technology can be a powerful force for good. Our hackathon brings together tech enthusiasts to develop innovative solutions that address social challenges. By participating, you contribute to making the world a better place through technology.
         `,
-        imgUrl: 'tech-hackathon.jpg',
-        categories: 'Technology',
+        imgUrl: 'https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/cqvmrxx5hkjkzmdxzxvx',
       },
       {
         userId: 1,
@@ -90,8 +91,7 @@ module.exports = {
         story: `
           Good health starts with good food. Our cooking classes focus on teaching you how to prepare nutritious and tasty meals. Join us in this culinary journey to improve your cooking skills and overall well-being.
         `,
-        imgUrl: 'cooking-classes.jpg',
-        categories: 'Food, Health',
+        imgUrl: 'https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/cyhywy0gu7escy7rtz6n',
       },
       {
         userId: 2,
@@ -105,8 +105,7 @@ module.exports = {
         story: `
           Music has the power to unite people and evoke emotions. Our music festival features an incredible lineup of artists from various genres. Immerse yourself in a world of melodies and rhythms, and celebrate the universal language of music.
         `,
-        imgUrl: 'music-festival.jpg',
-        categories: 'Entertainment, Music',
+        imgUrl: 'https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/jeynhf5ai4iwktl8cinz',
       },
       {
         userId: 3,
@@ -120,8 +119,7 @@ module.exports = {
         story: `
           Our planet is a precious gift, and it's our responsibility to protect it. Join our conservation project to preserve nature and biodiversity. Your support makes a lasting impact on the environment.
         `,
-        imgUrl: 'conservation-project.jpg',
-        categories: 'Environment, Sustainability',
+        imgUrl: 'https://c3.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/grqic4cyzpngmeisau7w',
       },
       {
         userId: 1,
@@ -135,8 +133,7 @@ module.exports = {
         story: `
           Mobile apps are shaping the digital landscape. Our course equips you with the skills to create your own mobile applications. Join us in this educational journey to become a proficient app developer.
         `,
-        imgUrl: 'app-development-course.jpg',
-        categories: 'Technology, Education',
+        imgUrl: 'https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/jfakatosvjlcfablawmj',
       },
       {
         userId: 2,
@@ -150,8 +147,7 @@ module.exports = {
         story: `
           Every life deserves love and care, including the lives of our furry friends. Join our mission to rescue and provide shelter to animals in need. Your support ensures that they receive the care they deserve.
         `,
-        imgUrl: 'animal-rescue.jpg',
-        categories: 'Animals, Charity',
+        imgUrl: 'https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/vhjxjpu04ll2nxlt3ee6',
       },
       {
         userId: 3,
@@ -165,8 +161,7 @@ module.exports = {
         story: `
           Nature is calling, and we're answering. Our outdoor adventure club brings together outdoor enthusiasts for exciting hikes, camping, and exploration. Connect with like-minded adventurers and create memories in the great outdoors.
         `,
-        imgUrl: 'outdoor-adventures.jpg',
-        categories: 'Travel, Sports',
+        imgUrl: 'https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/yorz2i4yk98ijw9et7i0',
       },
       {
         userId: 1,
@@ -180,8 +175,7 @@ module.exports = {
         story: `
           Curiosity is a child's greatest asset. Our program introduces children to the wonders of science through interactive and educational activities. Spark a lifelong love for learning with engaging science experiences.
         `,
-        imgUrl: 'science-education.jpg',
-        categories: 'Education',
+        imgUrl: 'https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/tzrxpbkitwtozvqsmd5y',
       },
       {
         userId: 2,
@@ -195,8 +189,7 @@ module.exports = {
         story: `
           Art has the power to transcend boundaries and bring communities together. Our project aims to create a vibrant and inclusive art installation that reflects the diversity and unity of our community. Join us in this creative journey.
         `,
-        imgUrl: 'community-art.jpg',
-        categories: 'Art, Community',
+        imgUrl: 'https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/tsuynyzj4dahrzerah9g',
       },
       {
         userId: 3,
@@ -210,8 +203,7 @@ module.exports = {
         story: `
           The future is green, and we're committed to making it happen. Our initiative promotes renewable energy solutions and sustainability. By contributing, you play a vital role in reducing our environmental footprint.
         `,
-        imgUrl: 'renewable-energy.jpg',
-        categories: 'Environment, Sustainability',
+        imgUrl: 'https://c3.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/ih4en2izpcmv9vscqgsh',
       },
       {
         userId: 1,
@@ -225,8 +217,7 @@ module.exports = {
         story: `
           Our food festival is a celebration of local flavors and culinary traditions. Join us for a gastronomic adventure featuring delicious dishes from talented local chefs. Your support encourages small food producers and promotes local cuisine.
         `,
-        imgUrl: 'food-festival.jpg',
-        categories: 'Food, Community',
+        imgUrl: 'https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/xc5wnjbofubpzwevwfpf',
       },
       {
         userId: 2,
@@ -240,8 +231,7 @@ module.exports = {
         story: `
           Mental health matters. Our campaign aims to create awareness, reduce stigma, and support mental health initiatives. Join us in this crucial effort to make mental well-being a priority.
         `,
-        imgUrl: 'mental-health.jpg',
-        categories: 'Health, Community',
+        imgUrl: 'https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/elp5cdfl5ihodldaj9y7',
       },
       {
         userId: 3,
@@ -255,8 +245,7 @@ module.exports = {
         story: `
           The universe is our final frontier. Our project is dedicated to advancing scientific research and exploration in space. By contributing, you become a part of humanity's quest to understand the cosmos.
         `,
-        imgUrl: 'space-exploration.jpg',
-        categories: 'Technology',
+        imgUrl: 'https://c0.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/p0fbo1yfgj76wcrx28pa',
       },
       {
         userId: 1,
@@ -270,8 +259,7 @@ module.exports = {
         story: `
           Reading opens doors to new worlds. Our literacy program is designed to make reading fun and accessible for children. Your support empowers young readers and nurtures a lifelong love for books.
         `,
-        imgUrl: 'literacy-program.jpg',
-        categories: 'Education',
+        imgUrl: 'https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/oumswa89qcckwwi9uxfl',
       },
       {
         userId: 2,
@@ -285,8 +273,7 @@ module.exports = {
         story: `
           Hidden musical gems await your discovery. Our talent showcase features the best local musicians and bands. Be a part of the music scene in your community and help these talented artists shine.
         `,
-        imgUrl: 'music-talent-showcase.jpg',
-        categories: 'Music, Community',
+        imgUrl: 'https://c0.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/a7h7valag0a0rjqknrm0',
       },
       {
         userId: 3,
@@ -300,8 +287,7 @@ module.exports = {
         story: `
           Clean water is a basic human right. Our initiative aims to bring clean and safe drinking water to communities in need. Your support transforms lives and ensures access to this essential resource.
         `,
-        imgUrl: 'clean-water-initiative.jpg',
-        categories: 'Charity, Community',
+        imgUrl: 'https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/rpolrhyzlg4mm5w8nvo9',
       },
       {
         userId: 1,
@@ -315,8 +301,7 @@ module.exports = {
         story: `
           Sports build character and teamwork. Our program supports youth athletes and encourages sports participation in the community. Your support helps young talents grow and achieve their sporting dreams.
         `,
-        imgUrl: 'youth-sports.jpg',
-        categories: 'Sports, Community',
+        imgUrl: 'https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/hl64qqqhynmus3cytg1v'
       },
       {
         userId: 2,
@@ -330,8 +315,7 @@ module.exports = {
         story: `
           Cooking is an art, and we're here to support budding chefs. Our culinary entrepreneurship program provides the tools and guidance for aspiring cooks to start their culinary journeys. Join us in shaping the future of food.
         `,
-        imgUrl: 'culinary-program.jpg',
-        categories: 'Food, Entrepreneurship',
+        imgUrl: 'https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/hs8ip5uawf6bvgbrvs1j',
       },
       {
         userId: 3,
@@ -345,8 +329,7 @@ module.exports = {
         story: `
           Local artisans and creators come together in a celebration of art and craftsmanship. Our art fair is a showcase of the talents in our community. Support local artists and find unique, handmade treasures.
         `,
-        imgUrl: 'arts-crafts-fair.jpg',
-        categories: 'Art, Community',
+        imgUrl: 'https://c3.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/j5ww0eg4h3lbgby0fvsj',
       },
       {
         userId: 1,
@@ -360,8 +343,7 @@ module.exports = {
         story: `
           The natural world is a marvel. Our expedition brings you close to the wonders of wildlife and conservation efforts. Join us on a transformative adventure to protect endangered species and their habitats.
         `,
-        imgUrl: 'wildlife-expedition.jpg',
-        categories: 'Animals, Environment',
+        imgUrl: 'https://c0.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/tkc1mpgcw5g7yr7mcyza',
       },
       {
         userId: 3,
@@ -375,8 +357,7 @@ module.exports = {
         story: `
           Unleash your adventurous spirit and explore the world with us. Our guided travel experiences are designed to provide thrill-seekers with unforgettable journeys. From trekking through the wilderness to diving into the deep blue, we offer an array of exciting adventures.
         `,
-        imgUrl: 'adventure-travel.jpg',
-        categories: 'Travel, Adventure',
+        imgUrl: 'https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/mhct1aworkmiyb0kqltk',
       },
       {
         userId: 1,
@@ -390,8 +371,7 @@ module.exports = {
         story: `
           Health is wealth, and we're on a mission to help you achieve your health and wellness goals. Join our community where you'll find support, guidance, and resources to make positive changes in your lifestyle. Together, we can live healthier and happier lives.
         `,
-        imgUrl: 'healthy-living.jpg',
-        categories: 'Health, Lifestyle',
+        imgUrl: 'https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/ryep18b3crwua3asdhka',
       },
       {
         userId: 2,
@@ -405,8 +385,7 @@ module.exports = {
         story: `
           History holds the key to understanding our world. Join us in preserving the past through an engaging historical documentary project. We aim to document significant events and stories that shaped our history for generations to come.
         `,
-        imgUrl: 'historical-documentary.jpg',
-        categories: 'History, Documentary',
+        imgUrl: 'https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/byxpadkgcclhog6shlhe',
       },
       {
         userId: 3,
@@ -420,8 +399,7 @@ module.exports = {
         story: `
           Food is a universal language, and we're here to take you on a culinary journey. Our exploration tour will introduce you to diverse cuisines from around the globe. Taste, learn, and immerse yourself in the art of cooking and eating.
         `,
-        imgUrl: 'culinary-exploration.jpg',
-        categories: 'Travel, Food',
+        imgUrl: 'https://c3.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/nala7pkur30xlnb7ydtr',
       },
       {
         userId: 2,
@@ -435,8 +413,7 @@ module.exports = {
         story: `
           Startups are the future of innovation, and we're dedicated to supporting them. Your contribution helps startups access the resources, mentorship, and funding they need to thrive in a competitive business landscape.
         `,
-        imgUrl: 'startup-support.jpg',
-        categories: 'Technology, Business',
+        imgUrl: 'https://c3.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/v4dtd88deaxcjdjbhu1e',
       },
       {
         userId: 3,
@@ -450,11 +427,10 @@ module.exports = {
         story: `
           Our planet is in need of guardians, and we're here to make a difference. Join us in conserving our environment through various initiatives, from reforestation to wildlife protection. Together, we can ensure a greener and cleaner world.
         `,
-        imgUrl: 'environment-conservation.jpg',
-        categories: 'Environment, Sustainability',
+        imgUrl: 'https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/yxy0kzoqxrjfs1zxwnbo',
       },
 
-      // Add more campaign data as needed
+
     ], {});
 
     /**
@@ -475,5 +451,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    options.tableName = 'Campaigns';
+    return queryInterface.bulkDelete(options)
   }
 };

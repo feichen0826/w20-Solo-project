@@ -1,13 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
-// import campaignReducer from './campaignReducer'
+import campaignReducer from './campaignReducer'
 // import categoryReducer from './categoryReducer'
 
 const rootReducer = combineReducers({
   // add reducer functions here
   session: sessionReducer,
-  // campaign: campaignReducer,
+  campaign: campaignReducer,
   // category: categoryReducer
 });
 

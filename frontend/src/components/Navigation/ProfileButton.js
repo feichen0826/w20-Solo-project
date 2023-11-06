@@ -1,15 +1,18 @@
-// frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
-import OpenModalButton from '../OpenModalButton';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/session";
+import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import { Link, useHistory } from "react-router-dom";
+import "./ProfileButton.css";
+import ProfileImage from "./ProfileImage.png";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const history = useHistory();
 
   const openMenu = () => {
     if (showMenu) return;
@@ -25,55 +28,61 @@ function ProfileButton({ user }) {
       }
     };
 
-    document.addEventListener('click', closeMenu);
+    document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const closeMenu = () => setShowMenu(false);
-
-  const logout = (e) => {
+  const handleLogout = (e) => {
     e.preventDefault();
-    dispatch(sessionActions.logout());
+    dispatch(logout());
+    history.push("/");
     closeMenu();
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const closeMenu = () => setShowMenu(false);
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      <ul className={ulClassName} ref={ulRef}>
-        {user ? (
-          <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
-          </>
-        ) : (
-          <>
-            <li>
+      <div className="navigation-container">
+        <div className="profile-button-container">
+          <button className="profile-button" onClick={openMenu}>
+            {/* <i className="fas fa-user-circle" /> */}
+            <img className="profile-image" src={ProfileImage} alt="Logo" />
+          </button>
+        </div>
+        <ul className={ulClassName} ref={ulRef}>
+          {user ? (
+            <>
+              {user.username}
+              {user.email}
+
+              <Link to="/campaigns">View all campaigns</Link>
+              <Link to="/my-campaigns">My campaigns</Link>
+
+              {/* <Link to="/my-contributions">My Contributions</Link> */}
+
+
+              <button onClick={handleLogout}>Log Out</button>
+            </>
+          ) : (
+            <>
               <OpenModalButton
                 buttonText="Log In"
-                onButtonClick={closeMenu}
+                onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}
               />
-            </li>
-            <li>
+
               <OpenModalButton
                 buttonText="Sign Up"
-                onButtonClick={closeMenu}
+                onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
-            </li>
-          </>
-        )}
-      </ul>
+            </>
+          )}
+        </ul>
+      </div>
     </>
   );
 }

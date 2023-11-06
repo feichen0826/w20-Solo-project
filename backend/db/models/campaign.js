@@ -29,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
     endDate: DataTypes.DATE,
     story: DataTypes.TEXT,
     imgUrl: DataTypes.STRING,
-    categories: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Campaign',
