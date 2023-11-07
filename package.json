@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/feichen0826/w20-Solo-project#readme",
   "dependencies": {
+    "aws-sdk": "^2.1489.0",
     "multer": "*"
   }
 }
