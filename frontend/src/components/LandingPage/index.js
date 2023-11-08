@@ -7,14 +7,14 @@ import './LandingPage.css'
 // import BackIcon from './path/to/back-icon.svg';
 // import ForwardIcon from './path/to/forward-icon.svg';
 
-const categories = [
-  { name: 'Art', icon: 'art-icon.png' },
-  { name: 'Technology', icon: 'tech-icon.png' },
-  { name: 'Health', icon: 'health-icon.png' },
-  { name: 'Food', icon: 'food-icon.png' },
-  { name: 'Environment', icon: 'environment-icon.png' },
-  { name: 'Sports', icon: 'sports-icon.png' },
-];
+// const categories = [
+//   { name: 'Art', icon: 'art-icon.png' },
+//   { name: 'Technology', icon: 'tech-icon.png' },
+//   { name: 'Health', icon: 'health-icon.png' },
+//   { name: 'Food', icon: 'food-icon.png' },
+//   { name: 'Environment', icon: 'environment-icon.png' },
+//   { name: 'Sports', icon: 'sports-icon.png' },
+// ];
 
 const LandingPage = () => {
   const [currentIndex, setCurrentIndex] = useState(9);
@@ -22,6 +22,8 @@ const LandingPage = () => {
   const dispatch = useDispatch();
   const allCampaigns = useSelector((state) => state.campaign.campaigns);
   console.log(allCampaigns)
+  const allCategories = useSelector((state)=> state.category)
+  console.log(allCategories)
 
   useEffect(() => {
      dispatch(fetchAllCampaignsAsync());

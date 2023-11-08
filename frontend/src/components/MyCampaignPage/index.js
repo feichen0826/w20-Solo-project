@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { fetchAllCampaignsAsync } from '../../store/campaignReducer';
 import { NavLink } from 'react-router-dom';
 import { useParams, useHistory } from "react-router-dom";
+import OpenModalButton from "../OpenModalButton";
+import DeleteConfirmationModal from "../DeleteConfirmationModal";
 import './MyCampaignPage.css'
 
 const MyCampaignPage = () => {
@@ -11,6 +13,9 @@ const history = useHistory();
 const dispatch = useDispatch();
 const currentUser = useSelector((state) => state.session.user);
 const allCampaigns = useSelector((state) => state.campaign.campaigns);
+const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(true);
+const [campaignToDelete, setCampaignToDelete] = useState(null);
+
 console.log(currentUser)
 useEffect(() => {
     dispatch(fetchAllCampaignsAsync());
@@ -20,6 +25,9 @@ useEffect(() => {
   const selectedOption = e.target.value;
   if (selectedOption === 'Edit Campaign') {
     history.push(`/campaigns/${campaignId}/edit`);
+  }else if (selectedOption === 'Delete Campaign') {
+    setCampaignToDelete(campaignId);
+    setShowDeleteConfirmation(true);
   }
 };
 
@@ -43,13 +51,27 @@ useEffect(() => {
                 <select defaultValue="Actions" onChange={(e) => handleDropdownChange(e, campaign.id, history)}>
                   <option value="Actions" disabled>Actions</option>
                   <option value="Edit Campaign">Edit Campaign</option>
-                  <option value="Delete Campaign">Delete Campaign</option>
+                  {/* <option value="Delete Campaign" >Delete Campaign</option> */}
                 </select>
               </div>
+              {campaign && showDeleteConfirmation && (
+                   <OpenModalButton
+                    className="delete-button"
+                    buttonText="Delete Campaign"
+                    modalComponent={
+                      <DeleteConfirmationModal
+                        show={showDeleteConfirmation}
+                        onCancel={() => setShowDeleteConfirmation(false)}
+                        campaignId={campaign.id}
+                      />
+                    }
+                  />
+                  )}
             </div>
           </div>
         ))}
       </div>
+
     </div>
   );
 };

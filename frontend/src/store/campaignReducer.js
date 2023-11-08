@@ -147,9 +147,8 @@ export const deleteCampaignAsync = (campaignId) => async (dispatch) => {
     const response = await csrfFetch(`/api/campaigns/${campaignId}`, {
       method: 'DELETE',
     });
-
+    console.log(response)
     if (response.ok) {
-      const responseBody = await response.json();
       dispatch(deleteCampaign(campaignId));
     } else if (response.status === 404) {
       console.error('Campaign not found');
@@ -168,6 +167,7 @@ const initialState = {
 };
 
 const campaignReducer = (state = initialState, action) => {
+  let newState;
   switch (action.type) {
     case FETCH_ALL_CAMPAIGNS:
       return {
@@ -175,7 +175,7 @@ const campaignReducer = (state = initialState, action) => {
         campaigns: action.campaigns,
       };
     case FETCH_CAMPAIGN_DETAILS:
-       const newState = {...state};
+       newState = {...state};
         newState.campaignDetails = action.campaignDetails
       return newState
     case CREATE_CAMPAIGN:
@@ -184,7 +184,7 @@ const campaignReducer = (state = initialState, action) => {
         campaigns: [...state.campaigns, action.campaign],
       };
     case UPDATE_CAMPAIGN:
-          newState = { ...state };
+        newState = { ...state };
           newState.campaignDetails[action.campaignId] = {
             ...newState.campaignDetails[action.campaignId],
             ...action.campaignData,
@@ -193,7 +193,7 @@ const campaignReducer = (state = initialState, action) => {
 
     case DELETE_CAMPAIGN:
       newState = { ...state };
-      delete newState.campaignDetails[action.campaignId];
+      delete newState.campaigns[action.campaignId];
       return newState;
     // case DELETE_CAMPAIGN:
     //   const updatedCampaigns = state.campaigns.filter(

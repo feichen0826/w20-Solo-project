@@ -3,6 +3,7 @@ const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const campaignRouter = require('./campaigns.js')
+const categoryRouter = require('./categories.js')
 const { restoreUser } = require("../../utils/auth.js");
 
 const { User } = require('../../db/models');
@@ -22,5 +23,7 @@ router.post('/test', (req, res) => {
 });
 
 router.use('/campaigns', campaignRouter)
+
+router.use('/categories', categoryRouter)
 
 module.exports = router;

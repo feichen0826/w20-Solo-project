@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCampaignAsync, fetchCampaignDetailsAsync } from '../../store/campaignReducer';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import './EditCampaignForm.css';
 
-const EditCampaignForm = ({ campaignId }) => {
+const EditCampaignForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const paramId = useParams();
+  console.log(paramId.campaignId)
+  const campaignId = paramId.campaignId
   const [campaign, setCampaign] = useState({
     title: '',
     description: '',
@@ -154,10 +157,81 @@ const EditCampaignForm = ({ campaignId }) => {
             </ul>
           </div>
         )}
+        <div className="form-group">
+          <label>Campaign Story</label>
+          <p>Tell potential contributors more about your campaign. Provide details that will motivate people to contribute. A good pitch is compelling, informative, and easy to digest.</p>
+          <textarea
+            value={campaign.story}
+            onChange={(e) => setCampaign({ ...campaign, story: e.target.value })}
+            required
+          />
+          {errors.story && <span className="error">{errors.story}</span>}
+        </div>
 
         <div className="form-group">
-          <label>Campaign Image</label>
+          <label>Campaign Start Date</label>
+          <input
+            type="date"
+            value={campaign.startDate}
+            onChange={(e) => setCampaign({ ...campaign, startDate: e.target.value })}
+            required
+          />
+          {errors.startDate && <span className="error">{errors.startDate}</span>}
+        </div>
+
+        <div className="form-group">
+          <label>Campaign End Date</label>
+          <input
+            type="date"
+            value={campaign.endDate}
+            onChange={(e) => setCampaign({ ...campaign, endDate: e.target.value })}
+            required
+          />
+          {errors.endDate && <span className="error">{errors.endDate}</span>}
+        </div>
+
+        <div className="form-group">
+           <label>Image</label>
+           <p>Add a image to appear on the top of your campaign page. Campaigns with images raise 2000% more than campaigns without images.</p>
           <input type="file" accept="image/*" onChange={handleImageUpload} />
+        </div>
+
+        <div className="form-group">
+          <label>Campaign Goal Amount & Currency</label>
+          <p>How much money would you like to raise for this campaign?</p>
+          <input
+            type="number"
+            placeholder="$"
+            value={campaign.fundingGoal}
+            onChange={(e) => setCampaign({ ...campaign, fundingGoal: e.target.value })}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Current Funding</label>
+          <p>How much money has been raised for this campaign?</p>
+          <input
+            type="number"
+            placeholder="$"
+            value={campaign.currentFunding}
+            onChange={(e) => setCampaign({ ...campaign, currentFunding: e.target.value })}
+            required
+          />
+          {errors.currentFunding && <span className="error">{errors.currentFunding}</span>}
+        </div>
+
+
+        <div className="form-group">
+          <label>Number of Backers</label>
+          <p>How many backers have supported this campaign?</p>
+          <input
+            type="number"
+            value={campaign.numBackers}
+            onChange={(e) => setCampaign({ ...campaign, numBackers: e.target.value })}
+            required
+          />
+          {errors.numBackers && <span className="error">{errors.numBackers}</span>}
         </div>
       </div>
       <button onClick={handleSubmit}>Save Changes</button>

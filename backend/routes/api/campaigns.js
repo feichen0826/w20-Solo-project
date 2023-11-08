@@ -197,20 +197,28 @@ router.put('/:id', singleMulterUpload('image'), async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const campaignId = req.params.id;
 
-  try {
-    const rowsDeleted = await Campaign.destroy({
-      where: { id: campaignId },
-    });
+  const campaign = await Campaign.findByPk(campaignId);
+  await campaign.destroy();
+  return res.json({ message: 'Successfully deleted' })
 
-    if (rowsDeleted === 0) {
-      res.status(404).json({ message: 'Campaign not found' });
-    } else {
-      res.status(204).send();
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
 });
+// router.delete('/:id', async (req, res) => {
+//   const campaignId = req.params.id;
+
+//   try {
+//     const rowsDeleted = await Campaign.destroy({
+//       where: { id: campaignId },
+//     });
+
+//     if (rowsDeleted === 0) {
+//       res.status(404).json({ message: 'Campaign not found' });
+//     } else {
+//       res.status(204).send();
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Internal Server Error' });
+//   }
+// });
 
 module.exports = router
