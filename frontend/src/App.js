@@ -29,7 +29,7 @@ function App() {
           <Route exact path='/campaign/:campaignId' component={CampaignDetailPage} />
           <Route exact path='/create-campaign' component={CreateNewCampaign} />
           <Route path = '/my-campaigns' component={MyCampaignPage} />
-          <Route path = '/campaigns/:campaignId/edit' component={EditCampaignForm} />
+          <Route exact path = '/campaigns/:campaignId/edit' component={EditCampaignForm} />
         </Switch>
       )}
     </>

@@ -1,32 +1,42 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {createCampaignAsync} from '../../store/campaignReducer'
+import { useHistory } from "react-router-dom";
 import './CreateNewCampaign.css'
 
 const CreateNewCampaign = () => {
-  const [campaignTitle, setCampaignTitle] = useState('');
-  const [campaignTagline, setCampaignTagline] = useState('');
+    const dispatch = useDispatch()
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const [campaignStory, setCampaignStory] = useState('');
+  const [story, setStory] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [imgUrl, setImgUrl] = useState(null);
   const [errors, setErrors] = useState({});
+  const [fundingGoal, setFundingGoal] = useState(0);
+  const [currentFunding, setCurrentFunding] = useState(0);
+  const [numBackers, setNumBackers] = useState(0);
+  const [categories, setCategories] = useState([]);
+   const history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newErrors = {};
-    if (!campaignTitle) {
-      newErrors.campaignTitle = "Campaign Title is required.";
+    if (!title) {
+      newErrors.title = "Campaign Title is required.";
     }
-    if (!campaignTagline) {
-      newErrors.campaignTagline = "Campaign Tagline is required.";
+    if (!description) {
+      newErrors.description = "Campaign Tagline is required.";
     }
 
     if (!category) {
       newErrors.category = "Category is required.";
     }
 
-    if (!campaignStory) {
-      newErrors.campaignStory = "Campaign Story is required.";
+    if (!story) {
+      newErrors.story = "Campaign Story is required.";
     }
 
     if (!startDate) {
@@ -37,12 +47,61 @@ const CreateNewCampaign = () => {
       newErrors.endDate = "End Date is required.";
     }
 
+    if (!fundingGoal) {
+      newErrors.fundingGoal = 'Valid Funding Goal is required.';
+    }
+
+    if (!currentFunding ) {
+      newErrors.currentFunding = 'Valid Current Funding is required.';
+     }
+
+    if (!numBackers) {
+     newErrors.numBackers = 'Valid Number of Backers is required.';
+     }
+
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
+    const createdCampaign = await dispatch(
+        createCampaignAsync({
+            title,
+            description,
+            category,
+            story,
+            startDate,
+            endDate,
+            imgUrl,
+            fundingGoal,
+            currentFunding,
+            numBackers, }));
+    console.log(createdCampaign)
+    if(createdCampaign){
+        history.push(`/campaign/${createdCampaign.id}`)
+    }else{
+        return "Error"
+    }
+  };
 
+  // Add a function to handle image file selection
+  const handleImageUpload = (e) => {
+    const selectedImage = e.target.files[0];
+    if (selectedImage) {
+      setImgUrl(selectedImage);
+    }
+  };
 
+  const handleAddCategory = () => {
+    if (category && !categories.includes(category)) {
+      setCategories([...categories, category]);
+      setCategory(''); // Clear the category input
+    }
+  };
+
+  const handleRemoveCategory = (categoryToRemove) => {
+    const updatedCategories = categories.filter((cat) => cat !== categoryToRemove);
+    setCategories(updatedCategories);
   };
 
   return (
@@ -58,11 +117,11 @@ const CreateNewCampaign = () => {
           <input
             type="text"
             placeholder="My Campaign Title"
-            value={campaignTitle}
-            onChange={(e) => setCampaignTitle(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             required
           />
-          {errors.campaignTitle && <span className="error">{errors.campaignTitle}</span>}
+          {errors.title && <span className="error">{errors.title}</span>}
         </div>
 
         <div className="form-group">
@@ -71,11 +130,11 @@ const CreateNewCampaign = () => {
           <input
             type="text"
             placeholder="My Campaign Tagline"
-            value={campaignTagline}
-            onChange={(e) => setCampaignTagline(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
           />
-          {errors.campaignTagline && <span className="error">{errors.campaignTagline}</span>}
+          {errors.description && <span className="error">{errors.description}</span>}
         </div>
 
         <div className="form-group">
@@ -91,17 +150,32 @@ const CreateNewCampaign = () => {
             <option value="Sports">Sports</option>
           </select>
           {errors.category && <span className="error">{errors.category}</span>}
+          <button onClick={handleAddCategory}>+ Add Category</button>
         </div>
+
+        {categories.length > 0 && (
+        <div>
+          <p>Selected Categories:</p>
+          <ul>
+            {categories.map((cat) => (
+              <li key={cat}>
+                {cat}
+                <button onClick={() => handleRemoveCategory(cat)}>Remove</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
         <div className="form-group">
           <label>Campaign Story</label>
           <p>Tell potential contributors more about your campaign. Provide details that will motivate people to contribute. A good pitch is compelling, informative, and easy to digest.</p>
           <textarea
-            value={campaignStory}
-            onChange={(e) => setCampaignStory(e.target.value)}
+            value={story}
+            onChange={(e) => setStory(e.target.value)}
             required
           />
-          {errors.campaignStory && <span className="error">{errors.campaignStory}</span>}
+          {errors.story && <span className="error">{errors.story}</span>}
         </div>
 
         <div className="form-group">
@@ -124,6 +198,50 @@ const CreateNewCampaign = () => {
             required
           />
           {errors.endDate && <span className="error">{errors.endDate}</span>}
+        </div>
+
+        <div className="form-group">
+            <label>Image</label>
+            <p>Add a image to appear on the top of your campaign page. Campaigns with images raise 2000% more than campaigns without images.</p>
+            <input type="file" accept="image/*" onChange={handleImageUpload} />
+        </div>
+
+        <div className="form-group">
+          <label>Campaign Goal Amount & Currency</label>
+          <p>How much money would you like to raise for this campaign?</p>
+          <input
+            type="number"
+            placeholder="$"
+            value={fundingGoal}
+            onChange={(e) => setFundingGoal(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Current Funding</label>
+          <p>How much money has been raised for this campaign?</p>
+          <input
+            type="number"
+            placeholder="$"
+            value={currentFunding}
+            onChange={(e) => setCurrentFunding(e.target.value)}
+            required
+          />
+          {errors.currentFunding && <span className="error">{errors.currentFunding}</span>}
+        </div>
+
+
+        <div className="form-group">
+          <label>Number of Backers</label>
+          <p>How many backers have supported this campaign?</p>
+          <input
+            type="number"
+            value={numBackers}
+            onChange={(e) => setNumBackers(e.target.value)}
+            required
+          />
+          {errors.numBackers && <span className="error">{errors.numBackers}</span>}
         </div>
       </div>
 

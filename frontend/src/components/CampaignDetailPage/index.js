@@ -56,7 +56,7 @@ const { campaignId } = useParams();
       <p>{singleCampaign.story}</p>
 
       <div className="campaign-category">
-        <p>Category: {singleCampaign.category}</p>
+        <p>Category: {singleCampaign.categories}</p>
       </div>
     </div>
   );

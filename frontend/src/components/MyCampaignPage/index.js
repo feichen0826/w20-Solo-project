@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { fetchAllCampaignsAsync } from '../../store/campaignReducer';
 import { NavLink } from 'react-router-dom';
+import { useParams, useHistory } from "react-router-dom";
 import './MyCampaignPage.css'
 
 const MyCampaignPage = () => {
+const history = useHistory();
 const dispatch = useDispatch();
 const currentUser = useSelector((state) => state.session.user);
 const allCampaigns = useSelector((state) => state.campaign.campaigns);
@@ -13,6 +15,13 @@ console.log(currentUser)
 useEffect(() => {
     dispatch(fetchAllCampaignsAsync());
  }, [dispatch]);
+
+ const handleDropdownChange = (e, campaignId, history) => {
+  const selectedOption = e.target.value;
+  if (selectedOption === 'Edit Campaign') {
+    history.push(`/campaigns/${campaignId}/edit`);
+  }
+};
 
  const userCampaigns = allCampaigns.filter(campaign => campaign.userId === currentUser.id);
   return (
@@ -31,11 +40,9 @@ useEffect(() => {
               <h2>{campaign.title}</h2>
               <p>By {currentUser.username}</p>
               <div className="dropdown">
-                <select defaultValue="Actions">
+                <select defaultValue="Actions" onChange={(e) => handleDropdownChange(e, campaign.id, history)}>
                   <option value="Actions" disabled>Actions</option>
-                  <option value="Edit Campaign">
-                  <Link to={`/campaigns/${campaign.id}/edit`}>Edit Campaign</Link>
-                  </option>
+                  <option value="Edit Campaign">Edit Campaign</option>
                   <option value="Delete Campaign">Delete Campaign</option>
                 </select>
               </div>

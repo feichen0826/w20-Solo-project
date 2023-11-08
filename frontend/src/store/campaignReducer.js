@@ -5,6 +5,7 @@ const FETCH_ALL_CAMPAIGNS = 'campaign/fetchAllCampaigns';
 const FETCH_CAMPAIGN_DETAILS = 'campaign/fetchCampaignDetails';
 const CREATE_CAMPAIGN = 'campaign/createCampaign';
 const DELETE_CAMPAIGN = 'campaign/deleteCampaign';
+const UPDATE_CAMPAIGN = 'campaign/updateCampaign';
 
 
 // Action creator
@@ -29,6 +30,14 @@ const createCampaign = (campaign) => {
   };
 };
 
+const updateCampaign = (campaignId, campaignData) =>{
+  return {
+    type: UPDATE_CAMPAIGN,
+    campaignId,
+    campaignData
+  };
+}
+
 export const deleteCampaign = (campaignId) => {
   return {
     type: DELETE_CAMPAIGN,
@@ -40,13 +49,13 @@ export const deleteCampaign = (campaignId) => {
 
 // Thunk action
 export const fetchAllCampaignsAsync = () => async (dispatch) => {
-  const response = await fetch('/api/campaigns');
+  const response = await csrfFetch('/api/campaigns');
   const campaignsData = await response.json();
   dispatch(fetchAllCampaigns(campaignsData));
 };
 
 export const fetchCampaignDetailsAsync = (campaignId) => async (dispatch) => {
-  const response = await fetch(`/api/campaigns/${campaignId}`);
+  const response = await csrfFetch(`/api/campaigns/${campaignId}`);
   console.log(response)
   if ( response.ok ) {
     const campaignDetails = await response.json();
@@ -58,26 +67,79 @@ export const fetchCampaignDetailsAsync = (campaignId) => async (dispatch) => {
 };
 
 // export const createCampaignAsync = (campaignData) => async (dispatch) => {
+//   console.log(campaignData)
+//   const{title, description,category, story,startDate, endDate, imgUrl} = campaignData
+//   const formData = new FormData();
+//   formData.append("title", title);
+//   formData.append("description", description);
+//   formData.append("category", category);
+//   formData.append("story", story);
+//   formData.append("startDate", startDate);
+//   formData.append("endDate", endDate);
+
+
+//   if (imgUrl) {
+//     formData.append("imgUrl", campaignData.imgUrl);
+//   }
+
 //   const response = await csrfFetch('/api/campaigns', {
 //     method: 'POST',
 //     headers: {
-//       'Content-Type': 'application/json',
+//       "Content-Type": "multipart/form-data",
 //     },
-//     body: JSON.stringify(campaignData),
+//     body: JSON.stringify(formData),
 //   });
 
+//   console.log(response)
 //   if (response.ok) {
 //     const createdCampaign = await response.json();
-//     const imageUploadResponse = await dispatch(
-//       uploadCampaignImageAsync(createdCampaign.id, campaignData.imageUrl)
-//     );
-
+//     dispatch(createCampaign(createdCampaign.campaign));
 //     return createdCampaign;
 //   } else {
 //     const errors = await response.json();
 //     return errors;
 //   }
 // };
+
+export const createCampaignAsync = (campaignData) => async (dispatch) => {
+
+  const response = await csrfFetch('/api/campaigns', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(campaignData),
+  });
+  console.log(response)
+  if (response.ok) {
+    const createdCampaign = await response.json();
+      dispatch(createCampaign(createdCampaign))
+      console.log(createdCampaign)
+    return createdCampaign;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
+
+export const updateCampaignAsync = (campaignId, campaignData) => async (dispatch) => {
+  const response = await csrfFetch(`/api/campaigns/${campaignId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(campaignData),
+  });
+
+  if (response.ok) {
+    const updatedCampaign = await response.json();
+    dispatch(updateCampaign(updatedCampaign));
+    return updatedCampaign;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
 
 
 export const deleteCampaignAsync = (campaignId) => async (dispatch) => {
@@ -121,14 +183,26 @@ const campaignReducer = (state = initialState, action) => {
         ...state,
         campaigns: [...state.campaigns, action.campaign],
       };
+    case UPDATE_CAMPAIGN:
+          newState = { ...state };
+          newState.campaignDetails[action.campaignId] = {
+            ...newState.campaignDetails[action.campaignId],
+            ...action.campaignData,
+          };
+    return newState;
+
     case DELETE_CAMPAIGN:
-      const updatedCampaigns = state.campaigns.filter(
-        (campaign) => campaign.id !== action.campaignId
-      );
-      return {
-        ...state,
-        campaigns: updatedCampaigns,
-      };
+      newState = { ...state };
+      delete newState.campaignDetails[action.campaignId];
+      return newState;
+    // case DELETE_CAMPAIGN:
+    //   const updatedCampaigns = state.campaigns.filter(
+    //     (campaign) => campaign.id !== action.campaignId
+    //   );
+    //   return {
+    //     ...state,
+    //     campaigns: updatedCampaigns,
+    //   };
     default:
       return state;
   }

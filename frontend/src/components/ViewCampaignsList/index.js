@@ -49,6 +49,7 @@ const ViewCampaignsList = () => {
             <p>{campaign.description}</p>
             <p>Funding: ${campaign.currentFunding}  ({((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%)</p>
             <p>{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
+            <p>{campaign.categories}</p>
             </Link>
         ))}
         </div>
