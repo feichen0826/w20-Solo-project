@@ -31,10 +31,12 @@ const ViewCampaignsList = () => {
         }
       };
 
-      if(allCampaigns.length === 0){
+      if(allCampaigns.length === 0 || !allCampaigns){
         return null
       }
-
+      if(allCategories.length === 0){
+        return null
+      }
 
   return (
     <div className="view-campaigns-list">

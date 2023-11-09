@@ -20,7 +20,14 @@ const ViewCategoryCampaign = () => {
     dispatch(fetchAllCategoryAsync())
  }, [dispatch]);
 
-  // Filter campaigns for the selected category
+ if(allCampaigns.length === 0 || !allCampaigns){
+  return null
+}
+if(allCategories.length === 0){
+  return null
+}
+
+
 const categoryCampaigns = allCategories.filter((category) => category.id === categoryId);
 //const categoryCampaigns = allCampaigns.filter((campaign) => campaign.category === categoryId);
 const calculateDaysLeft = (startDate, endDate) => {
