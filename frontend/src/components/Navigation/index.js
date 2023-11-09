@@ -22,6 +22,7 @@ function Navigation({ isLoaded }) {
         {sessionUser && isLoaded ? (
           <>
           <NavLink to="create-campaign">Start a campaign</NavLink>
+          {sessionUser.username}
           <div>
             <ProfileButton user={sessionUser} />
           </div>

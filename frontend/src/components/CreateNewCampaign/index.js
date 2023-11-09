@@ -32,10 +32,6 @@ const CreateNewCampaign = () => {
       newErrors.description = "Campaign Tagline is required.";
     }
 
-    if (!category) {
-      newErrors.category = "Category is required.";
-    }
-
     if (!story) {
       newErrors.story = "Campaign Story is required.";
     }
@@ -52,13 +48,7 @@ const CreateNewCampaign = () => {
       newErrors.fundingGoal = 'Valid Funding Goal is required.';
     }
 
-    if (!currentFunding ) {
-      newErrors.currentFunding = 'Valid Current Funding is required.';
-     }
 
-    if (!numBackers) {
-     newErrors.numBackers = 'Valid Number of Backers is required.';
-     }
 
 
     if (Object.keys(newErrors).length > 0) {

@@ -55,8 +55,7 @@ function ProfileButton({ user }) {
         <ul className={ulClassName} ref={ulRef}>
           {user ? (
             <>
-              {user.username}
-              {user.email}
+
 
               <Link to="/view-campaigns">View all campaigns</Link>
               <Link to="/my-campaigns">My campaigns</Link>
