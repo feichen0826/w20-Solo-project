@@ -23,6 +23,8 @@ const fetchAllCategory = (category) => {
 export const fetchAllCategoryAsync = () => async (dispatch) => {
     const response = await csrfFetch('/api/categories');
     const categoryData = await response.json();
+    console.log(response)
+    console.log(categoryData)
     dispatch(fetchAllCategory(categoryData));
   };
 

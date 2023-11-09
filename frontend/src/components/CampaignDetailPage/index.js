@@ -38,7 +38,7 @@ const { campaignId } = useParams();
   return (
     <div className="campaign-detail-page">
       <div className="campaign-image">
-        <img src={singleCampaign.imgUrl} alt="Campaign" />
+        <img src={singleCampaign.imgUrl? singleCampaign.imgUrl: singleCampaign.image} alt="Campaign" />
       </div>
       <div className="campaign-details">
         <h2>{singleCampaign.title}</h2>

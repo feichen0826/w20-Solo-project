@@ -10,11 +10,17 @@ router.get('/', async (req, res) => {
           model:Campaign
         }]
       });
-      const categoriesWithCategories = categories.map((campaign) => {
-        const campaignData = campaign.toJSON();
-        campaignData.campaigns = campaignData.Campaigns.map((campaign) => campaign.title, campaign.description, campaign.currentFunding, campaign.fundingGoal, campaign.StartDate, campaign.endDate);
-        delete campaignData.Campaigns;
-        return campaignData;
+      const categoriesWithCategories = categories.map((category) => {
+        const categoryData = category.toJSON();
+      categoryData.campaigns = categoryData.Campaigns.map((campaign) => {
+        campaign.title,
+        campaign.description,
+        campaign.currentFunding,
+        campaign.fundingGoal,
+        campaign.StartDate,
+        campaign.endDate});
+        delete categoryData.campaigns;
+        return categoryData;
       });
 
       res.json(categoriesWithCategories);
@@ -24,3 +30,5 @@ router.get('/', async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   });
+
+  module.exports = router

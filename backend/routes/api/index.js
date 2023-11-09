@@ -22,7 +22,7 @@ router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
 });
 
-router.use('/campaigns', campaignRouter)
+router.use('/campaigns', campaignRouter);
 
 router.use('/categories', categoryRouter)
 

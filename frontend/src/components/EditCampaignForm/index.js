@@ -17,16 +17,15 @@ const EditCampaignForm = () => {
     story: '',
     startDate: '',
     endDate: '',
-    imgUrl: null,
+    image: '',
     fundingGoal: 0,
     currentFunding: 0,
     numBackers: 0,
-    categories: [], // Categories selected for the campaign
+    categories: [],
   });
 
   const [errors, setErrors] = useState({});
-  const [categoriesList, setCategoriesList] = useState([]); // The list of available categories
-
+  const [categoriesList, setCategoriesList] = useState([]);
   // Load the existing campaign data and available categories when the component mounts
   useEffect(() => {
     // Fetch campaign data
@@ -44,7 +43,7 @@ const EditCampaignForm = () => {
         // Handle the error, e.g., show an error message
       });
 
-    // Fetch available categories from your API and set them in the categoriesList state
+    // Fetch available categories from your  API and set them in the categoriesList state
     // You can fetch this list from your server
     // Example:
     // fetchCategoriesList()
@@ -193,7 +192,7 @@ const EditCampaignForm = () => {
         <div className="form-group">
            <label>Image</label>
            <p>Add a image to appear on the top of your campaign page. Campaigns with images raise 2000% more than campaigns without images.</p>
-          <input type="file" accept="image/*" onChange={handleImageUpload} />
+          <input type="file"  onChange={(e)=>setCampaign({...campaign, image: e.target.files[0]})} />
         </div>
 
         <div className="form-group">

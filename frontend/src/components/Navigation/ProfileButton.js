@@ -58,7 +58,7 @@ function ProfileButton({ user }) {
               {user.username}
               {user.email}
 
-              <Link to="/campaigns">View all campaigns</Link>
+              <Link to="/view-campaigns">View all campaigns</Link>
               <Link to="/my-campaigns">My campaigns</Link>
 
               {/* <Link to="/my-contributions">My Contributions</Link> */}

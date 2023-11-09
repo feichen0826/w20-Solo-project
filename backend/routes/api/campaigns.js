@@ -114,11 +114,13 @@ router.get('/:id', async (req, res) => {
 // });
 
 // Create a new campaign
-router.post('/', singleMulterUpload("image"), async (req, res) => {
+router.post('/', singleMulterUpload("imgUrl"), async (req, res) => {
   try {
-    const { title, description, story, startDate, endDate, fundingGoal, currentFunding, numBackers, category } = req.body;
-
+    const { userId, title, description, story, startDate, endDate, fundingGoal, currentFunding, numBackers, category } = req.body;
+    const imgUrl = await singlePublicFileUpload(req.file);
+    console.log(req.body)
     const newCampaignData = {
+      userId,
       title,
       description,
       story,
@@ -127,6 +129,7 @@ router.post('/', singleMulterUpload("image"), async (req, res) => {
       fundingGoal,
       currentFunding,
       numBackers,
+      imgUrl
     };
 
     const newCampaign = await Campaign.create(newCampaignData);
@@ -150,20 +153,18 @@ router.post('/', singleMulterUpload("image"), async (req, res) => {
 
 
 // update a campaign by its ID
-// Update an existing campaign
-router.put('/:id', singleMulterUpload('image'), async (req, res) => {
+router.put('/:id', singleMulterUpload('imgUrl'), async (req, res) => {
   try {
     const campaignId = req.params.id;
     const { title, description, story, startDate, endDate, fundingGoal, currentFunding, numBackers, category } = req.body;
-
-    // Retrieve the existing campaign by ID
+    const imgUrl = await singlePublicFileUpload(req.file);
     const existingCampaign = await Campaign.findByPk(campaignId);
 
     if (!existingCampaign) {
       return res.status(404).json({ message: 'Campaign not found' });
     }
 
-    // Update campaign attributes
+
     existingCampaign.title = title;
     existingCampaign.description = description;
     existingCampaign.story = story;
@@ -172,6 +173,7 @@ router.put('/:id', singleMulterUpload('image'), async (req, res) => {
     existingCampaign.fundingGoal = fundingGoal;
     existingCampaign.currentFunding = currentFunding;
     existingCampaign.numBackers = numBackers;
+    existingCampaign.imgUrl= imgUrl;
 
     await existingCampaign.save();
 

@@ -12,13 +12,14 @@ const CreateNewCampaign = () => {
   const [story, setStory] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [imgUrl, setImgUrl] = useState(null);
+  const [image, setImage] = useState('');
   const [errors, setErrors] = useState({});
   const [fundingGoal, setFundingGoal] = useState(0);
   const [currentFunding, setCurrentFunding] = useState(0);
   const [numBackers, setNumBackers] = useState(0);
   const [categories, setCategories] = useState([]);
    const history = useHistory();
+   const currentUser = useSelector((state) => state.session.user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,13 +67,14 @@ const CreateNewCampaign = () => {
     }
     const createdCampaign = await dispatch(
         createCampaignAsync({
+            userId:currentUser.id,
             title,
             description,
             category,
             story,
             startDate,
             endDate,
-            imgUrl,
+            image,
             fundingGoal,
             currentFunding,
             numBackers, }));
@@ -83,19 +85,48 @@ const CreateNewCampaign = () => {
         return "Error"
     }
   };
-
-  // Add a function to handle image file selection
-  const handleImageUpload = (e) => {
-    const selectedImage = e.target.files[0];
-    if (selectedImage) {
-      setImgUrl(selectedImage);
+  //   dispatch(createCampaignAsync({
+  //           userId:currentUser.id,
+  //           title,
+  //           description,
+  //           category,
+  //           story,
+  //           startDate,
+  //           endDate,
+  //           image,
+  //           fundingGoal,
+  //           currentFunding,
+  //           numBackers,
+  //   })).then(()=>{
+  //     setTitle("");
+  //     setDescription("");
+  //     setCategory("");
+  //     setStory("");
+  //     setStartDate('');
+  //     setEndDate('');
+  //     setImage(null);
+  //     setFundingGoal(0);
+  //     setCurrentFunding(0);
+  //     setNumBackers(0)
+  //   }).catch(async(res)=>{
+  //     const data = await res.json();
+  //     if (data && data.errors) {
+  //       newErrors = data.errors;
+  //       setErrors(newErrors);
+  //     }
+  //   })
+  // };
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
     }
   };
 
   const handleAddCategory = () => {
     if (category && !categories.includes(category)) {
       setCategories([...categories, category]);
-      setCategory(''); // Clear the category input
+      setCategory('');
     }
   };
 
@@ -203,7 +234,7 @@ const CreateNewCampaign = () => {
         <div className="form-group">
             <label>Image</label>
             <p>Add a image to appear on the top of your campaign page. Campaigns with images raise 2000% more than campaigns without images.</p>
-            <input type="file" accept="image/*" onChange={handleImageUpload} />
+            <input type="file"  onChange={(e)=>setImage(e.target.files[0])} />
         </div>
 
         <div className="form-group">
@@ -211,7 +242,7 @@ const CreateNewCampaign = () => {
           <p>How much money would you like to raise for this campaign?</p>
           <input
             type="number"
-            placeholder="$"
+
             value={fundingGoal}
             onChange={(e) => setFundingGoal(e.target.value)}
             required
@@ -223,7 +254,6 @@ const CreateNewCampaign = () => {
           <p>How much money has been raised for this campaign?</p>
           <input
             type="number"
-            placeholder="$"
             value={currentFunding}
             onChange={(e) => setCurrentFunding(e.target.value)}
             required

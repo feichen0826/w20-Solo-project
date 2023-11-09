@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { fetchAllCampaignsAsync } from '../../store/campaignReducer';
+import { fetchAllCategoryAsync } from '../../store/categoryReducer';
 import './ViewCampaignsList.css'
 
 const ViewCampaignsList = () => {
     const dispatch = useDispatch();
     const allCampaigns = useSelector((state) => state.campaign.campaigns);
+    const allCategories = useSelector((state)=> state.category.category)
     console.log(allCampaigns)
 
     useEffect(() => {
        dispatch(fetchAllCampaignsAsync());
+       dispatch(fetchAllCategoryAsync())
     }, [dispatch]);
 
     const calculateDaysLeft = (startDate, endDate) => {
@@ -39,7 +42,7 @@ const ViewCampaignsList = () => {
         <h1>VisionFund Campaigns</h1>
         <p>Fund new and groundbreaking projects, including hits from VisionFund InDemand.</p>
       </div>
-      <div className="columns">
+      <div className="campaigns-grid">
         <div className="left-column">
         {allCampaigns.map((campaign, index) => (
           <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
@@ -62,8 +65,14 @@ const ViewCampaignsList = () => {
               <option value="date">Date</option>
             </select>
           </div>
-          <div className="campaigns-grid">
-            {/* Render campaign containers here */}
+          <div className="left-column">
+              {allCategories.map((category, index) => (
+              <Link to={`/${category.id}/campaigns`} key={index} className="category">
+              <div>
+                <p>{category.name}</p>
+              </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

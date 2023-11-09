@@ -1,0 +1,82 @@
+/* LandingPage.css */
+.landing-page {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .landing-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .landing-description {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #777;
+  }
+
+  .explore-button {
+    background-color: #f05a28;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .rotating-images-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 20px 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .campaign-image {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  .campaign-info {
+    flex: 1;
+    margin-left: 20px;
+    text-align: left;
+  }
+
+  .campaign-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .campaign-description {
+    font-size: 16px;
+    color: #777;
+    margin: 10px 0;
+  }
+
+  .see-campaign-link {
+    text-decoration: none;
+    background-color: #f05a28;
+    color: #fff;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  /* Styles for the popular projects section and category icons can be added below. */
+
+  .popular-projects-title {
+    /* Add your styles here */
+  }
+
+  /* Add styles for other elements as needed. */

@@ -10,6 +10,7 @@ import ViewCampaignsList from "./components/ViewCampaignsList"
 import CreateNewCampaign from "./components/CreateNewCampaign";
 import MyCampaignPage from "./components/MyCampaignPage";
 import EditCampaignForm from "./components/EditCampaignForm"
+import ViewCategoryCampaign from './components/ViewCategoryCampaign'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route exact path='/create-campaign' component={CreateNewCampaign} />
           <Route path = '/my-campaigns' component={MyCampaignPage} />
           <Route exact path = '/campaigns/:campaignId/edit' component={EditCampaignForm} />
+          <Route path = '/:categoryId/campaigns' component={ViewCategoryCampaign}/>
         </Switch>
       )}
     </>
