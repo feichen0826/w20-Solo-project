@@ -92,9 +92,9 @@ const LandingPage = () => {
       <div className="campaign-info">
         <h2 className="campaign-title">{allCampaigns[currentIndex].title}</h2>
         <p className="campaign-description">{allCampaigns[currentIndex].description}</p>
-        <Link to={`/campaign/${allCampaigns[currentIndex].campaignId}`} className="see-campaign-link">
+        {/* <Link to={`/campaign/${allCampaigns[currentIndex].campaignId}`} className="see-campaign-link">
           See Campaign
-        </Link>
+        </Link> */}
         <div>
 
         </div>

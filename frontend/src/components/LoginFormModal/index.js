@@ -23,14 +23,14 @@ function LoginFormModal() {
         }
       });
   };
-  const handleDemoLogin = () => {
-    // Fill in the demo user's credentials
-    setCredential("demo@user.io");
-    setPassword("password1");
+  // const handleDemoLogin = () => {
+  //   // Fill in the demo user's credentials
+  //   setCredential("demo@user.io");
+  //   setPassword("password1");
 
-    // Submit the form
-    handleSubmit(new Event("submit"));
-  };
+  //   // Submit the form
+  //   handleSubmit(new Event("submit"));
+  // };
 
   const isButtonDisabled = credential.length < 4 || password.length < 6;
 
@@ -66,9 +66,9 @@ function LoginFormModal() {
           Log In
         </button>
       </form>
-      <button className="demo-login-button" onClick={handleDemoLogin}>
+      {/* <button className="demo-login-button" onClick={handleDemoLogin}>
         Log in as Demo User
-      </button>
+      </button> */}
     </div>
   );
 }
