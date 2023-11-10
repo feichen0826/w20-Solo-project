@@ -1,0 +1,75 @@
+/* Add this to your CSS file */
+.form-group{
+    margin: 10px 0px;
+}
+.create-new-campaign {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .form-label {
+    font-size: 1.2em;
+    color: #333;
+  }
+
+  .form-description {
+    font-size: 0.9em;
+    color: #555;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .error {
+    color: #ff6347;
+  }
+
+  .add-category-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .selected-categories {
+    margin-top: 20px;
+  }
+
+  .selected-categories ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .selected-categories li {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .selected-categories button {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .create-campaign-button {
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }

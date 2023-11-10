@@ -1,0 +1,85 @@
+/* MyCampaignPage.css */
+
+.my-campaign-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  h1#username {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  nav {
+    margin-bottom: 20px;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: #3498db;
+    margin-right: 20px;
+    font-size: 1.2em;
+  }
+
+  nav a:hover {
+    color: #555;
+  }
+
+  .campaign-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .campaign-container1 {
+    width: 100%;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .campaign-container1 img {
+    width: 250px;
+    height: auto;
+  }
+
+  .campaign-info {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .dropdown {
+    margin-bottom: 10px;
+  }
+
+  select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 100%;
+  }
+
+  .delete-button {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .delete-button:hover {
+    background-color: #c0392b;
+  }

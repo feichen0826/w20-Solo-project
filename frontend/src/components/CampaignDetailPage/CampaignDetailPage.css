@@ -1,0 +1,74 @@
+/* Add this to your CSS file */
+
+.campaign-detail-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .campaign-image-container {
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .campaign-image2 {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .campaign-details {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .campaign-title1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+
+  .campaign-description {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+
+  .campaign-stats {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .campaign-stat {
+    flex: 0 0 50%;
+    margin-bottom: 10px;
+  }
+
+  .see-options-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  .story-section {
+    margin-top: 20px;
+  }
+
+  .story-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  .campaign-story {
+    font-size: 1.2em;
+    line-height: 1.6;
+  }
+
+  .category-info {
+    font-size: 1.2em;
+  }

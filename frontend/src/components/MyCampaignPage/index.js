@@ -34,44 +34,53 @@ useEffect(() => {
  const userCampaigns = allCampaigns.filter(campaign => campaign.userId === currentUser.id);
   return (
     <div className="my-campaign-page">
-      <h1>{currentUser.username}</h1>
+      <h1 id="username">{currentUser.username}</h1>
       <nav>
-        <NavLink to="/my-campaigns">Campaigns</NavLink>
-        <NavLink to="/my-contributions">Contributions</NavLink>
+        <NavLink to="/my-campaigns" id="campaigns-link">
+          Campaigns
+        </NavLink>
+        <NavLink to="/my-contributions" id="contributions-link">
+          Contributions
+        </NavLink>
       </nav>
 
       <div className="campaign-list">
         {userCampaigns.map((campaign) => (
-          <div key={campaign.id} className="campaign-container">
+          <div key={campaign.id} className="campaign-container1">
             <img src={campaign.imgUrl} alt="Campaign" />
             <div className="campaign-info">
-              <h2>{campaign.title}</h2>
+              <h2 id={`title-${campaign.id}`}>{campaign.title}</h2>
               <p>By {currentUser.username}</p>
               <div className="dropdown">
-                <select defaultValue="Actions" onChange={(e) => handleDropdownChange(e, campaign.id, history)}>
-                  <option value="Actions" disabled>Actions</option>
+                <select
+                  defaultValue="Actions"
+                  onChange={(e) => handleDropdownChange(e, campaign.id, history)}
+                  id={`dropdown-${campaign.id}`}
+                >
+                  <option value="Actions" disabled>
+                    Actions
+                  </option>
                   <option value="Edit Campaign">Edit Campaign</option>
                   {/* <option value="Delete Campaign" >Delete Campaign</option> */}
                 </select>
               </div>
               {campaign && showDeleteConfirmation && (
-                   <OpenModalButton
-                    className="delete-button"
-                    buttonText="Delete Campaign"
-                    modalComponent={
-                      <DeleteConfirmationModal
-                        show={showDeleteConfirmation}
-                        onCancel={() => setShowDeleteConfirmation(false)}
-                        campaignId={campaign.id}
-                      />
-                    }
-                  />
-                  )}
+                <OpenModalButton
+                  className="delete-button"
+                  buttonText="Delete Campaign"
+                  modalComponent={
+                    <DeleteConfirmationModal
+                      show={showDeleteConfirmation}
+                      onCancel={() => setShowDeleteConfirmation(false)}
+                      campaignId={campaign.id}
+                    />
+                  }
+                />
+              )}
             </div>
           </div>
         ))}
       </div>
-
     </div>
   );
 };

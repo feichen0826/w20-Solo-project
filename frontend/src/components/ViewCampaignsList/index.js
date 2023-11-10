@@ -9,6 +9,8 @@ const ViewCampaignsList = () => {
     const dispatch = useDispatch();
     const allCampaigns = useSelector((state) => state.campaign.campaigns);
     const allCategories = useSelector((state)=> state.category.category)
+    const [searchTerm, setSearchTerm] = useState('');
+  const [sortOption, setSortOption] = useState('mostFunded');
     console.log(allCampaigns)
 
     useEffect(() => {
@@ -38,41 +40,68 @@ const ViewCampaignsList = () => {
         return null
       }
 
+
+      const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+      };
+
+      const handleSortChange = (e) => {
+        setSortOption(e.target.value);
+      };
+
+   const filteredCampaigns = allCampaigns.filter((campaign) =>
+    campaign.title && campaign.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+      const sortedCampaigns = filteredCampaigns.sort((a, b) => {
+        if (sortOption === 'mostFunded') {
+          return b.currentFunding - a.currentFunding;
+        } else if (sortOption === 'date') {
+          return new Date(a.startDate) - new Date(b.startDate);
+        }
+        return 0;
+      });
+
   return (
     <div className="view-campaigns-list">
       <div className="banner">
-        <h1>VisionFund Campaigns</h1>
-        <p>Fund new and groundbreaking projects, including hits from VisionFund InDemand.</p>
+        <h1 className="banner-title">VisionFund Campaigns</h1>
+        <p className="banner-description">Fund new and groundbreaking projects, including hits from VisionFund InDemand.</p>
       </div>
       <div className="campaigns-grid">
         <div className="left-column">
-        {allCampaigns.map((campaign, index) => (
-          <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
-
-            <img src={campaign.imgUrl} alt="Campaign" />
-            <h3>{campaign.title}</h3>
-            <p>{campaign.description}</p>
-            <p>Funding: ${campaign.currentFunding}  ({((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%)</p>
-            <p>{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
-            <p>{campaign.categories}</p>
-            </Link>
-        ))}
-        </div>
-        <div className="right-column">
-          <input type="text" placeholder="Search for campaigns" />
+        <input type="text"
+          placeholder="Search for campaigns"
+          className="search-input"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          />
           <div className="sort-by">
-            <label>Sort by:</label>
-            <select>
+            <label className="sort-label">Sort by:</label>
+            <select className="sort-select" value={sortOption} onChange={handleSortChange}>
               <option value="mostFunded">Most Funded</option>
               <option value="date">Date</option>
             </select>
           </div>
-          <div className="left-column">
-              {allCategories.map((category, index) => (
+          {allCampaigns.map((campaign, index) => (
+            <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
+              <img src={campaign.imgUrl} alt="Campaign" className="campaign-image2" />
+              <h3 className="campaign-title">{campaign.title}</h3>
+              <p className="campaign-description">{campaign.description}</p>
+              <p className="funding-details">
+                Funding: ${campaign.currentFunding} ({((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%)
+              </p>
+              <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
+              <p className="categories">{campaign.categories}</p>
+            </Link>
+          ))}
+        </div>
+        <div className="right-column">
+
+          <div className="category-list">
+            {allCategories.map((category, index) => (
               <Link to={`/${category.id}/campaigns`} key={index} className="category">
-              <div>
-                <p>{category.name}</p>
-              </div>
+                <p className="category-name">{category.name}</p>
               </Link>
             ))}
           </div>

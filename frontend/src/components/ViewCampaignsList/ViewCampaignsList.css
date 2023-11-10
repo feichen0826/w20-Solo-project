@@ -1,0 +1,106 @@
+.view-campaigns-list {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .banner {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .banner-title {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+
+  .banner-description {
+    color: #555;
+  }
+
+  .campaigns-grid {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .left-column{
+    flex:4;
+  }
+  .right-column {
+    flex: 1;
+  }
+
+  .right-column {
+    order: -1;
+  }
+
+  .campaign-container {
+    text-decoration: none;
+    color: #333;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .campaign-container:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .campaign-image2 {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .campaign-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  .campaign-description {
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .funding-details,
+  .days-left,
+  .categories {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 5px;
+  }
+
+  .right-column {
+    padding-left: 20px;
+  }
+
+  .search-input,
+  .sort-select {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  .sort-label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .category-list .category {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  .category-list .category:hover {
+    background-color: #f8f8f8;
+  }

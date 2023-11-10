@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { fetchAllCampaignsAsync } from '../../store/campaignReducer';
 import { fetchAllCategoryAsync } from '../../store/categoryReducer';
+
 import './LandingPage.css'
 
 // import BackIcon from './path/to/back-icon.svg';
@@ -78,7 +79,7 @@ const LandingPage = () => {
 //   const handleForwardClick = () => {
 //     setCurrentImageIndex((currentImageIndex + 1) % randomCampaign.length);
 //   };
-
+ console.log(allCampaigns[currentIndex].id)
   return (
     <div className="landing-page">
     <h1 className="landing-title">Find it first on VisionFund</h1>
@@ -88,31 +89,43 @@ const LandingPage = () => {
     </Link>
 
     <div className="rotating-images-container">
-      <img src={allCampaigns[currentIndex].imgUrl} alt="Random Campaign" className="campaign-image" />
-      <div className="campaign-info">
-        <h2 className="campaign-title">{allCampaigns[currentIndex].title}</h2>
-        <p className="campaign-description">{allCampaigns[currentIndex].description}</p>
-        {/* <Link to={`/campaign/${allCampaigns[currentIndex].campaignId}`} className="see-campaign-link">
-          See Campaign
-        </Link> */}
-        <div>
+    <div className="overlay"></div>
+      <img src={allCampaigns[currentIndex].imgUrl} alt="Random Campaign" className="campaign-image1" />
 
+      <div className="campaign-info1">
+      <button className='vision-fund-picks'>FEATURED</button>
+        <h2 className="campaign-title">{allCampaigns[currentIndex].title} </h2>
+        <p className="campaign-description">{allCampaigns[currentIndex].description}</p>
+        <Link to={`/campaign/${allCampaigns[currentIndex].id}`} className="see-campaign-link">
+          See Campaign
+        </Link>
+        <div>
+        <p className='campaign-number'>{currentIndex - 8} /8</p>
         </div>
       </div>
     </div>
 
+<div className="popular-project-container">
+  <div className='popular-project-title-container'>
     <h2 className="popular-projects-title">Popular Projects</h2>
+    </div>
     <div className="horizontal-scrollable-bar">
       {allCampaigns.slice(4, 8).map((campaign, index) => (
         <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
           <img src={campaign.imgUrl} alt="Campaign" className="campaign-image" />
+          <div className="campaign-info-container">
           <h3 className="campaign-title">{campaign.title}</h3>
+          <div>
+          <i class="fal fa-heart"></i>
+          </div>
           <p className="campaign-description">{campaign.description}</p>
           <p className="funding-details">Funding: ${campaign.currentFunding}  ({((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%)</p>
           <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
           <p className="campaign-categories">{campaign.categories}</p>
+          </div>
         </Link>
       ))}
+    </div>
     </div>
 
     <h2 className="interest-categories-title">Which categories interest you?</h2>
@@ -121,6 +134,7 @@ const LandingPage = () => {
       {allCategories.map((category, index) => (
         <Link to={`/${category.id}/campaigns`} key={index} className="category">
           <div className="category-container">
+          <i className={`fas ${category.icon}`} style={{ fontSize: '24px' }}></i>
             <p className="category-name">{category.name}</p>
           </div>
         </Link>

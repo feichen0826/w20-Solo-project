@@ -133,8 +133,8 @@ const CreateNewCampaign = () => {
 
       <div className="form-container">
         <div className="form-group">
-          <label>Campaign Title</label>
-          <p>What is the title of your campaign?</p>
+        <label className="form-label">Campaign Title</label>
+          <p className="form-description">What is the title of your campaign?</p>
           <input
             type="text"
             placeholder="My Campaign Title"
@@ -146,8 +146,8 @@ const CreateNewCampaign = () => {
         </div>
 
         <div className="form-group">
-          <label>Campaign Tagline</label>
-          <p>Provide a short description that best describes your campaign to your audience.</p>
+        <label className="form-label">Campaign Tagline</label>
+          <p className="form-description">Provide a short description that best describes your campaign to your audience.</p>
           <input
             type="text"
             placeholder="My Campaign Tagline"
@@ -159,8 +159,8 @@ const CreateNewCampaign = () => {
         </div>
 
         <div className="form-group">
-          <label>Category</label>
-          <p>To help backers find your campaign, select a category that best represents your project.</p>
+        <label className="form-label">Category</label>
+          <p className="form-description">To help backers find your campaign, select a category that best represents your project.</p>
           <select value={category} onChange={(e) => setCategory(e.target.value)} required>
             <option value="">Select a Category</option>
             <option value="Technology">Technology</option>
@@ -171,36 +171,38 @@ const CreateNewCampaign = () => {
             <option value="Sports">Sports</option>
           </select>
           {errors.category && <span className="error">{errors.category}</span>}
-          <button onClick={handleAddCategory}>+ Add Category</button>
+          <button onClick={handleAddCategory} className="add-category-button">+ Add Category</button>
+
         </div>
 
         {categories.length > 0 && (
-        <div>
-          <p>Selected Categories:</p>
-          <ul>
-            {categories.map((cat) => (
-              <li key={cat}>
-                {cat}
-                <button onClick={() => handleRemoveCategory(cat)}>Remove</button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+          <div className="selected-categories">
+            <p>Selected Categories:</p>
+            <ul>
+              {categories.map((cat) => (
+                <li key={cat}>
+                  {cat}
+                  <button onClick={() => handleRemoveCategory(cat)}>Remove</button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <div className="form-group">
-          <label>Campaign Story</label>
-          <p>Tell potential contributors more about your campaign. Provide details that will motivate people to contribute. A good pitch is compelling, informative, and easy to digest.</p>
+        <label className="form-label">Campaign Story</label>
+          <p className="form-description">Tell potential contributors more about your campaign. Provide details that will motivate people to contribute. A good pitch is compelling, informative, and easy to digest.</p>
           <textarea
             value={story}
             onChange={(e) => setStory(e.target.value)}
             required
+            className="form-input"
           />
           {errors.story && <span className="error">{errors.story}</span>}
         </div>
 
         <div className="form-group">
-          <label>Campaign Start Date</label>
+          <label className="form-label">Campaign Start Date</label>
           <input
             type="date"
             value={startDate}
@@ -211,7 +213,7 @@ const CreateNewCampaign = () => {
         </div>
 
         <div className="form-group">
-          <label>Campaign End Date</label>
+          <label className="form-label">Campaign End Date</label>
           <input
             type="date"
             value={endDate}
@@ -222,14 +224,14 @@ const CreateNewCampaign = () => {
         </div>
 
         <div className="form-group">
-            <label>Image</label>
-            <p>Add a image to appear on the top of your campaign page. Campaigns with images raise 2000% more than campaigns without images.</p>
+            <label className="form-label">Image</label>
+            <p className="form-description">Add a image to appear on the top of your campaign page. Campaigns with images raise 2000% more than campaigns without images.</p>
             <input type="file"  onChange={(e)=>setImage(e.target.files[0])} />
         </div>
 
         <div className="form-group">
-          <label>Campaign Goal Amount & Currency</label>
-          <p>How much money would you like to raise for this campaign?</p>
+          <label className="form-label">Campaign Goal Amount & Currency</label>
+          <p className="form-description">How much money would you like to raise for this campaign?</p>
           <input
             type="number"
 
@@ -240,8 +242,8 @@ const CreateNewCampaign = () => {
         </div>
 
         <div className="form-group">
-          <label>Current Funding</label>
-          <p>How much money has been raised for this campaign?</p>
+          <label className="form-label">Current Funding</label>
+          <p className="form-description">How much money has been raised for this campaign?</p>
           <input
             type="number"
             value={currentFunding}
@@ -253,8 +255,8 @@ const CreateNewCampaign = () => {
 
 
         <div className="form-group">
-          <label>Number of Backers</label>
-          <p>How many backers have supported this campaign?</p>
+          <label className="form-label">Number of Backers</label>
+          <p className="form-description">How many backers have supported this campaign?</p>
           <input
             type="number"
             value={numBackers}
