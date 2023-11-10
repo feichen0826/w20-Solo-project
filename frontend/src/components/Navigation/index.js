@@ -19,15 +19,17 @@ function Navigation({ isLoaded }) {
         </NavLink>
 		</div>
     <div className="navbar-auth">
+      <div className='navbar-user'>
         {sessionUser && isLoaded ? (
           <>
-          <NavLink to="create-campaign">Start a campaign</NavLink>
+          <NavLink to="create-campaign" className='start-a-campaign'>Start a campaign</NavLink>
           {sessionUser.username}
           <div>
             <ProfileButton user={sessionUser} />
           </div>
 
           </>
+
         ) : (
           <>
             <OpenModalButton
@@ -41,6 +43,7 @@ function Navigation({ isLoaded }) {
             />
           </>
         )}
+      </div>
       </div>
       {/* {isLoaded && (
 

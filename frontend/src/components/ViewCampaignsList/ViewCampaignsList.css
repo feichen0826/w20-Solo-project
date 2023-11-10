@@ -28,9 +28,10 @@
 
   .left-column{
     flex:4;
+    margin: 0 10px;
   }
   .right-column {
-    flex: 1;
+    flex: 0.8;
   }
 
   .right-column {
@@ -49,8 +50,9 @@
   }
 
   .campaign-image2 {
-    width: 100%;
-    height: auto;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 10px;
   }
@@ -103,4 +105,14 @@
 
   .category-list .category:hover {
     background-color: #f8f8f8;
+  }
+
+  .campaign-column{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .view-campaign-copy{
+    padding: 15px;
   }

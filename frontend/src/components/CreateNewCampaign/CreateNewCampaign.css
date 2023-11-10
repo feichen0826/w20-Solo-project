@@ -1,6 +1,6 @@
 /* Add this to your CSS file */
 .form-group{
-    margin: 10px 0px;
+    margin: 38px 0px;
 }
 .create-new-campaign {
     max-width: 800px;
@@ -32,7 +32,7 @@
   }
 
   .add-category-button {
-    background-color: #3498db;
+    background-color: #a253fc;;
     color: #fff;
     border: none;
     padding: 8px 12px;

@@ -83,9 +83,15 @@ const ViewCampaignsList = () => {
               <option value="date">Date</option>
             </select>
           </div>
+          <div className='campaign-column'>
           {allCampaigns.map((campaign, index) => (
             <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
               <img src={campaign.imgUrl} alt="Campaign" className="campaign-image2" />
+              <div className='view-campaign-copy'>
+              <p className='funding'>Funding</p>
+              <div>
+              <i class="far fa-heart"></i>
+              </div>
               <h3 className="campaign-title">{campaign.title}</h3>
               <p className="campaign-description">{campaign.description}</p>
               <p className="funding-details">
@@ -93,8 +99,10 @@ const ViewCampaignsList = () => {
               </p>
               <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
               <p className="categories">{campaign.categories}</p>
+              </div>
             </Link>
           ))}
+          </div>
         </div>
         <div className="right-column">
 

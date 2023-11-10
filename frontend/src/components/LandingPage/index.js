@@ -83,7 +83,7 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
     <h1 className="landing-title">Find it first on VisionFund</h1>
-    <p className="landing-description">Vision Fund is where early adopters and innovation seekers find lively, imaginative tech before it hits the mainstream.</p>
+    <p className="landing-description1">Vision Fund is where early adopters and innovation seekers find lively, imaginative tech before it hits the mainstream.</p>
     <Link to="/view-campaigns">
       <button className="explore-button">EXPLORE CAMPAIGNS</button>
     </Link>
@@ -95,7 +95,7 @@ const LandingPage = () => {
       <div className="campaign-info1">
       <button className='vision-fund-picks'>FEATURED</button>
         <h2 className="campaign-title">{allCampaigns[currentIndex].title} </h2>
-        <p className="campaign-description">{allCampaigns[currentIndex].description}</p>
+        <p className="campaign-description1">{allCampaigns[currentIndex].description}</p>
         <Link to={`/campaign/${allCampaigns[currentIndex].id}`} className="see-campaign-link">
           See Campaign
         </Link>
@@ -114,10 +114,12 @@ const LandingPage = () => {
         <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
           <img src={campaign.imgUrl} alt="Campaign" className="campaign-image" />
           <div className="campaign-info-container">
-          <h3 className="campaign-title">{campaign.title}</h3>
+            <p className='funding'>Funding</p>
           <div>
-          <i class="fal fa-heart"></i>
+          <i class="far fa-heart"></i>
           </div>
+          <h3 className="campaign-title">{campaign.title}</h3>
+
           <p className="campaign-description">{campaign.description}</p>
           <p className="funding-details">Funding: ${campaign.currentFunding}  ({((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%)</p>
           <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
@@ -134,7 +136,7 @@ const LandingPage = () => {
       {allCategories.map((category, index) => (
         <Link to={`/${category.id}/campaigns`} key={index} className="category">
           <div className="category-container">
-          <i className={`fas ${category.icon}`} style={{ fontSize: '24px' }}></i>
+
             <p className="category-name">{category.name}</p>
           </div>
         </Link>

@@ -1,9 +1,58 @@
 
 const express = require('express');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
 const {Campaign, Category, CampaignCategory} = require('../../db/models')
 
 const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3')
+
+// const validateCampaign = [
+//   check('title')
+//     .isLength({ min: 5 })
+//     .withMessage('Campaign Title must be at least 5 characters'),
+//   check('description')
+//     .isLength({ min: 10 })
+//     .withMessage('Campaign Tagline must be at least 10 characters'),
+//   check('story')
+//     .isLength({ min: 50 })
+//     .withMessage('Campaign Story must be at least 50 characters'),
+//   check('startDate')
+//     .isISO8601()
+//     .toDate()
+//     .withMessage('Invalid Start Date'),
+//   check('endDate')
+//     .isISO8601()
+//     .toDate()
+//     .withMessage('Invalid End Date')
+//     .custom((value, { req }) => {
+//       const startDate = new Date(req.body.startDate);
+//       if (value <= startDate) {
+//         throw new Error('End date must be after the start date');
+//       }
+//       return true;
+//     }),
+//   check('fundingGoal')
+//     .isNumeric()
+//     .withMessage('Funding Goal must be a valid number')
+//     .custom((value) => {
+//       if (value <= 0) {
+//         throw new Error('Funding Goal must be greater than 0');
+//       }
+//       return true;
+//     }),
+//   check('currentFunding')
+//     .isNumeric()
+//     .withMessage('Current Funding must be a valid number')
+//     .custom((value) => {
+//       if (value < 0) {
+//         throw new Error('Current Funding must be greater than or equal to 0');
+//       }
+//       return true;
+//     }),
+//   check('numBackers')
+//     .isInt({ min: 0 })
+//     .withMessage('Number of Backers must be a non-negative integer'),
+// ];
 
 //get all campaigns
 router.get('/', async (req, res) => {
@@ -114,7 +163,7 @@ router.get('/:id', async (req, res) => {
 // });
 
 // Create a new campaign
-router.post('/', singleMulterUpload("imgUrl"), async (req, res) => {
+router.post('/',  singleMulterUpload("imgUrl"), async (req, res) => {
   try {
     const { userId, title, description, story, startDate, endDate, fundingGoal, currentFunding, numBackers, category } = req.body;
     const imgUrl = await singlePublicFileUpload(req.file);

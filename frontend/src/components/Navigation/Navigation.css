@@ -10,8 +10,17 @@
     margin: 20px
   }
 
+.navbar-user{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 10px;
 
-
+}
+.start-a-campaign{
+  text-decoration: none;
+  color:#a253fc;
+}
 .hidden {
     display: none;
   }
@@ -24,25 +33,25 @@
   }
 
   .profile-dropdown > *{
-    color: #000;
+
     text-decoration: none;
   }
 
   .profile-dropdown > *:hover{
-    color: #007bff;
+    color: #a7289c;
     text-decoration: none;
   }
 
   .profile-dropdown button{
-    background-color: #007bff;
+    background-color: #a253fc;
     color: #fff;
-    border: 2px solid #007bff;
+
   }
 
   .profile-dropdown button:hover{
-    color: #28a745;
+    color: #a7289c;
     background-color: #fff  ;
-    border: 2px solid #28a745;
+
   }
 
 

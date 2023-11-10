@@ -4,18 +4,21 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+
   }
 
   .campaign-image-container {
-    overflow: hidden;
+
     border-radius: 8px;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
   }
 
-  .campaign-image2 {
-    width: 100%;
+  .campaign-image3 {
+    width: 400px;
     height: auto;
-    display: block;
+
   }
 
   .campaign-details {
@@ -23,6 +26,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
   }
 
   .campaign-title1 {
@@ -46,7 +50,7 @@
   }
 
   .see-options-button {
-    background-color: #3498db;
+    background-color:#a253fc; ;
     color: #fff;
     border: none;
     padding: 10px 20px;

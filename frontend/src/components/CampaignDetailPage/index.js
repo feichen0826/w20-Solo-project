@@ -38,24 +38,26 @@ const { campaignId } = useParams();
   return (
     <div className="campaign-detail-page">
     <div className="campaign-image-container">
-      <img src={singleCampaign.imgUrl ? singleCampaign.imgUrl : singleCampaign.image} alt="Campaign" className="campaign-image2" />
-    </div>
-    <div className="campaign-details">
-      <h2 className="campaign-title1">{singleCampaign.title}</h2>
-      <p className="campaign-description">{singleCampaign.description}</p>
-      <div className="campaign-stats">
-        <p className="campaign-stat">Username: {singleCampaign.userId}</p>
-        <p className="campaign-stat">Funding Goal: ${singleCampaign.fundingGoal}</p>
-        <p className="campaign-stat">Current Funding: ${singleCampaign.currentFunding}</p>
-        <p className="campaign-stat">Backers: {singleCampaign.numBackers}</p>
-        <p className="campaign-stat">
-          Funding: ${singleCampaign.currentFunding} ({((singleCampaign.currentFunding / singleCampaign.fundingGoal) * 100).toFixed(2)}%)
-        </p>
-        <p className="campaign-stat">Days Left: {calculateDaysLeft(singleCampaign.startDate, singleCampaign.endDate)}</p>
+      <div>
+      <img src={singleCampaign.imgUrl ? singleCampaign.imgUrl : singleCampaign.image} alt="Campaign" className="campaign-image3" />
       </div>
-      <button className="see-options-button">See Options</button>
-    </div>
 
+      <div className="campaign-details">
+        <h2 className="campaign-title1">{singleCampaign.title}</h2>
+        <p className="campaign-description">{singleCampaign.description}</p>
+        <div className="campaign-stats">
+          <p className="campaign-stat">Username: {singleCampaign.userId}</p>
+          <p className="campaign-stat">Funding Goal: ${singleCampaign.fundingGoal}</p>
+          <p className="campaign-stat">Current Funding: ${singleCampaign.currentFunding}</p>
+          <p className="campaign-stat">Backers: {singleCampaign.numBackers}</p>
+          <p className="campaign-stat">
+            Funding: ${singleCampaign.currentFunding} ({((singleCampaign.currentFunding / singleCampaign.fundingGoal) * 100).toFixed(2)}%)
+          </p>
+          <p className="campaign-stat">Days Left: {calculateDaysLeft(singleCampaign.startDate, singleCampaign.endDate)}</p>
+        </div>
+        <button className="see-options-button">See Options</button>
+      </div>
+    </div>
     <div className="story-section">
       <h2 className="story-title">Story</h2>
       <p className="campaign-story">{singleCampaign.story}</p>

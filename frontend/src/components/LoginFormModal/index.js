@@ -1,36 +1,36 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
+import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors({});
-    return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-        }
-      });
+    const data = await dispatch(login(credential, password));
+    if (data) {
+      setErrors(data);
+    } else {
+      closeModal();
+    }
   };
-  // const handleDemoLogin = () => {
-  //   // Fill in the demo user's credentials
-  //   setCredential("demo@user.io");
-  //   setPassword("password1");
 
-  //   // Submit the form
-  //   handleSubmit(new Event("submit"));
-  // };
+  const handleDemoUser = async (e) => {
+    e.preventDefault();
+
+    return dispatch(login("demo@user.io", "password")).then(() => {
+      closeModal();
+      // history.push("/");
+    });
+  };
 
   const isButtonDisabled = credential.length < 4 || password.length < 6;
 
@@ -66,9 +66,9 @@ function LoginFormModal() {
           Log In
         </button>
       </form>
-      {/* <button className="demo-login-button" onClick={handleDemoLogin}>
+      <button className="demo-login-button" onClick={handleDemoUser}>
         Log in as Demo User
-      </button> */}
+      </button>
     </div>
   );
 }
