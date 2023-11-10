@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
@@ -34,10 +34,12 @@ function Navigation({ isLoaded }) {
           <>
             <OpenModalButton
               buttonText="Log In"
+
               modalComponent={<LoginFormModal />}
             />
             <OpenModalButton
               buttonText="Sign Up"
+
               modalComponent={<SignupFormModal />}
               tealBackground={true}
             />
