@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {createCampaignAsync} from '../../store/campaignReducer'
 import { useHistory } from "react-router-dom";
+import ErrorMessage from './ErrorMessage';
 import './CreateNewCampaign.css'
 
 const CreateNewCampaign = () => {
@@ -25,30 +26,58 @@ const CreateNewCampaign = () => {
     e.preventDefault();
 
     const newErrors = {};
-    if (!title) {
-      newErrors.title = "Campaign Title is required.";
-    }
-    if (!description) {
-      newErrors.description = "Campaign Tagline is required.";
+    if (!title || title.length < 5) {
+      newErrors.title = "Campaign Title must be at least 5 characters.";
     }
 
-    if (!story) {
-      newErrors.story = "Campaign Story is required.";
+    // Validate description
+    if (!description || description.length < 10) {
+      newErrors.description = "Campaign Tagline must be at least 10 characters.";
     }
 
+    // Validate story
+    if (!story || story.length < 50) {
+      newErrors.story = "Campaign Story must be at least 50 characters.";
+    }
+
+    // Validate startDate
     if (!startDate) {
       newErrors.startDate = "Start Date is required.";
     }
 
+    // Validate endDate
     if (!endDate) {
       newErrors.endDate = "End Date is required.";
+    } else {
+      const startDateObj = new Date(startDate);
+      const endDateObj = new Date(endDate);
+
+      // Check if endDate is after startDate
+      if (endDateObj <= startDateObj) {
+        newErrors.endDate = "End date must be after the start date.";
+      }
+
+      // Check if endDate is in the future
+      const currentDate = new Date();
+      if (endDateObj <= currentDate) {
+        newErrors.endDate = "End date must be in the future.";
+      }
     }
 
-    if (!fundingGoal) {
-      newErrors.fundingGoal = 'Valid Funding Goal is required.';
+    // Validate fundingGoal
+    if (!fundingGoal || fundingGoal <= 0) {
+      newErrors.fundingGoal = "Funding Goal must be greater than 0.";
     }
 
+    // Validate currentFunding
+    if (currentFunding < 0) {
+      newErrors.currentFunding = "Current Funding must be greater than or equal to 0.";
+    }
 
+    // Validate numBackers
+    if (numBackers < 0) {
+      newErrors.numBackers = "Number of Backers must be greater than or equal to 0.";
+    }
 
 
     if (Object.keys(newErrors).length > 0) {
@@ -142,7 +171,8 @@ const CreateNewCampaign = () => {
             onChange={(e) => setTitle(e.target.value)}
             required
           />
-          {errors.title && <span className="error">{errors.title}</span>}
+          <ErrorMessage message={errors.title} />
+
         </div>
 
         <div className="form-group">
@@ -155,7 +185,8 @@ const CreateNewCampaign = () => {
             onChange={(e) => setDescription(e.target.value)}
             required
           />
-          {errors.description && <span className="error">{errors.description}</span>}
+
+          <ErrorMessage message={errors.description} />
         </div>
 
         <div className="form-group">
@@ -170,7 +201,8 @@ const CreateNewCampaign = () => {
             <option value="Environment">Environment</option>
             <option value="Sports">Sports</option>
           </select>
-          {errors.category && <span className="error">{errors.category}</span>}
+          {/* {errors.category && <span className="error">{errors.category}</span>} */}
+          <ErrorMessage message={errors.category} />
           <button onClick={handleAddCategory} className="add-category-button">+ Add Category</button>
 
         </div>
@@ -198,7 +230,8 @@ const CreateNewCampaign = () => {
             required
             className="form-input"
           />
-          {errors.story && <span className="error">{errors.story}</span>}
+          {/* {errors.story && <span className="error">{errors.story}</span>} */}
+          <ErrorMessage message={errors.story} />
         </div>
 
         <div className="form-group">
@@ -209,7 +242,8 @@ const CreateNewCampaign = () => {
             onChange={(e) => setStartDate(e.target.value)}
             required
           />
-          {errors.startDate && <span className="error">{errors.startDate}</span>}
+          {/* {errors.startDate && <span className="error">{errors.startDate}</span>} */}
+          <ErrorMessage message={errors.startDate} />
         </div>
 
         <div className="form-group">
@@ -220,7 +254,8 @@ const CreateNewCampaign = () => {
             onChange={(e) => setEndDate(e.target.value)}
             required
           />
-          {errors.endDate && <span className="error">{errors.endDate}</span>}
+          {/* {errors.endDate && <span className="error">{errors.endDate}</span>} */}
+          <ErrorMessage message={errors.endDate} />
         </div>
 
         <div className="form-group">
@@ -250,7 +285,7 @@ const CreateNewCampaign = () => {
             onChange={(e) => setCurrentFunding(e.target.value)}
             required
           />
-          {errors.currentFunding && <span className="error">{errors.currentFunding}</span>}
+          <ErrorMessage message={errors.currentFunding} />
         </div>
 
 
@@ -263,7 +298,7 @@ const CreateNewCampaign = () => {
             onChange={(e) => setNumBackers(e.target.value)}
             required
           />
-          {errors.numBackers && <span className="error">{errors.numBackers}</span>}
+          <ErrorMessage message={errors.numBackers} />
         </div>
       </div>
 

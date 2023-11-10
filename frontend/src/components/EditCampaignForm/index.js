@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCampaignAsync, fetchCampaignDetailsAsync } from '../../store/campaignReducer';
 import { useHistory, useParams } from 'react-router-dom';
+import ErrorMessage from './ErrorMessage';
 import './EditCampaignForm.css';
 
 const EditCampaignForm = () => {
@@ -100,20 +101,20 @@ const EditCampaignForm = () => {
 
       <div className="form-container">
         <div className="form-group">
-          <label>Campaign Title</label>
-          <p>What is the title of your campaign?</p>
+        <label className="form-label">Campaign Title</label>
+          <p className="form-description">What is the title of your campaign?</p>
           <input
             type="text"
             value={campaign.title}
             onChange={(e) => setCampaign({ ...campaign, title: e.target.value })}
             required
           />
-          {errors.title && <span className="error">{errors.title}</span>}
+          <ErrorMessage message={errors.title} />
         </div>
 
         <div className="form-group">
-          <label>Campaign Tagline</label>
-          <p>Provide a short description that best describes your campaign to your audience.</p>
+        <label className="form-label">Campaign Tagline</label>
+          <p className="form-description">Provide a short description that best describes your campaign to your audience.</p>
           <input
             type="text"
             value={campaign.description}
@@ -127,8 +128,8 @@ const EditCampaignForm = () => {
 
         {/* Form field for selecting categories */}
         <div className="form-group">
-        <label>Category</label>
-        <p>To help backers find your campaign, select a category that best represents your project.</p>
+        <label className="form-label">Category</label>
+        <p className="form-description">To help backers find your campaign, select a category that best represents your project.</p>
           <select value={campaign.category} onChange={(e) => setCampaign({ ...campaign, category: e.target.value })}>
           <option value="">Select a Category</option>
             <option value="Technology">Technology</option>
@@ -139,7 +140,7 @@ const EditCampaignForm = () => {
             <option value="Sports">Sports</option>
           </select>
           {errors.category && <span className="error">{errors.category}</span>}
-          <button onClick={handleAddCategory}>+ Add Category</button>
+          <button onClick={handleAddCategory} className="add-category-button">+ Add Category</button>
         </div>
 
         {/* List of selected categories */}
@@ -157,18 +158,19 @@ const EditCampaignForm = () => {
           </div>
         )}
         <div className="form-group">
-          <label>Campaign Story</label>
-          <p>Tell potential contributors more about your campaign. Provide details that will motivate people to contribute. A good pitch is compelling, informative, and easy to digest.</p>
+          <label className="form-label">Campaign Story</label>
+          <p className="form-description">Tell potential contributors more about your campaign. Provide details that will motivate people to contribute. A good pitch is compelling, informative, and easy to digest.</p>
           <textarea
             value={campaign.story}
             onChange={(e) => setCampaign({ ...campaign, story: e.target.value })}
             required
+            className="form-input"
           />
           {errors.story && <span className="error">{errors.story}</span>}
         </div>
 
         <div className="form-group">
-          <label>Campaign Start Date</label>
+          <label className="form-label">Campaign Start Date</label>
           <input
             type="date"
             value={campaign.startDate}
@@ -179,7 +181,7 @@ const EditCampaignForm = () => {
         </div>
 
         <div className="form-group">
-          <label>Campaign End Date</label>
+          <label className="form-label">Campaign End Date</label>
           <input
             type="date"
             value={campaign.endDate}
@@ -190,14 +192,14 @@ const EditCampaignForm = () => {
         </div>
 
         <div className="form-group">
-           <label>Image</label>
-           <p>Add a image to appear on the top of your campaign page. Campaigns with images raise 2000% more than campaigns without images.</p>
+           <label className="form-label">Image</label>
+           <p className="form-description">Add a image to appear on the top of your campaign page. Campaigns with images raise 2000% more than campaigns without images.</p>
           <input type="file"  onChange={(e)=>setCampaign({...campaign, image: e.target.files[0]})} />
         </div>
 
         <div className="form-group">
           <label>Campaign Goal Amount & Currency</label>
-          <p>How much money would you like to raise for this campaign?</p>
+          <p className="form-description">How much money would you like to raise for this campaign?</p>
           <input
             type="number"
             placeholder="$"
@@ -209,7 +211,7 @@ const EditCampaignForm = () => {
 
         <div className="form-group">
           <label>Current Funding</label>
-          <p>How much money has been raised for this campaign?</p>
+          <p className="form-description">How much money has been raised for this campaign?</p>
           <input
             type="number"
             placeholder="$"
@@ -222,8 +224,8 @@ const EditCampaignForm = () => {
 
 
         <div className="form-group">
-          <label>Number of Backers</label>
-          <p>How many backers have supported this campaign?</p>
+          <label className="form-label">Number of Backers</label>
+          <p className="form-description">How many backers have supported this campaign?</p>
           <input
             type="number"
             value={campaign.numBackers}

@@ -30,8 +30,12 @@ useEffect(() => {
     setShowDeleteConfirmation(true);
   }
 };
+if(allCampaigns.length === 0 || !currentUser ){
+  return null
+}
 
- const userCampaigns = allCampaigns.filter(campaign => campaign.userId === currentUser.id);
+ const userCampaigns = allCampaigns.filter(campaign => campaign && campaign.userId === (currentUser?.id || null));
+
   return (
     <div className="my-campaign-page">
       <h1 id="username">{currentUser.username}</h1>

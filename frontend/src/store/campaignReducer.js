@@ -68,9 +68,10 @@ export const fetchCampaignDetailsAsync = (campaignId) => async (dispatch) => {
 
 export const createCampaignAsync = (campaignData) => async (dispatch) => {
 
-  const{title, description,category, story,startDate, endDate, image, fundingGoal, currentFunding, numBackers} = campaignData
+  const{userId, title, description,category, story,startDate, endDate, image, fundingGoal, currentFunding, numBackers} = campaignData
   console.log(campaignData)
   const formData = new FormData();
+  formData.append("userId", userId);
   formData.append("title", title);
   formData.append("description", description);
   formData.append("category", category);
@@ -100,6 +101,7 @@ export const createCampaignAsync = (campaignData) => async (dispatch) => {
   if (response.ok) {
     const createdCampaign = await response.json();
     dispatch(createCampaign(createdCampaign.campaign));
+    console.log(createdCampaign)
     return createdCampaign;
   } else {
     const errors = await response.json();
@@ -247,18 +249,18 @@ const campaignReducer = (state = initialState, action) => {
           };
     return newState;
 
-    case DELETE_CAMPAIGN:
-      newState = { ...state };
-      delete newState.campaigns[action.campaignId];
-      return newState;
     // case DELETE_CAMPAIGN:
-    //   const updatedCampaigns = state.campaigns.filter(
-    //     (campaign) => campaign.id !== action.campaignId
-    //   );
-    //   return {
-    //     ...state,
-    //     campaigns: updatedCampaigns,
-    //   };
+    //   newState = { ...state };
+    //   delete newState.campaigns[action.campaignId];
+    //   return newState;
+    case DELETE_CAMPAIGN:
+      const updatedCampaigns = state.campaigns.filter(
+        (campaign) => campaign.id !== action.campaignId
+      );
+      return {
+        ...state,
+        campaigns: updatedCampaigns,
+      };
     default:
       return state;
   }
