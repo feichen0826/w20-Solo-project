@@ -15,17 +15,34 @@ function SignupFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  const isSignUpDisabled =
-  !email ||
-  username.length < 4 ||
-  password.length < 6 ||
-  password !== confirmPassword;
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!email.includes("@")) {
+      newErrors.email = "Invalid email address";
+    }
+
+    if (username.length < 4) {
+      newErrors.username = "Username must be at least 4 characters";
+    }
+
+    if (password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+    }
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors({});
-      return dispatch(
+
+    if (validateForm()) {
+      dispatch(
         sessionActions.signup({
           email,
           username,
@@ -42,9 +59,6 @@ function SignupFormModal() {
           }
         });
     }
-    return setErrors({
-      confirmPassword: "Confirm Password field must be the same as the Password field"
-    });
   };
 
   return (
@@ -119,7 +133,7 @@ function SignupFormModal() {
         {errors.confirmPassword && (
           <p className="error-message">{errors.confirmPassword}</p>
         )}
-        <button type="submit" className="submit-button" disabled={isSignUpDisabled}>
+        <button type="submit" className="submit-button">
           Sign Up
         </button>
       </form>

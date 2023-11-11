@@ -15,12 +15,21 @@ function LoginFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(credential, password));
-    if (data) {
-      setErrors(data);
-    } else {
-      closeModal();
-    }
+    setErrors({});
+    return dispatch(sessionActions.login( credential, password ))
+      .then(closeModal)
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+        }
+      });
+    // const data = await dispatch(login(credential, password));
+    // if (!data) {
+    //   closeModal();
+    // } else {
+    //   setErrors(data);
+    // }
   };
 
   const handleDemoUser = async (e) => {

@@ -114,16 +114,24 @@ const LandingPage = () => {
         <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
           <img src={campaign.imgUrl} alt="Campaign" className="campaign-image" />
           <div className="campaign-info-container">
+            <div className='funding-container'>
             <p className='funding'>Funding</p>
-          <div>
-          <i class="far fa-heart"></i>
+              <div className='save-favorite'>
+              <i class="far fa-heart"></i>
+              </div>
           </div>
+          <div className='campaign-copy-container'>
+          <div className='campaign-title-description-container'>
           <h3 className="campaign-title">{campaign.title}</h3>
 
           <p className="campaign-description">{campaign.description}</p>
+          </div>
+          <div className='funding-details-container'>
           <p className="funding-details">Funding: ${campaign.currentFunding}  ({((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%)</p>
           <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
           <p className="campaign-categories">{campaign.categories}</p>
+          </div>
+          </div>
           </div>
         </Link>
       ))}

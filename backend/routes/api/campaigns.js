@@ -222,6 +222,7 @@ router.put('/:id', validateCampaign, singleMulterUpload('imgUrl'), async (req, r
     existingCampaign.fundingGoal = fundingGoal;
     existingCampaign.currentFunding = currentFunding;
     existingCampaign.numBackers = numBackers;
+
     existingCampaign.imgUrl= imgUrl;
 
     await existingCampaign.save();

@@ -104,6 +104,7 @@ const ViewCampaignsList = () => {
           ))}
           </div>
         </div>
+
         <div className="right-column">
 
           <div className="category-list">

@@ -16,7 +16,10 @@
     margin: 10px 0px;
     color: #777;
   }
-
+  .funding{
+    color:#a253fc;
+    font-weight: bold;
+  }
   .explore-button {
     margin-top: 10px;
     background-color:#a253fc;
@@ -25,6 +28,16 @@
     padding: 10px 20px;
     border: none;
     cursor: pointer;
+  }
+.campaign-copy-container{
+  display: flex;
+  flex-direction: column;
+
+
+}
+  .funding-container{
+    display: flex;
+    justify-content: space-between;
   }
 
   .rotating-images-container {

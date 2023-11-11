@@ -16,8 +16,9 @@
   }
 
   .campaign-image3 {
-    width: 400px;
-    height: auto;
+    width: 500px;
+    height: 400px;
+    object-fit: cover;
 
   }
 
@@ -71,6 +72,8 @@
   .campaign-story {
     font-size: 1.2em;
     line-height: 1.6;
+    word-break: break-all;
+
   }
 
   .category-info {

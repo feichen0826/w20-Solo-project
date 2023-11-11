@@ -20,6 +20,7 @@
 .start-a-campaign{
   text-decoration: none;
   color:#a253fc;
+  cursor: pointer;
 }
 .hidden {
     display: none;

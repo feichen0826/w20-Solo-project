@@ -7,10 +7,11 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 import logo from "./logo.png";
+import { useHistory } from "react-router-dom";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-
+  const history=useHistory()
   return (
     <div className="navigation">
 		<div>
@@ -22,7 +23,7 @@ function Navigation({ isLoaded }) {
       <div className='navbar-user'>
         {sessionUser && isLoaded ? (
           <>
-          <NavLink to="create-campaign" className='start-a-campaign'>Start a campaign</NavLink>
+          <div onClick={()=>{history.push('/create-campaign')}}  className='start-a-campaign'>Start a campaign</div>
           {sessionUser.username}
           <div>
             <ProfileButton user={sessionUser} />

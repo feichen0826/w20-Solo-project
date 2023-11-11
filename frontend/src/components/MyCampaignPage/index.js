@@ -39,18 +39,19 @@ if(allCampaigns.length === 0 || !currentUser ){
   return (
     <div className="my-campaign-page">
       <h1 id="username">{currentUser.username}</h1>
-      <nav>
+      {/* <nav>
         <NavLink to="/my-campaigns" id="campaigns-link">
           Campaigns
         </NavLink>
         <NavLink to="/my-contributions" id="contributions-link">
           Contributions
         </NavLink>
-      </nav>
+      </nav> */}
 
       <div className="campaign-list">
-        {userCampaigns.map((campaign) => (
-          <div key={campaign.id} className="campaign-container1">
+        {userCampaigns.map((campaign,index) => (
+          <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container1">
+
             <img src={campaign.imgUrl} alt="Campaign" />
             <div className="campaign-info">
               <h2 id={`title-${campaign.id}`}>{campaign.title}</h2>
@@ -82,7 +83,7 @@ if(allCampaigns.length === 0 || !currentUser ){
                 />
               )}
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

@@ -55,7 +55,7 @@ const { campaignId } = useParams();
           </p>
           <p className="campaign-stat">Days Left: {calculateDaysLeft(singleCampaign.startDate, singleCampaign.endDate)}</p>
         </div>
-        <button className="see-options-button">See Options</button>
+        {/* <button className="see-options-button">See Options</button> */}
       </div>
     </div>
     <div className="story-section">
