@@ -25,6 +25,12 @@ const EditCampaignForm = () => {
   const [campaignData, setCampaignDataState] = useState(null);
   const [errors, setErrors] = useState({});
   const [categories, setCategories] = useState([]);
+  const [filename, setFilename] = useState('');
+const [optional, setOptional] = useState('');
+const [imageURL, setImageURL] = useState('');
+const [file, setFile] = useState(null);
+const maxFileError = "Selected image exceeds the maximum file size of 5Mb";
+
 
   useEffect(() => {
     dispatch(fetchCampaignDetailsAsync(campaignId))
@@ -189,27 +195,46 @@ const EditCampaignForm = () => {
   //   }
   // };
 
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
+  // const handleFileChange = (e) => {
+  //   const selectedFile = e.target.files[0];
 
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append('file', selectedFile);
+  //   if (selectedFile) {
+  //     const formData = new FormData();
+  //     formData.append('file', selectedFile);
 
 
-      fetch(`/api/campaigns/${campaignId}/image`, {
-        method: 'POST',
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          console.log('File uploaded successfully:', result);
-        })
-        .catch((error) => {
-          console.error('Error uploading file:', error);
-        });
+  //     fetch(`/api/campaigns/${campaignId}/image`, {
+  //       method: 'POST',
+  //       body: formData,
+  //     })
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         console.log('File uploaded successfully:', result);
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error uploading file:', error);
+  //       });
+  //   }
+  // };
+
+  const fileWrap = (e) => {
+    e.stopPropagation();
+
+    const tempFile = e.target.files[0];
+
+    // Check for max image size of 5Mb
+    if (tempFile.size > 5000000) {
+      setFilename(maxFileError); // "Selected image exceeds the maximum file size of 5Mb"
+      return;
     }
+
+    const newImageURL = URL.createObjectURL(tempFile);
+    setImageURL(newImageURL);
+    setFile(tempFile);
+    setFilename(tempFile.name);
+    setOptional('');
   };
+
 
 
   const handleAddCategory = () => {
@@ -329,7 +354,15 @@ const EditCampaignForm = () => {
         </div>
 
         <div className="form-group">
-            <label className="form-label">Image</label>
+        <div className="file-inputs-container">
+          <input type="file" accept="image/png, image/jpeg, image/jpg" id="post-image-input2" onChange={fileWrap}></input>
+          <label htmlFor="post-image-input2" className="file-input-labels-noname"> {image && (
+              <div className="image-preview">
+                <img src={image.preview} alt="Preview" />
+              </div>
+            )}</label>
+        </div>
+            {/* <label className="form-label">Image</label>
             {image && (
               <div className="image-preview">
                 <img src={image.preview} alt="Preview" />
@@ -337,7 +370,7 @@ const EditCampaignForm = () => {
             )}
             <p className="form-description">Add a image to appear on the top of your campaign page. Campaigns with images raise 2000% more than campaigns without images.</p>
 
-            <input type="file"  onChange={handleFileChange}/>
+            <input type="file"  onChange={handleFileChange}/> */}
         </div>
 
         <div className="form-group">
