@@ -26,10 +26,10 @@ const EditCampaignForm = () => {
   const [errors, setErrors] = useState({});
   const [categories, setCategories] = useState([]);
   const [filename, setFilename] = useState('');
-const [optional, setOptional] = useState('');
-const [imageURL, setImageURL] = useState('');
-const [file, setFile] = useState(null);
-const maxFileError = "Selected image exceeds the maximum file size of 5Mb";
+  const [optional, setOptional] = useState('');
+  const [imageURL, setImageURL] = useState('');
+  const [file, setFile] = useState(null);
+  const maxFileError = "Selected image exceeds the maximum file size of 5Mb";
 
 
   useEffect(() => {
@@ -39,12 +39,11 @@ const maxFileError = "Selected image exceeds the maximum file size of 5Mb";
         if (campaignData) {
           setCampaignData(campaignData);
         } else {
-          // Handle not found or error condition
+
         }
       })
       .catch((error) => {
         console.error(error);
-        // Handle the error, e.g., show an error message
       });
   }, [dispatch, campaignId]);
 
@@ -105,12 +104,11 @@ const maxFileError = "Selected image exceeds the maximum file size of 5Mb";
       const startDateObj = new Date(startDate);
       const endDateObj = new Date(endDate);
 
-      // Check if endDate is after startDate
+
       if (endDateObj <= startDateObj) {
         newErrors.endDate = "End date must be after the start date.";
       }
 
-      // Check if endDate is in the future
       const currentDate = new Date();
       if (endDateObj <= currentDate) {
         newErrors.endDate = "End date must be in the future.";
@@ -156,14 +154,12 @@ const maxFileError = "Selected image exceeds the maximum file size of 5Mb";
         const updatedImage = await dispatch(updateCampaignImageAsync(campaignId, { image }));
         if (updatedImage) {
           history.push(`/campaign/${campaignId}`);
-        } else {
-          // Handle image update error
         }
+
+
       } else {
         history.push(`/campaign/${campaignId}`);
       }
-    } else {
-      // Handle campaign update error
     }
   };
 //     const updatedCampaign = await dispatch(updateCampaignAsync(campaignId, {
@@ -354,14 +350,16 @@ const maxFileError = "Selected image exceeds the maximum file size of 5Mb";
         </div>
 
         <div className="form-group">
-        <div className="file-inputs-container">
-          <input type="file" accept="image/png, image/jpeg, image/jpg" id="post-image-input2" onChange={fileWrap}></input>
-          <label htmlFor="post-image-input2" className="file-input-labels-noname"> {image && (
-              <div className="image-preview">
-                <img src={image.preview} alt="Preview" />
-              </div>
-            )}</label>
-        </div>
+          <div className="file-inputs-container">
+            <input type="file" accept="image/png, image/jpeg, image/jpg" id="post-image-input2" onChange={fileWrap}></input>
+            <label htmlFor="post-image-input2" className="file-input-labels-noname"> {image && (
+                <div className="image-preview">
+                  <img src={image.preview} alt="Preview" />
+                </div>
+              )}
+            </label>
+          </div>
+
             {/* <label className="form-label">Image</label>
             {image && (
               <div className="image-preview">

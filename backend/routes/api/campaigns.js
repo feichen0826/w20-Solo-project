@@ -206,8 +206,8 @@ router.put('/:id', validateCampaign, singleMulterUpload('imgUrl'), async (req, r
   try {
     const campaignId = req.params.id;
     const { title, description, story, startDate, endDate, fundingGoal, currentFunding, numBackers, category } = req.body;
-    const imgUrl = await singlePublicFileUpload(req.file);
-    console.log(imgUrl)
+    // const imgUrl = await singlePublicFileUpload(req.file);
+   // console.log(imgUrl)
     const existingCampaign = await Campaign.findByPk(campaignId);
 
     if (!existingCampaign) {
@@ -224,7 +224,7 @@ router.put('/:id', validateCampaign, singleMulterUpload('imgUrl'), async (req, r
     existingCampaign.currentFunding = currentFunding;
     existingCampaign.numBackers = numBackers;
 
-    existingCampaign.imgUrl= imgUrl;
+   // existingCampaign.imgUrl= imgUrl;
 
     await existingCampaign.save();
 
@@ -253,19 +253,14 @@ router.put('/:id/image', validateCampaign, singleMulterUpload('imgUrl'), async (
   try {
     const campaignId = req.params.id;
 
-    const imgUrl = await singlePublicFileUpload(req.file);
-    console.log(imgUrl)
-    const existingCampaign = await Campaign.findByPk(campaignId);
-
-    if (!existingCampaign) {
-      return res.status(404).json({ message: 'Campaign not found' });
+    if(req.file){
+      const imgUrl = await singlePublicFileUpload(req.file);
+      existingCampaign.imgUrl= imgUrl;
     }
 
-
-    existingCampaign.imgUrl= imgUrl;
+    const existingCampaign = await Campaign.findByPk(campaignId);
 
     await existingCampaign.save();
-
 
     if (category) {
       const selectedCategories = await Category.findAll({
@@ -273,7 +268,6 @@ router.put('/:id/image', validateCampaign, singleMulterUpload('imgUrl'), async (
           name: category,
         },
       });
-
       await existingCampaign.setCategories(selectedCategories);
     }
 

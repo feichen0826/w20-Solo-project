@@ -38,11 +38,11 @@ const updateCampaign = (campaignId, campaignData) =>{
   };
 }
 
-const updateCampaignImage = (campaignId, campaignData) => {
+const updateCampaignImage = (campaignId, updatedCampaignImage) => {
   return {
     type: UPDATE_CAMPAIGN_IMAGE,
     campaignId,
-    campaignData
+    updatedCampaignImage,
   };
 };
 
@@ -194,12 +194,12 @@ console.log(campaignData)
 
 
 //update campaign image
-export const updateCampaignImageAsync = (campaignId, campaignData) => async (dispatch) => {
+export const updateCampaignImageAsync = (campaignId, imgUrl) => async (dispatch) => {
   const {
     image,
-  } = campaignData;
+  } = imgUrl;
 
-console.log(campaignData)
+
 
 
   const formData = new FormData();
@@ -222,7 +222,7 @@ console.log(campaignData)
 
   if (response.ok) {
     const updatedCampaignImage = await response.json();
-    dispatch(updateCampaignImage(updatedCampaignImage));
+    dispatch(updateCampaignImage(campaignId, updatedCampaignImage));
     return updatedCampaignImage;
   } else {
     const errors = await response.json();
