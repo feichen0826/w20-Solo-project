@@ -9,7 +9,7 @@ const CreateNewCampaign = () => {
     const dispatch = useDispatch()
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState([]);
   const [story, setStory] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -65,7 +65,7 @@ const CreateNewCampaign = () => {
     }
 
     // Validate fundingGoal
-    if (!fundingGoal || fundingGoal <= 0) {
+    if (!fundingGoal || Number(fundingGoal) < 0) {
       newErrors.fundingGoal = "Funding Goal must be greater than 0.";
     }
 
@@ -78,7 +78,7 @@ const CreateNewCampaign = () => {
     if (numBackers < 0) {
       newErrors.numBackers = "Number of Backers must be greater than or equal to 0.";
     }
-
+console.log(errors)
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -89,7 +89,7 @@ const CreateNewCampaign = () => {
             userId:currentUser.id,
             title,
             description,
-            category,
+            category:categories,
             story,
             startDate,
             endDate,
@@ -274,6 +274,7 @@ const CreateNewCampaign = () => {
             onChange={(e) => setFundingGoal(e.target.value)}
             required
           />
+          <ErrorMessage message={errors.fundingGoal} />
         </div>
 
         <div className="form-group">

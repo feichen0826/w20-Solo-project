@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCampaignAsync, fetchCampaignDetailsAsync } from '../../store/campaignReducer';
+import { updateCampaignAsync, fetchCampaignDetailsAsync , updateCampaignImageAsync} from '../../store/campaignReducer';
 import { useHistory, useParams } from 'react-router-dom';
+
 import ErrorMessage from './ErrorMessage';
 import './EditCampaignForm.css';
 
@@ -21,7 +22,7 @@ const EditCampaignForm = () => {
   const [fundingGoal, setFundingGoal] = useState(0);
   const [currentFunding, setCurrentFunding] = useState(0);
   const [numBackers, setNumBackers] = useState(0);
-
+  const [campaignData, setCampaignDataState] = useState(null);
   const [errors, setErrors] = useState({});
   const [categories, setCategories] = useState([]);
 
@@ -41,6 +42,13 @@ const EditCampaignForm = () => {
       });
   }, [dispatch, campaignId]);
 
+  useEffect(() => {
+    if (campaignData) {
+      setCampaignDataState(campaignData);
+    }
+  }, [campaignData]);
+
+
   const setCampaignData = (campaignData) => {
     setTitle(campaignData.title);
     setDescription(campaignData.description);
@@ -48,11 +56,17 @@ const EditCampaignForm = () => {
     setStory(campaignData.story);
     setStartDate(new Date(campaignData.startDate).toISOString().split('T')[0]);
     setEndDate(new Date(campaignData.endDate).toISOString().split('T')[0]);
-    setImage(campaignData.imgUrl);
+    //setImage(campaignData.imgUrl);
     setFundingGoal(campaignData.fundingGoal);
     setCurrentFunding(campaignData.currentFunding);
     setNumBackers(campaignData.numBackers);
     setCategories(campaignData.categories);
+    if (campaignData.imgUrl) {
+      setImage({
+        name: 'image',
+        preview: campaignData.imgUrl,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -116,34 +130,87 @@ const EditCampaignForm = () => {
       setErrors(newErrors);
       return;
     }
-
-    const updatedCampaign = await dispatch(updateCampaignAsync(campaignId, {
+    const campaignDetails = {
       title,
       description,
-      category,
+      category: categories,
       story,
       startDate,
       endDate,
-      image,
       fundingGoal,
       currentFunding,
       numBackers,
-      //categories: categories,
-    }));
-console.log(updatedCampaign)
+      categories: categories,
+    };
+
+    const updatedCampaign = await dispatch(updateCampaignAsync(campaignId, campaignDetails));
+
     if (updatedCampaign) {
-      history.push(`/campaign/${campaignId}`);
+      if (image) {
+        const updatedImage = await dispatch(updateCampaignImageAsync(campaignId, { image }));
+        if (updatedImage) {
+          history.push(`/campaign/${campaignId}`);
+        } else {
+          // Handle image update error
+        }
+      } else {
+        history.push(`/campaign/${campaignId}`);
+      }
     } else {
-      return 'Error';
+      // Handle campaign update error
+    }
+  };
+//     const updatedCampaign = await dispatch(updateCampaignAsync(campaignId, {
+//       title,
+//       description,
+//       category:categories,
+//       story,
+//       startDate,
+//       endDate,
+
+//       fundingGoal,
+//       currentFunding,
+//       numBackers,
+//       categories: categories,
+//     }));
+// console.log(updatedCampaign)
+//     if (updatedCampaign) {
+//       history.push(`/campaign/${campaignId}`);
+//     } else {
+//       return 'Error';
+//     }
+
+
+  // const handleImageUpload = (e) => {
+  //   const selectedImage = e.target.files[0];
+  //   console.log(selectedImage)
+  //   if (selectedImage) {
+  //     setImage(selectedImage);
+  //   }
+  // };
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+
+      fetch(`/api/campaigns/${campaignId}/image`, {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log('File uploaded successfully:', result);
+        })
+        .catch((error) => {
+          console.error('Error uploading file:', error);
+        });
     }
   };
 
-  const handleImageUpload = (e) => {
-    const selectedImage = e.target.files[0];
-    if (selectedImage) {
-      setImage(selectedImage);
-    }
-  };
 
   const handleAddCategory = () => {
     if (category && !categories.includes(category)) {
@@ -263,9 +330,14 @@ console.log(updatedCampaign)
 
         <div className="form-group">
             <label className="form-label">Image</label>
+            {image && (
+              <div className="image-preview">
+                <img src={image.preview} alt="Preview" />
+              </div>
+            )}
             <p className="form-description">Add a image to appear on the top of your campaign page. Campaigns with images raise 2000% more than campaigns without images.</p>
 
-            <input type="file"  onChange={(e)=>setImage(e.target.files[0])} />
+            <input type="file"  onChange={handleFileChange}/>
         </div>
 
         <div className="form-group">

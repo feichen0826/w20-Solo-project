@@ -10,10 +10,8 @@ const { campaignId } = useParams();
   const singleCampaign = useSelector((state) => state.campaign.campaignDetails);
     console.log(singleCampaign)
 
-  // Fetch username associated with the campaign's userId
+
   useEffect(() => {
-    // Make an API call to fetch the username based on the userId from your database
-    // Update the 'username' state with the fetched username
     dispatch(fetchCampaignDetailsAsync(campaignId))
   }, [dispatch, campaignId]);
 
@@ -64,7 +62,7 @@ const { campaignId } = useParams();
     </div>
 
     <div className="campaign-category">
-      <p className="category-info">Category: {singleCampaign.categories}</p>
+      <p className="category-info">Category: {singleCampaign.categories && singleCampaign.Categories.map(category => category.name).join(', ')}</p>
     </div>
   </div>
   );

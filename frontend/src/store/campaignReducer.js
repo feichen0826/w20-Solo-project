@@ -6,7 +6,7 @@ const FETCH_CAMPAIGN_DETAILS = 'campaign/fetchCampaignDetails';
 const CREATE_CAMPAIGN = 'campaign/createCampaign';
 const DELETE_CAMPAIGN = 'campaign/deleteCampaign';
 const UPDATE_CAMPAIGN = 'campaign/updateCampaign';
-
+const UPDATE_CAMPAIGN_IMAGE = 'campaign/updateCampaignImage';
 
 // Action creator
 const fetchAllCampaigns = (campaigns) => {
@@ -37,6 +37,14 @@ const updateCampaign = (campaignId, campaignData) =>{
     campaignData
   };
 }
+
+const updateCampaignImage = (campaignId, campaignData) => {
+  return {
+    type: UPDATE_CAMPAIGN_IMAGE,
+    campaignId,
+    campaignData
+  };
+};
 
 export const deleteCampaign = (campaignId) => {
   return {
@@ -74,7 +82,7 @@ export const createCampaignAsync = (campaignData) => async (dispatch) => {
   formData.append("userId", userId);
   formData.append("title", title);
   formData.append("description", description);
-  formData.append("category", category);
+ // formData.append("category", category);
   formData.append("story", story);
   formData.append("startDate", startDate);
   formData.append("endDate", endDate);
@@ -82,7 +90,9 @@ export const createCampaignAsync = (campaignData) => async (dispatch) => {
   formData.append("currentFunding", currentFunding);
   formData.append("numBackers", numBackers);
 
-
+category.forEach((categoryValue, index) => {
+  formData.append(`category[${index}]`, categoryValue);
+});
 
   if (image) {
     const imageUrl = image;
@@ -137,16 +147,22 @@ export const updateCampaignAsync = (campaignId, campaignData) => async (dispatch
     story,
     startDate,
     endDate,
-    image,
     fundingGoal,
     currentFunding,
     numBackers,
   } = campaignData;
 
+console.log(campaignData)
+
+
   const formData = new FormData();
   formData.append("title", title);
   formData.append("description", description);
-  formData.append("category", category);
+
+  category.forEach((categoryValue, index) => {
+    formData.append(`category[${index}]`, categoryValue);
+  });
+
   formData.append("story", story);
   formData.append("startDate", startDate);
   formData.append("endDate", endDate);
@@ -154,10 +170,7 @@ export const updateCampaignAsync = (campaignId, campaignData) => async (dispatch
   formData.append("currentFunding", currentFunding);
   formData.append("numBackers", numBackers);
 
-  if (image) {
-    const imageUrl = image;
-    formData.append("imgUrl", imageUrl);
-  }
+
 
   const response = await csrfFetch(`/api/campaigns/${campaignId}`, {
     method: 'PUT',
@@ -180,6 +193,42 @@ export const updateCampaignAsync = (campaignId, campaignData) => async (dispatch
 };
 
 
+//update campaign image
+export const updateCampaignImageAsync = (campaignId, campaignData) => async (dispatch) => {
+  const {
+    image,
+  } = campaignData;
+
+console.log(campaignData)
+
+
+  const formData = new FormData();
+
+
+  if (image) {
+    const imageUrl = image;
+    formData.append("imgUrl", imageUrl);
+  }
+
+  const response = await csrfFetch(`/api/campaigns/${campaignId}`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
+  });
+
+  console.log(response);
+
+  if (response.ok) {
+    const updatedCampaignImage = await response.json();
+    dispatch(updateCampaignImage(updatedCampaignImage));
+    return updatedCampaignImage;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
 // export const updateCampaignAsync = (campaignId, campaignData) => async (dispatch) => {
 //   const response = await csrfFetch(`/api/campaigns/${campaignId}`, {
 //     method: 'PUT',
@@ -249,6 +298,14 @@ const campaignReducer = (state = initialState, action) => {
           };
     return newState;
 
+    case UPDATE_CAMPAIGN_IMAGE:
+    newState = { ...state };
+    newState.campaignDetails[action.campaignId] = {
+      ...newState.campaignDetails[action.campaignId],
+      imgUrl: action.updatedCampaignImage.imgUrl,
+
+    };
+    return newState;
     // case DELETE_CAMPAIGN:
     //   newState = { ...state };
     //   delete newState.campaigns[action.campaignId];

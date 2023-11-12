@@ -49,9 +49,8 @@ if(allCampaigns.length === 0 || !currentUser ){
       </nav> */}
 
       <div className="campaign-list">
-        {userCampaigns.map((campaign,index) => (
-          <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container1">
-
+        {userCampaigns.map((campaign) => (
+          <div key={campaign.id} className="campaign-container1">
             <img src={campaign.imgUrl} alt="Campaign" />
             <div className="campaign-info">
               <h2 id={`title-${campaign.id}`}>{campaign.title}</h2>
@@ -83,7 +82,7 @@ if(allCampaigns.length === 0 || !currentUser ){
                 />
               )}
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

@@ -183,7 +183,7 @@ router.post('/',  validateCampaign, singleMulterUpload("imgUrl"), async (req, re
 
     const newCampaign = await Campaign.create(newCampaignData);
 
-    if (category) {
+    if (category && category.length > 0) {
       const selectedCategories = await Category.findAll({
         where: {
           name: category,
@@ -207,6 +207,7 @@ router.put('/:id', validateCampaign, singleMulterUpload('imgUrl'), async (req, r
     const campaignId = req.params.id;
     const { title, description, story, startDate, endDate, fundingGoal, currentFunding, numBackers, category } = req.body;
     const imgUrl = await singlePublicFileUpload(req.file);
+    console.log(imgUrl)
     const existingCampaign = await Campaign.findByPk(campaignId);
 
     if (!existingCampaign) {
@@ -227,7 +228,45 @@ router.put('/:id', validateCampaign, singleMulterUpload('imgUrl'), async (req, r
 
     await existingCampaign.save();
 
-    // Update categories if provided
+
+    if (category) {
+      const selectedCategories = await Category.findAll({
+        where: {
+          name: category,
+        },
+      });
+
+      await existingCampaign.setCategories(selectedCategories);
+    }
+
+    res.json(existingCampaign);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+// update campaign image by its id
+
+router.put('/:id/image', validateCampaign, singleMulterUpload('imgUrl'), async (req, res) => {
+  try {
+    const campaignId = req.params.id;
+
+    const imgUrl = await singlePublicFileUpload(req.file);
+    console.log(imgUrl)
+    const existingCampaign = await Campaign.findByPk(campaignId);
+
+    if (!existingCampaign) {
+      return res.status(404).json({ message: 'Campaign not found' });
+    }
+
+
+    existingCampaign.imgUrl= imgUrl;
+
+    await existingCampaign.save();
+
+
     if (category) {
       const selectedCategories = await Category.findAll({
         where: {
