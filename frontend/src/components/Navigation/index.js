@@ -7,6 +7,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 import logo from "./logo.png";
+import VisionFund from "./VisionFund.png"
 import { useHistory } from "react-router-dom";
 
 function Navigation({ isLoaded }) {
@@ -14,11 +15,14 @@ function Navigation({ isLoaded }) {
   const history=useHistory()
   return (
     <div className="navigation">
-		<div>
+
         <NavLink exact to="/">
-          <img className=" navigation-logo" src={logo} alt="Logo" />
+          	<div className="logo-container">
+          <img className="vision-fund-logo" src={VisionFund} />
+          <img className="navigation-logo" src={logo} alt="Logo" />
+          </div>
         </NavLink>
-		</div>
+
     <div className="navbar-auth">
       <div className='navbar-user'>
         {sessionUser && isLoaded ? (
@@ -32,7 +36,7 @@ function Navigation({ isLoaded }) {
           </>
 
         ) : (
-          <>
+          <div className='login-and-signup'>
             <OpenModalButton
               buttonText="Log In"
 
@@ -40,11 +44,10 @@ function Navigation({ isLoaded }) {
             />
             <OpenModalButton
               buttonText="Sign Up"
-
               modalComponent={<SignupFormModal />}
               tealBackground={true}
             />
-          </>
+          </div>
         )}
       </div>
       </div>

@@ -32,8 +32,11 @@
 .campaign-copy-container{
   display: flex;
   flex-direction: column;
+}
 
-
+.campaign-number{
+  margin-left: 10px;
+  color:rgb(148, 148, 148)
 }
   .funding-container{
     display: flex;
@@ -46,19 +49,53 @@
 
   }
 
+  .go-back-button{
+    width: 40px;
+    transform: scaleX(-1);
+    margin-right: 10px;
+    cursor: pointer;
+
+  }
+  .move-forward-button{
+    width: 40px;
+    cursor: pointer;
+  }
+
+  .back-icon:hover img{
+    transform: scale(-1.1);
+  }
+
+.next-icon:hover img {
+  transform: scale(1.1);
+}
+
+.back-icon:active img{
+
+  transform: scale(-0.9);
+}
+
+.next-icon:active img {
+  transform: scale(0.9);
+}
+
   .campaign-image1 {
-    width: 1920px;
+    width: 100%;
     height:400px;
     object-fit: cover;
     z-index: -1;
+  }
+
+  .arrow-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
   }
 
   .overlay {
     position: absolute;
     top: 100;
 
-
-    width: 1920px;
+    width: 100%;
     height: 400px;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 0;
@@ -66,12 +103,13 @@
 
   .vision-fund-picks{
     background-color: #fff;
-    color:black
+    color:black;
+    margin-bottom:10px;
   }
 
   .campaign-info1 {
   position: absolute;
-  top: 50%;
+  top: 47%;
   left: 35%;
   transform: translate(-50%, -50%);
 
@@ -201,7 +239,7 @@
 
   .category-icons {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
   }
 
   .category {
@@ -211,12 +249,15 @@
 
   .category-container {
     text-align: center;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    padding: 20px;
     transition: transform 0.3s ease-in-out;
+
+
   }
 
+  .category-icon{
+    width: 40%;
+  }
   .category:hover .category-container {
     transform: scale(1.05);
   }
@@ -224,4 +265,50 @@
   .category-name {
     font-size: 1em;
     margin-top: 8px;
+  }
+
+  .navigation-icons{
+    display: flex;
+    align-items: center;
+  }
+
+  /* footer */
+  .footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .row {
+    margin-bottom: 20px;
+  }
+
+  .col-md-6 {
+    width: 50%;
+  }
+
+
+
+  .social-icons a {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #0077b5; /* LinkedIn blue color */
+  }
+
+  .footer-links li {
+    list-style-type: none;
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .copyright {
+    color: #777;
   }

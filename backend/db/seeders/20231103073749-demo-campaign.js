@@ -119,7 +119,7 @@ module.exports = {
         story: `
           Our planet is a precious gift, and it's our responsibility to protect it. Join our conservation project to preserve nature and biodiversity. Your support makes a lasting impact on the environment.
         `,
-        imgUrl: 'https://c3.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/grqic4cyzpngmeisau7w',
+        imgUrl: 'https://media.gettyimages.com/id/1360884566/photo/cityscape-mixed-with-green-plants-multi-layered-image.jpg?s=612x612&w=0&k=20&c=rW2JcCaQv41BTKX_f3J_NPnUFXpp_SJVpObFvVNDBGs=',
       },
       {
         userId: 1,
@@ -161,7 +161,7 @@ module.exports = {
         story: `
           Nature is calling, and we're answering. Our outdoor adventure club brings together outdoor enthusiasts for exciting hikes, camping, and exploration. Connect with like-minded adventurers and create memories in the great outdoors.
         `,
-        imgUrl: 'https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/yorz2i4yk98ijw9et7i0',
+        imgUrl: 'https://media.gettyimages.com/id/1295441409/photo/stand-up-paddling-with-my-dog.jpg?s=1024x1024&w=gi&k=20&c=T1r4V1bqSJayq_5uscnE6djFGE8dG0s9X0DKBn3lLpA=',
       },
       {
         userId: 1,
@@ -175,7 +175,7 @@ module.exports = {
         story: `
           Curiosity is a child's greatest asset. Our program introduces children to the wonders of science through interactive and educational activities. Spark a lifelong love for learning with engaging science experiences.
         `,
-        imgUrl: 'https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/tzrxpbkitwtozvqsmd5y',
+        imgUrl: 'https://media.gettyimages.com/id/615629394/photo/playing-the-astronaut.jpg?s=612x612&w=gi&k=20&c=sxrsAm21CzSbhbgY4_Vc7WWRZNm1pVjJn6HSZE7T5qY=',
       },
       {
         userId: 2,
@@ -217,7 +217,7 @@ module.exports = {
         story: `
           Our food festival is a celebration of local flavors and culinary traditions. Join us for a gastronomic adventure featuring delicious dishes from talented local chefs. Your support encourages small food producers and promotes local cuisine.
         `,
-        imgUrl: 'https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/xc5wnjbofubpzwevwfpf',
+        imgUrl: 'https://media.gettyimages.com/id/1303486876/photo/tomatoes-and-greeny-on-counter-of-vegetable-market.jpg?s=612x612&w=0&k=20&c=FN-7Grr05-vVhS0dFAp-oQxf1Z3_kcNaQgOz1-aAnfs=',
       },
       {
         userId: 2,
@@ -231,7 +231,7 @@ module.exports = {
         story: `
           Mental health matters. Our campaign aims to create awareness, reduce stigma, and support mental health initiatives. Join us in this crucial effort to make mental well-being a priority.
         `,
-        imgUrl: 'https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/elp5cdfl5ihodldaj9y7',
+        imgUrl: 'https://media.gettyimages.com/id/1395851060/video/an-unrecognizable-woman-having-a-therapy-session-with-a-psychologist-closeup-of-a-patient.jpg?s=640x640&k=20&c=uXG_5EXxnWbdrsqHYgnBfoLznIl15tURwWkmtzweITQ=',
       },
       {
         userId: 3,
@@ -245,7 +245,7 @@ module.exports = {
         story: `
           The universe is our final frontier. Our project is dedicated to advancing scientific research and exploration in space. By contributing, you become a part of humanity's quest to understand the cosmos.
         `,
-        imgUrl: 'https://c0.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/p0fbo1yfgj76wcrx28pa',
+        imgUrl: 'https://media.gettyimages.com/id/530185374/photo/man-sitting-under-the-milky-way-galaxy.jpg?s=612x612&w=0&k=20&c=c1V-IkpM0TsKcskJgg8cYvp1OcpjDxAbF_c1GSMBh0g=',
       },
       {
         userId: 1,

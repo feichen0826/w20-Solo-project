@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
 import {fetchCampaignDetailsAsync} from '../../store/campaignReducer'
 import { useParams, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './CampaignDetailPage.css'
 
 const CampaignDetailPage = () => {
@@ -9,11 +10,21 @@ const dispatch = useDispatch();
 const { campaignId } = useParams();
   const singleCampaign = useSelector((state) => state.campaign.campaignDetails);
     console.log(singleCampaign)
-
+    const allCampaigns = useSelector((state) => state.campaign.campaigns);
+    const allCategories = useSelector((state)=> state.category.category)
 
   useEffect(() => {
     dispatch(fetchCampaignDetailsAsync(campaignId))
   }, [dispatch, campaignId]);
+  const categoryCampaigns = allCategories
+  //const categoryCampaigns = allCampaigns.filter((campaign) => campaign.category === categoryId);
+
+  if(allCampaigns.length === 0 || !allCampaigns){
+    return null
+  }
+  if(allCategories.length === 0){
+    return null
+  }
 
   if(singleCampaign ===  undefined){
     return null
@@ -63,6 +74,33 @@ const { campaignId } = useParams();
 
     <div className="campaign-category">
       <p className="category-info">Category: {singleCampaign.categories && singleCampaign.Categories.map(category => category.name).join(', ')}</p>
+    </div>
+
+    <div className='may-interest-container'>
+      <p className='may-interest'>You may also be interested in</p>
+      <div className='campaign-column'>
+      {categoryCampaigns[0].Campaigns.map((campaign, index) => (
+
+        <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
+           <img src={campaign.imgUrl} alt="Campaign" className="campaign-image2"/>
+           <div className='view-campaign-copy'>
+              <p className='funding'>Funding</p>
+              <div>
+              <i class="far fa-heart"></i>
+              </div>
+              <h3 className="campaign-title">{campaign.title}</h3>
+              <p className="campaign-description">{campaign.description}</p>
+              <p className="funding-details">
+                Funding: ${campaign.currentFunding} ({((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%)
+              </p>
+              <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
+              <p className="categories">{campaign.categories}</p>
+              </div>
+        </Link>
+
+
+      ))}
+        </div>
     </div>
   </div>
   );

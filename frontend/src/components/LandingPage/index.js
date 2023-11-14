@@ -3,24 +3,35 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { fetchAllCampaignsAsync } from '../../store/campaignReducer';
 import { fetchAllCategoryAsync } from '../../store/categoryReducer';
-
+import arrow from './arrow.png'
+import black from './black.png'
 import './LandingPage.css'
+import technology from './technology.png'
+import business from './business.png'
+import education from './education.png'
+import health from './health.png'
+import sport from './sport.png'
+import environment from './environment.png'
 
 // import BackIcon from './path/to/back-icon.svg';
 // import ForwardIcon from './path/to/forward-icon.svg';
 
-// const categories = [
-//   { name: 'Art', icon: 'art-icon.png' },
-//   { name: 'Technology', icon: 'tech-icon.png' },
-//   { name: 'Health', icon: 'health-icon.png' },
-//   { name: 'Food', icon: 'food-icon.png' },
-//   { name: 'Environment', icon: 'environment-icon.png' },
-//   { name: 'Sports', icon: 'sports-icon.png' },
-// ];
+const categoryIcons = {
+  Technology: technology,
+  Education:education,
+  Health:health,
+  Environment:environment,
+  Business:business,
+  Sports:sport
+
+
+};
 
 const LandingPage = () => {
   const [currentIndex, setCurrentIndex] = useState(9);
+  const [startIndex, setStartIndex] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
+
   const dispatch = useDispatch();
   const allCampaigns = useSelector((state) => state.campaign.campaigns);
   console.log(allCampaigns)
@@ -72,14 +83,23 @@ const LandingPage = () => {
     return null
   }
 
-//   const handleBackClick = () => {
-//     setCurrentImageIndex((currentImageIndex - 1 + randomCampaign.length) % randomCampaign.length);
-//   };
+  const handlePrevClickConstrained = () => {
+  setCurrentIndex((prevIndex) => Math.max(9, (prevIndex - 1) % allCampaigns.length));
+};
 
-//   const handleForwardClick = () => {
-//     setCurrentImageIndex((currentImageIndex + 1) % randomCampaign.length);
-//   };
- console.log(allCampaigns[currentIndex].id)
+const handleNextClickConstrained = () => {
+  setCurrentIndex((prevIndex) => Math.min(9 + 7, (prevIndex + 1) % allCampaigns.length));
+};
+
+
+ const handleNextClick = () => {
+    setStartIndex((prevIndex) => Math.min(prevIndex + 4, allCampaigns.length - 4));
+  };
+
+  const handlePrevClick = () => {
+    setStartIndex((prevIndex) => Math.max(0, prevIndex - 4));
+  };
+
   return (
     <div className="landing-page">
     <h1 className="landing-title">Find it first on VisionFund</h1>
@@ -100,6 +120,17 @@ const LandingPage = () => {
           See Campaign
         </Link>
         <div>
+
+        </div>
+        <div className='arrow-container'>
+        <div className="arrow-icons">
+        <span className="arrow-left" onClick={handlePrevClickConstrained}>
+          <img className="go-back-button" src={arrow} alt="Go Back" />
+        </span>
+        <span className="arrow-right" onClick={handleNextClickConstrained}>
+          <img className="move-forward-button" src={arrow} alt="Move Forward" />
+        </span>
+      </div>
         <p className='campaign-number'>{currentIndex - 8} /8</p>
         </div>
       </div>
@@ -109,8 +140,16 @@ const LandingPage = () => {
   <div className='popular-project-title-container'>
     <h2 className="popular-projects-title">Popular Projects</h2>
     </div>
+
     <div className="horizontal-scrollable-bar">
-      {allCampaigns.slice(4, 8).map((campaign, index) => (
+    <div className="navigation-icons">
+          <span className="back-icon" onClick={handlePrevClick}>
+          <img className="go-back-button" src={black} alt="Go Back" />
+
+          </span>
+
+        </div>
+      {allCampaigns.slice(startIndex, startIndex + 4).map((campaign, index) => (
         <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
           <img src={campaign.imgUrl} alt="Campaign" className="campaign-image" />
           <div className="campaign-info-container">
@@ -135,6 +174,13 @@ const LandingPage = () => {
           </div>
         </Link>
       ))}
+       <div className="navigation-icons">
+
+          <span className="next-icon" onClick={handleNextClick}>
+
+          <img className="move-forward-button" src={black} alt="Move Forward" />
+          </span>
+        </div>
     </div>
     </div>
 
@@ -144,65 +190,55 @@ const LandingPage = () => {
       {allCategories.map((category, index) => (
         <Link to={`/${category.id}/campaigns`} key={index} className="category">
           <div className="category-container">
-
+            <div >
+          <img src={categoryIcons[category.name]} alt={category.name} className='category-icon'/>
+           </div>
             <p className="category-name">{category.name}</p>
           </div>
         </Link>
       ))}
     </div>
+
+    <footer className="footer">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6">
+            <h4>Contact Us</h4>
+            <p>Email: feichen0826@gmail.com</p>
+
+          </div>
+          <div className="col-md-6">
+            <h4>Follow Us</h4>
+
+            <div className="social-icons">
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-linkedin"></i>
+              </a>
+
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div className="row">
+          <div className="col-md-6">
+
+            <ul className="footer-links">
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About Us</a></li>
+
+            </ul>
+          </div>
+          <div className="col-md-6">
+            <p className="copyright">&copy; 2023 VisionFund. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
+
+
 );
-  //   <div className="landing-page">
-  //     <h1>Find it first on VisionFund</h1>
-  //     <p>Vision Fund is where early adopters and innovation seekers find lively, imaginative tech before it hits the mainstream.</p>
-  //     <Link to="/view-campaigns">
-  //       <button>EXPLORE CAMPAIGNS</button>
-  //     </Link>
 
-  //       <div className="rotating-images-container">
-  //         <img src={allCampaigns[currentIndex].imgUrl} alt="Random Campaign" />
-  //           <div className="campaign-info">
-  //             <h2>{allCampaigns[currentIndex].title}</h2>
-  //             <p>{allCampaigns[currentIndex].description}</p>
-  //             <Link to={`/campaign/${allCampaigns[currentIndex].campaignId}`}>
-  //               See Campaign
-  //             </Link>
-  //             <div>
-  //               {/* <img src={BackIcon} alt="Back" onClick={handleBackClick} />
-  //               <img src={ForwardIcon} alt="Forward" onClick={handleForwardClick} /> */}
-  //             </div>
-  //           </div>
-  //       </div>
-
-  //     <h2>Popular Projects</h2>
-  //     <div className="horizontal-scrollable-bar">
-  //       {allCampaigns.slice(4, 8).map((campaign, index) => (
-  //         <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
-
-  //           <img src={campaign.imgUrl} alt="Campaign" />
-  //           <h3>{campaign.title}</h3>
-  //           <p>{campaign.description}</p>
-  //           <p>Funding: ${campaign.currentFunding}  ({((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%)</p>
-  //           <p>{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
-  //           <p>{campaign.categories}</p>
-  //           </Link>
-  //       ))}
-  //     </div>
-
-
-  //     <h2>Which categories interest you?</h2>
-  //     <p>Discover projects just for you and get great recommendations when you select your interests. Or explore our top categories.</p>
-  //     <div className="category-icons">
-  //       {allCategories.map((category, index) => (
-  //         <Link to={`/${category.id}/campaigns`} key={index} className="category">
-  //         <div>
-  //           <p>{category.name}</p>
-  //         </div>
-  //         </Link>
-  //       ))}
-  //     </div>
-  //   </div>
-  // );
 };
 
 export default LandingPage;

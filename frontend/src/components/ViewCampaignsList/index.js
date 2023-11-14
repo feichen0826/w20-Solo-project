@@ -63,11 +63,15 @@ const ViewCampaignsList = () => {
       });
 
   return (
+    <>
+    <div className="banner">
+      <img src='https://media.gettyimages.com/id/1463696189/photo/collage-composition-matching-roads-from-directly-above-in-different-scenarios-and-seasons.jpg?s=612x612&w=0&k=20&c=OPCky7ayaNKnx9a6PMrdQBb5zJnjsTe5zVt3bAdKvAw='
+      className= 'banner-bg-image'></img>
+      <h1 className="banner-title">VisionFund Campaigns</h1>
+      <p className="banner-description">Fund new and groundbreaking projects, including hits from VisionFund InDemand.</p>
+    </div>
     <div className="view-campaigns-list">
-      <div className="banner">
-        <h1 className="banner-title">VisionFund Campaigns</h1>
-        <p className="banner-description">Fund new and groundbreaking projects, including hits from VisionFund InDemand.</p>
-      </div>
+
       <div className="campaigns-grid">
         <div className="left-column">
         <input type="text"
@@ -117,6 +121,7 @@ const ViewCampaignsList = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
