@@ -184,6 +184,31 @@ const handleNextClickConstrained = () => {
     </div>
     </div>
 
+    <div className = 'data-container'>
+    <h1 className='data-title'>Project by project,</h1>
+    <h1 className='data-title'>we're changing the way new ideas come to life.</h1>
+    <div className="project-statistics">
+
+      <div className="statistic">
+
+        <h3>1B+</h3>
+        <p>Total raised across all projects, from dance to design.</p>
+      </div>
+      <div className="statistic">
+        <h3>11MM+</h3>
+        <p>Contributions from our amazing community of backers for 650k+ projects.</p>
+      </div>
+      <div className="statistic">
+        <h3>223</h3>
+        <p>Countries & territories are home to Indiegogo users.</p>
+      </div>
+      <div className="statistic">
+        <h3>18,983%</h3>
+        <p>The most a campaign has exceeded its goal … so far!</p>
+      </div>
+    </div>
+</div>
+
     <h2 className="interest-categories-title">Which categories interest you?</h2>
     <p className="interest-categories-description">Discover projects just for you and get great recommendations when you select your interests. Or explore our top categories.</p>
     <div className="category-icons">
@@ -199,20 +224,30 @@ const handleNextClickConstrained = () => {
       ))}
     </div>
 
+
+
     <footer className="footer">
       <div className="container">
         <div className="row">
           <div className="col-md-6">
             <h4>Contact Us</h4>
-            <p>Email: feichen0826@gmail.com</p>
+            <p>
+                <i class="fas fa-envelope"></i>
+               feichen0826@gmail.com
+            </p>
+            <p>
+                <i class="fas fa-phone"></i>
+                (310) 218 8694
+            </p>
 
           </div>
           <div className="col-md-6">
             <h4>Follow Us</h4>
 
             <div className="social-icons">
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-linkedin"></i>
+            <a href="https://www.linkedin.com/in/fei-chen-651612193" target="_blank" rel="noopener noreferrer" className="small-link">
+                <i className="fab fa-linkedin">
+</i>www.linkedin.com/in/fei-chen-651612193
               </a>
 
             </div>
@@ -220,14 +255,7 @@ const handleNextClickConstrained = () => {
         </div>
         <hr />
         <div className="row">
-          <div className="col-md-6">
 
-            <ul className="footer-links">
-              <li><a href="/">Home</a></li>
-              <li><a href="/about">About Us</a></li>
-
-            </ul>
-          </div>
           <div className="col-md-6">
             <p className="copyright">&copy; 2023 VisionFund. All rights reserved.</p>
           </div>
