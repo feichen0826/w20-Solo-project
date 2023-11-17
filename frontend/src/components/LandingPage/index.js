@@ -31,6 +31,7 @@ const LandingPage = () => {
   const [currentIndex, setCurrentIndex] = useState(9);
   const [startIndex, setStartIndex] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
+  const [isFavorited, setIsFavorited] = useState(false);
 
   const dispatch = useDispatch();
   const allCampaigns = useSelector((state) => state.campaign.campaigns);
@@ -100,6 +101,16 @@ const handleNextClickConstrained = () => {
     setStartIndex((prevIndex) => Math.max(0, prevIndex - 4));
   };
 
+  const handleFavoriteClick = (e) => {
+    // e.stopPropagation();
+    // setIsFavorited((prevState) => !prevState);
+  };
+
+  const uppercaseCategories = (categories) => {
+    return categories.map((category) => category.toUpperCase()).join(', ');
+  };
+
+
   return (
     <div className="landing-page">
     <h1 className="landing-title">Find it first on VisionFund</h1>
@@ -116,6 +127,7 @@ const handleNextClickConstrained = () => {
       <button className='vision-fund-picks'>FEATURED</button>
         <h2 className="campaign-title">{allCampaigns[currentIndex].title} </h2>
         <p className="campaign-description1">{allCampaigns[currentIndex].description}</p>
+
         <Link to={`/campaign/${allCampaigns[currentIndex].id}`} className="see-campaign-link">
           See Campaign
         </Link>
@@ -154,23 +166,36 @@ const handleNextClickConstrained = () => {
           <img src={campaign.imgUrl} alt="Campaign" className="campaign-image" />
           <div className="campaign-info-container">
             <div className='funding-container'>
-            <p className='funding'>Funding</p>
-              <div className='save-favorite'>
-              <i class="far fa-heart"></i>
-              </div>
-          </div>
-          <div className='campaign-copy-container'>
-          <div className='campaign-title-description-container'>
-          <h3 className="campaign-title">{campaign.title}</h3>
+              <p className='funding'>FUNDING</p>
+                <div className='save-favorite' onClick={(e) => handleFavoriteClick(e)}>
+                <i className={`far fa-heart ${isFavorited ? 'favorited' : ''}`}></i>
+                </div>
+            </div>
+            <div className='campaign-copy-container'>
 
-          <p className="campaign-description">{campaign.description}</p>
-          </div>
-          <div className='funding-details-container'>
-          <p className="funding-details">Funding: ${campaign.currentFunding}  ({((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%)</p>
-          <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
-          <p className="campaign-categories">{campaign.categories}</p>
-          </div>
-          </div>
+                <h3 className="campaign-title">{campaign.title}</h3>
+                <p className="campaign-description">{campaign.description}</p>
+
+
+            </div>
+            <div className='funding-details-container'>
+                <p className="campaign-categories">{uppercaseCategories(campaign.categories)}</p>
+                <div className='funding-percentage-info-container'>
+                  <div className='usd-container'>
+                    <div className="funding-details">${campaign.currentFunding.toLocaleString()}</div>
+                    <div className='usd-raised'>USD raised </div>
+                  </div>
+                    <div className='funding-percentage'>{((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%</div>
+                </div>
+                <div className="percentage-bar">
+                  <div className="fill" style={{ width: `${((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%`}}></div>
+                </div>
+                <div className="days-left-container">
+                  <i className="far fa-clock"></i>
+                  <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
+                </div>
+
+            </div>
           </div>
         </Link>
       ))}
@@ -209,6 +234,7 @@ const handleNextClickConstrained = () => {
     </div>
 </div>
 
+<div className='category-info-container'>
     <h2 className="interest-categories-title">Which categories interest you?</h2>
     <p className="interest-categories-description">Discover projects just for you and get great recommendations when you select your interests. Or explore our top categories.</p>
     <div className="category-icons">
@@ -223,21 +249,44 @@ const handleNextClickConstrained = () => {
         </Link>
       ))}
     </div>
+</div>
 
 
+<div className='success-story-container'>
+<div>
+      <h2>Success Stories</h2>
+      <p>
+        The NOMATIC travel bag is shipping their products worldwide to 7K backers after raising $3M in crowdfunding on Indiegogo.
+        <a href="#">Learn More</a>
+      </p>
+      <p>
+        HyperDrive Thunderbolt 3 USB-C Hub for MacBook Pro raised $1M+ on InDemand, by targeting outreach to grow a loyal community of backers.
+        <a href="#">Learn More</a>
+      </p>
+      <p>
+        After raising $381K on Indiegogo, BullRest - the reinvented travel pillow - launched on Indiegogo Product Marketplace with guaranteed shipping.
+        <a href="#">Learn More</a>
+      </p>
+    </div>
+</div>
 
     <footer className="footer">
       <div className="container">
         <div className="row">
           <div className="col-md-6">
-            <h4>Contact Us</h4>
+            <h4>About Us</h4>
             <p>
                 <i class="fas fa-envelope"></i>
-               feichen0826@gmail.com
+                feichen0826@gmail.com
             </p>
             <p>
                 <i class="fas fa-phone"></i>
-                (310) 218 8694
+                 (310) 218 8694
+            </p>
+            <p>Portfolio:
+            <a href="https://chenfei0826.squarespace.com" target="_blank" rel="noopener noreferrer" className="small-link">
+            https://chenfei0826.squarespace.com
+            </a>
             </p>
 
           </div>

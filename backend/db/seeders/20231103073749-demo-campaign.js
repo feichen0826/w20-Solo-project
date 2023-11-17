@@ -161,7 +161,7 @@ module.exports = {
         story: `
           Nature is calling, and we're answering. Our outdoor adventure club brings together outdoor enthusiasts for exciting hikes, camping, and exploration. Connect with like-minded adventurers and create memories in the great outdoors.
         `,
-        imgUrl: 'https://media.gettyimages.com/id/1295441409/photo/stand-up-paddling-with-my-dog.jpg?s=1024x1024&w=gi&k=20&c=T1r4V1bqSJayq_5uscnE6djFGE8dG0s9X0DKBn3lLpA=',
+        imgUrl: 'https://images.unsplash.com/photo-1566122026582-ea7b2d70de33?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         userId: 1,
@@ -175,7 +175,7 @@ module.exports = {
         story: `
           Curiosity is a child's greatest asset. Our program introduces children to the wonders of science through interactive and educational activities. Spark a lifelong love for learning with engaging science experiences.
         `,
-        imgUrl: 'https://media.gettyimages.com/id/615629394/photo/playing-the-astronaut.jpg?s=612x612&w=gi&k=20&c=sxrsAm21CzSbhbgY4_Vc7WWRZNm1pVjJn6HSZE7T5qY=',
+        imgUrl: 'https://plus.unsplash.com/premium_photo-1663127057072-0a733aa1d48f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         userId: 2,
@@ -259,7 +259,7 @@ module.exports = {
         story: `
           Reading opens doors to new worlds. Our literacy program is designed to make reading fun and accessible for children. Your support empowers young readers and nurtures a lifelong love for books.
         `,
-        imgUrl: 'https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/oumswa89qcckwwi9uxfl',
+        imgUrl: 'https://images.unsplash.com/photo-1549737221-bef65e2604a6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         userId: 2,

@@ -42,6 +42,7 @@ module.exports = {
       { campaignId: 26, categoryId: 6 }, // Culinary Exploration Tour - Sports
       { campaignId: 27, categoryId: 4 }, // Innovative Startup Support - Business, Environment
       { campaignId: 28, categoryId: 6 }, // Environmental Conservation - Sports
+      { campaignId: 29, categoryId: 5 }, // Environmental Conservation - Sports
     ])
 
     /**

@@ -20,37 +20,37 @@
     margin: 10px 0px;
     color: #777;
   }
-  .funding{
-    color:#a253fc;
-    font-weight: bold;
-  }
-  .explore-button {
-    margin-top: 10px;
-    background-color:#a253fc;
-    color: #fff;
-    font-size: 15px;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-  }
-.campaign-copy-container{
-  display: flex;
-  flex-direction: column;
-}
 
-.campaign-number{
-  margin-left: 10px;
-  color:rgb(148, 148, 148)
-}
-  .funding-container{
+  /* horizontal-scrollable-bar styling */
+  .popular-project-container{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+ }
+
+
+
+   .popular-project-title-container{
+    text-align: left;
+   }
+
+
+   .popular-projects-title {
+    font-size: 25px;
+    margin-top: 30px;
+
   }
 
-  .rotating-images-container {
-    margin: 20px 0;
-    padding: 20px;
-
+  .horizontal-scrollable-bar {
+    display: flex;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+  .navigation-icons{
+    display: flex;
+    align-items: center;
   }
 
   .go-back-button{
@@ -60,6 +60,182 @@
     cursor: pointer;
 
   }
+  .campaign-container {
+    display: flex;
+    flex-direction: column;
+
+    width: 300px;
+    margin:0 10px;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color:#333;
+    height: 600px;
+
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .campaign-image {
+    width: 100%;
+    overflow: hidden;
+    flex: 50%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+  }
+  .campaign-info-container {
+    overflow: hidden;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 50%;
+
+  }
+  .funding-container{
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  .funding{
+    color:#d64d64;
+    font-size: 13px;
+  }
+  .campaign-copy-container{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .save-favorite{
+    display: flex;
+    align-items: center;
+    color: #9d9d9d;
+  }
+  .save-favorite:hover{
+    color: #393939;
+  }
+  .favorited {
+    color: red;
+  }
+
+  .campaign-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-decoration: none;
+  }
+
+
+  .fal.fa-heart {
+    color: #ff6347;
+  }
+
+  .campaign-description {
+    font-size: 14px;
+    color: #777;
+    margin: 5px 0;
+  }
+
+
+  .funding-details-container{
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .campaign-categories {
+    font-size: 14px;
+
+    color: #777;
+  }
+  .funding-details {
+    font-size: 18px;
+    margin-right: 3px;
+    color:#555
+  }
+
+  .usd-container{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+
+  .funding-percentage-info-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+
+  .usd-raised{
+    font-size: 12px;
+    color:#777
+  }
+  .percentage-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+    margin-top: 5px;
+    position: relative;
+    border-radius: 5px;
+  }
+
+  .fill {
+    height: 100%;
+    background-color:#ff9292;
+    border-radius: 5px;
+  }
+
+  .days-left-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .days-left {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+
+
+
+
+
+
+
+
+
+.campaign-number{
+  margin-left: 10px;
+  color:rgb(148, 148, 148)
+}
+
+  .rotating-images-container {
+    margin: 40px 0;
+  }
+
+  .explore-button {
+    margin-top: 10px;
+    background-color:#a253fc;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+
   .move-forward-button{
     width: 40px;
     cursor: pointer;
@@ -98,7 +274,7 @@
   .overlay {
     position: absolute;
     top: 100;
-
+    overflow: hidden;
     width: 100%;
     height: 400px;
     background-color: rgba(0, 0, 0, 0.6);
@@ -109,11 +285,14 @@
     background-color: #fff;
     color:black;
     margin-bottom:10px;
+    border: none;
+    outline: none;
+    text-decoration: none;
   }
 
   .campaign-info1 {
   position: absolute;
-  top: 47%;
+  top: 55%;
   left: 35%;
   transform: translate(-50%, -50%);
 
@@ -121,12 +300,6 @@
   color: #fff;
   }
 
-  .campaign-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-decoration: none;
-  }
 
   .campaign-description1 {
     font-size: 16px;
@@ -142,91 +315,11 @@
     cursor: pointer;
   }
 
-.popular-project-container{
-   display: flex;
-   flex-direction: column;
-   align-items: center;
 
+.category-info-container{
+  margin-top: 20px 0;
+  padding: 30px;
 }
-
-  .popular-projects-title {
-    font-size: 25px;
-    margin-top: 30px;
-
-  }
-
-  .popular-project-title-container{
-   text-align: left;
-  }
-
-  .horizontal-scrollable-bar {
-    display: flex;
-    overflow-x: auto;
-    margin-bottom: 20px;
-    padding: 10px;
-  }
-
-  .campaign-container {
-    width: 300px;
-    margin:0 10px;
-    text-align: left;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out;
-    margin-bottom: 20px;
-    text-decoration: none;
-    color:#333;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-
-
-  .campaign-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-  }
-
-  .campaign-info-container {
-    padding: 15px;
-  }
-
-  .campaign-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 5px 0;
-  }
-
-  .fal.fa-heart {
-    color: #ff6347;
-  }
-
-  .campaign-description {
-    font-size: 14px;
-    color: #777;
-    margin: 5px 0;
-  }
-
-  .funding-details {
-    font-size: 14px;
-    margin: 5px 0;
-  }
-
-  .days-left {
-    font-size: 14px;
-    margin: 5px 0;
-  }
-
-  .campaign-categories {
-    font-size: 14px;
-    margin: 5px 0;
-    color: #555;
-  }
 
 
   .interest-categories-title {
@@ -271,10 +364,7 @@
     margin-top: 8px;
   }
 
-  .navigation-icons{
-    display: flex;
-    align-items: center;
-  }
+
 
   .project-statistics {
     display: flex;
@@ -334,7 +424,7 @@
 
 
   .social-icons a {
-    font-size: 14px;
+    font-size: 17px;
     margin-right: 10px;
     color: #0077b5;
   }
@@ -354,5 +444,5 @@
   }
 
   .small-link {
-    font-size: 12px;
+    font-size: 17px;
 }

@@ -12,6 +12,9 @@ const ViewCampaignsList = () => {
     const allCategories = useSelector((state)=> state.category.category)
     const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('mostFunded');
+  const [filteredCampaigns, setFilteredCampaigns] = useState([]);
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [activeCategory, setActiveCategory] = useState(null);
     console.log(allCampaigns)
 
     useEffect(() => {
@@ -34,13 +37,16 @@ const ViewCampaignsList = () => {
         }
       };
 
-      if(allCampaigns.length === 0 || !allCampaigns){
-        return null
-      }
-      if(allCategories.length === 0){
-        return null
-      }
-
+      // if(allCampaigns.length === 0 || !allCampaigns){
+      //   return null
+      // }
+      // if(allCategories.length === 0){
+      //   return null
+      // }
+      const handleFavoriteClick = (e) => {
+        // e.stopPropagation();
+        // setIsFavorited((prevState) => !prevState);
+      };
 
       const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -50,19 +56,34 @@ const ViewCampaignsList = () => {
         setSortOption(e.target.value);
       };
 
-   const filteredCampaigns = allCampaigns.filter((campaign) =>
-    campaign.title && campaign.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-      const sortedCampaigns = filteredCampaigns.sort((a, b) => {
-        if (sortOption === 'mostFunded') {
-          return b.currentFunding - a.currentFunding;
-        } else if (sortOption === 'date') {
-          return new Date(a.startDate) - new Date(b.startDate);
+      useEffect(() => {
+        if (allCampaigns.length === 0 || !allCampaigns || allCategories.length === 0) {
+          return;
         }
-        return 0;
-      });
 
+        const filteredCampaigns = allCampaigns.filter(
+          (campaign) =>
+          (campaign.title && campaign.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (campaign.description && campaign.description.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+
+        const sortedCampaigns = filteredCampaigns.sort((a, b) => {
+          if (sortOption === 'mostFunded') {
+            return b.currentFunding - a.currentFunding;
+          } else if (sortOption === 'mostRecent') {
+            return new Date(b.startDate) - new Date(a.startDate);
+          }
+        });
+        setFilteredCampaigns(sortedCampaigns);
+      }, [allCampaigns, sortOption, searchTerm, allCategories]);
+
+      const uppercaseCategories = (categories) => {
+        return categories.map((category) => category.toUpperCase()).join(', ');
+      };
+
+      const handleCategoryClick = (index) => {
+        setActiveCategory(index);
+      };
   return (
     <>
     <div className="banner">
@@ -73,42 +94,65 @@ const ViewCampaignsList = () => {
     <div className="view-campaigns-list">
 
       <div className="campaigns-grid">
-        <div className="left-column">
+        <div className='left-column-container'>
+        <div className="search-bar-sort-by-container">
         <div className="search-container">
             <i className="fas fa-search search-icon"></i>
             <input
                 type="text"
-                placeholder="      Search for campaigns"
+                placeholder="Search for campaigns"
                 className="search-input"
                 value={searchTerm}
                 onChange={handleSearchChange}
             />
-        </div>
+            </div>
+
           <div className="sort-by">
             <label className="sort-label">Sort by:</label>
             <select className="sort-select" value={sortOption} onChange={handleSortChange}>
               <option value="mostFunded">Most Funded</option>
-              <option value="date">Date</option>
+              <option value="mostRecent">Most Recent</option>
             </select>
           </div>
+          </div>
           <div className='campaign-column'>
-          {allCampaigns.map((campaign, index) => (
+          {filteredCampaigns.map((campaign, index) => (
             <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
-              <img src={campaign.imgUrl} alt="Campaign" className="campaign-image2" />
-              <div className='view-campaign-copy'>
-              <p className='funding'>Funding</p>
-              <div>
-              <i class="far fa-heart"></i>
+            <img src={campaign.imgUrl} alt="Campaign" className="campaign-image" />
+            <div className="campaign-info-container">
+              <div className='funding-container'>
+                <p className='funding'>FUNDING</p>
+                  <div className='save-favorite' onClick={(e) => handleFavoriteClick(e)}>
+                  <i className={`far fa-heart ${isFavorited ? 'favorited' : ''}`}></i>
+                  </div>
               </div>
-              <h3 className="campaign-title">{campaign.title}</h3>
-              <p className="campaign-description">{campaign.description}</p>
-              <p className="funding-details">
-                Funding: ${campaign.currentFunding} ({((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%)
-              </p>
-              <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
-              <p className="categories">{campaign.categories}</p>
+              <div className='campaign-copy-container'>
+
+                  <h3 className="campaign-title">{campaign.title}</h3>
+                  <p className="campaign-description">{campaign.description}</p>
+
+
               </div>
-            </Link>
+              <div className='funding-details-container'>
+                  <p className="campaign-categories">{uppercaseCategories(campaign.categories)}</p>
+                  <div className='funding-percentage-info-container'>
+                    <div className='usd-container'>
+                      <div className="funding-details">${campaign.currentFunding.toLocaleString()}</div>
+                      <div className='usd-raised'>USD raised </div>
+                    </div>
+                      <div className='funding-percentage'>{((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%</div>
+                  </div>
+                  <div className="percentage-bar">
+                    <div className="fill" style={{ width: `${((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%`}}></div>
+                  </div>
+                  <div className="days-left-container">
+                    <i className="far fa-clock"></i>
+                    <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
+                  </div>
+
+              </div>
+            </div>
+          </Link>
           ))}
           </div>
         </div>
@@ -119,12 +163,12 @@ const ViewCampaignsList = () => {
             <p className='filter-result'>Filter results</p>
             <p className='filter-result-category'>CATEGORY</p>
             <div className='all-categories-container'>
-            <Link to={"/view-campaigns"} >
-                <p className="category-name">All categories</p>
+            <Link to="/view-campaigns">
+                <p className={`category-name ${activeCategory === null ? 'active' : ''}`}>All categories</p>
               </Link>
               </div>
             {allCategories.map((category, index) => (
-              <Link to={`/${category.id}/campaigns`} key={index} className="category">
+              <Link to={`/${category.id}/campaigns`} key={index} className={`category-name ${activeCategory === null ? 'active' : ''}`} onClick={() => handleCategoryClick(index)}>
                 <p className="category-name">{category.name}</p>
               </Link>
             ))}

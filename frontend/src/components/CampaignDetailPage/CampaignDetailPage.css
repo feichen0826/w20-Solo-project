@@ -9,10 +9,11 @@
 
   .campaign-image-container {
 
-    border-radius: 8px;
     margin-bottom: 20px;
+    padding-bottom: 30px;
     display: flex;
     flex-direction: row;
+    border-bottom: 1px solid rgb(183, 183, 183);
   }
 
   .campaign-image3 {
@@ -24,23 +25,25 @@
 
   .campaign-details {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding:0 20px;
+
     margin-left: 20px;
   }
 
+  .campaign-detail-funding{
+    color:#d64d64;
+  }
   .campaign-title1 {
     font-size: 2em;
     margin-bottom: 10px;
     word-break: break-all;
   }
 
-  .campaign-description {
+  /* .campaign-description {
     font-size: 1.2em;
     margin-bottom: 20px;
     word-break: break-all;
-  }
+  } */
 
   .campaign-stats {
     display: flex;
@@ -67,17 +70,46 @@
   }
 
   .story-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+    font-size: 17px;
+    margin-top: 20px;
+    padding-top: 20px;
+    color: rgb(55, 55, 55);
+  }
+  .story-title-container{
+    width:5%;
+    border-bottom: 3px solid rgb(129, 129, 129);
   }
 
   .campaign-story {
-    font-size: 1.2em;
+    font-size: 17px;
     line-height: 1.6;
+    color: rgb(83, 83, 83);
     word-break: break-all;
 
   }
 
   .category-info {
-    font-size: 1.2em;
+    font-size: 17px;
+    color:#913cf3
+  }
+  .campaign-category {
+    display: inline-block;
+    background-color: rgba(190, 35, 246, 0.1);
+    padding: 5px 15px;
+    border-radius: 3px;
+
+
+  }
+
+  .may-interest-container-background-grey{
+    background-color: #f8f9fa;
+    margin-top: 50px;
+    width: 100%;
+  }
+
+  .may-interest-container{
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+
   }

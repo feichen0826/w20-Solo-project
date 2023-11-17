@@ -45,8 +45,12 @@
 }
 .start-a-campaign{
   text-decoration: none;
-  color:#a253fc;
+  color:#3e3e3e;
+  font-weight: bold;
   cursor: pointer;
+}
+.start-a-campaign:hover{
+  color: #a253fc;
 }
 .hidden {
     display: none;

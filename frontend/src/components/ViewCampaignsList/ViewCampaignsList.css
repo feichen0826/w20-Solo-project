@@ -53,12 +53,19 @@
     justify-content: space-between;
   }
 
-  .left-column{
+  .search-bar-sort-by-container{
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .left-column-container{
     flex:4;
     margin: 0 10px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+
   }
   .right-column {
     flex: 0.8;
@@ -68,12 +75,13 @@
     order: -1;
   }
 
-  .campaign-container {
+  /* .campaign-container {
     text-decoration: none;
     color: #333;
     margin-bottom: 20px;
-    display: block;
-  }
+    display: flex;
+    flex-direction: column;
+  } */
 
   .campaign-container:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -87,17 +95,17 @@
     margin-bottom: 10px;
   }
 
-  .campaign-title {
+  /* .campaign-title {
     font-size: 1.5em;
     margin-bottom: 10px;
-  }
+  } */
 
-  .campaign-description {
-    color: #555;
+  /* .campaign-description {
+
     margin-bottom: 10px;
-  }
+  } */
 
-  .funding-details,
+
   .days-left,
   .categories {
     font-size: 0.9em;
@@ -115,7 +123,7 @@
     padding: 10px;
      border: 1px solid #ddd;
     border-radius: 4px;
-    margin: 10px 10px;
+    margin: 10px 15px;
   }
   .sort-label {
     display: block;
@@ -134,7 +142,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 
   .view-campaign-copy{
@@ -155,7 +163,13 @@
   .category-name{
     font-weight: lighter;
     text-decoration: none;
-    color: #333;
+    color: #333; /* Set the initial color */
+    transition: font-weight 0.3s, color 0.3s;
+  }
+
+  .category-name.active {
+    font-weight: bold;
+    color: #555; /* Set the color for the active state */
   }
 
   .all-categories-container{
@@ -176,11 +190,17 @@
     top: 50%;
     transform: translateY(-50%);
     color: #888;
+    pointer-events: none;
 }
 
 .search-input{
-  width: 930px;
+  width: 900px;
   border: 1px solid #ddd;
     border-radius: 4px;
-    padding: 10px
+    padding: 10px;
+    padding-left: 30px
+}
+
+i{
+  margin-right: 10px;
 }

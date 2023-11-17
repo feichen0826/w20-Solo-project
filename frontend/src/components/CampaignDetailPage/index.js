@@ -8,10 +8,12 @@ import './CampaignDetailPage.css'
 const CampaignDetailPage = () => {
 const dispatch = useDispatch();
 const { campaignId } = useParams();
+const [isFavorited, setIsFavorited] = useState(false);
   const singleCampaign = useSelector((state) => state.campaign.campaignDetails);
     console.log(singleCampaign)
     const allCampaigns = useSelector((state) => state.campaign.campaigns);
     const allCategories = useSelector((state)=> state.category.category)
+
 
   useEffect(() => {
     dispatch(fetchCampaignDetailsAsync(campaignId))
@@ -44,7 +46,25 @@ const { campaignId } = useParams();
     }
   };
 
+  const handleFavoriteClick = (e) => {
+    // e.stopPropagation();
+    // setIsFavorited((prevState) => !prevState);
+  };
+
+  const uppercaseCategories = (categories) => {
+    return categories.map((category) => category.toUpperCase()).join(', ');
+  };
+
+  const relatedCampaigns = allCampaigns.filter(
+    (campaign) =>
+      campaign.id !== singleCampaign.id &&
+      campaign.categories.some((category) =>
+        singleCampaign.categories.map((cat) => cat.id).includes(category.id)
+      )
+  )
+
   return (
+    <>
     <div className="campaign-detail-page">
     <div className="campaign-image-container">
       <div>
@@ -52,57 +72,86 @@ const { campaignId } = useParams();
       </div>
 
       <div className="campaign-details">
+        <p className='campaign-detail-funding'>FUNDING</p>
         <h2 className="campaign-title1">{singleCampaign.title}</h2>
         <p className="campaign-description">{singleCampaign.description}</p>
         <div className="campaign-stats">
           <p className="campaign-stat">Username: {singleCampaign.userId}</p>
-          <p className="campaign-stat">Funding Goal: ${singleCampaign.fundingGoal}</p>
-          <p className="campaign-stat">Current Funding: ${singleCampaign.currentFunding}</p>
+
           <p className="campaign-stat">Backers: {singleCampaign.numBackers}</p>
-          <p className="campaign-stat">
-            Funding: ${singleCampaign.currentFunding} ({((singleCampaign.currentFunding / singleCampaign.fundingGoal) * 100).toFixed(2)}%)
-          </p>
-          <p className="campaign-stat">Days Left: {calculateDaysLeft(singleCampaign.startDate, singleCampaign.endDate)}</p>
+          <div className='funding-percentage-info-container'>
+                  <div className='usd-container'>
+                    <div className="funding-details">${singleCampaign.currentFunding.toLocaleString()}</div>
+                    <div className='usd-raised'>USD raised </div>
+                  </div>
+                    <div className='funding-percentage'>{((singleCampaign.currentFunding / singleCampaign.fundingGoal) * 100).toFixed(2)}%</div>
+                </div>
+                <div className="percentage-bar">
+                  <div className="fill" style={{ width: `${((singleCampaign.currentFunding / singleCampaign.fundingGoal) * 100).toFixed(2)}%`}}></div>
+                </div>
+                <div className="days-left-container">
+                  <i className="far fa-clock"></i>
+                  <p className="days-left">{calculateDaysLeft(singleCampaign.startDate, singleCampaign.endDate)}</p>
+                </div>
         </div>
         {/* <button className="see-options-button">See Options</button> */}
       </div>
     </div>
     <div className="story-section">
-      <h2 className="story-title">Story</h2>
+      <div className='story-title-container'>
+      <p className="story-title">STORY</p>
+      </div>
       <p className="campaign-story">{singleCampaign.story}</p>
     </div>
 
     <div className="campaign-category">
-      <p className="category-info">Category: {singleCampaign.categories && singleCampaign.Categories.map(category => category.name).join(', ')}</p>
+      <div className="category-info">{singleCampaign.categories && singleCampaign.Categories.map(category => category.name).join(', ')}</div>
     </div>
-
-    <div className='may-interest-container'>
+    </div>
+    <div className='may-interest-container-background-grey'>
+      <div className='may-interest-container'>
       <p className='may-interest'>You may also be interested in</p>
-      <div className='campaign-column'>
-      {categoryCampaigns[0].Campaigns.map((campaign, index) => (
-
+      </div>
+      {relatedCampaigns.map((campaign, index) => (
         <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
-           <img src={campaign.imgUrl} alt="Campaign" className="campaign-image2"/>
-           <div className='view-campaign-copy'>
-              <p className='funding'>Funding</p>
-              <div>
-              <i class="far fa-heart"></i>
-              </div>
-              <h3 className="campaign-title">{campaign.title}</h3>
-              <p className="campaign-description">{campaign.description}</p>
-              <p className="funding-details">
-                Funding: ${campaign.currentFunding} ({((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%)
-              </p>
-              <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
-              <p className="categories">{campaign.categories}</p>
-              </div>
+          <img src={campaign.imgUrl} alt="Campaign" className="campaign-image" />
+          <div className="campaign-info-container">
+            <div className='funding-container'>
+              <p className='funding'>FUNDING</p>
+                <div className='save-favorite' onClick={(e) => handleFavoriteClick(e)}>
+                <i className={`far fa-heart ${isFavorited ? 'favorited' : ''}`}></i>
+                </div>
+            </div>
+            <div className='campaign-copy-container'>
+
+                <h3 className="campaign-title">{campaign.title}</h3>
+                <p className="campaign-description">{campaign.description}</p>
+
+
+            </div>
+            <div className='funding-details-container'>
+                <p className="campaign-categories">{uppercaseCategories(campaign.categories)}</p>
+                <div className='funding-percentage-info-container'>
+                  <div className='usd-container'>
+                    <div className="funding-details">${campaign.currentFunding.toLocaleString()}</div>
+                    <div className='usd-raised'>USD raised </div>
+                  </div>
+                    <div className='funding-percentage'>{((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%</div>
+                </div>
+                <div className="percentage-bar">
+                  <div className="fill" style={{ width: `${((campaign.currentFunding / campaign.fundingGoal) * 100).toFixed(2)}%`}}></div>
+                </div>
+                <div className="days-left-container">
+                  <i className="far fa-clock"></i>
+                  <p className="days-left">{calculateDaysLeft(campaign.startDate, campaign.endDate)}</p>
+                </div>
+
+            </div>
+          </div>
         </Link>
-
-
       ))}
-        </div>
     </div>
-  </div>
+    </>
   );
 };
 

@@ -212,10 +212,16 @@ console.log(errors)
             <p>Selected Categories:</p>
             <ul>
               {categories.map((cat) => (
-                <li key={cat}>
+                <div className='category-remove-container'>
+                <div className="campaign-category">
+                <li className="category-info" key={cat}>
                   {cat}
-                  <button onClick={() => handleRemoveCategory(cat)}>Remove</button>
+
                 </li>
+
+                </div>
+                   <button className='remove-categories'onClick={() => handleRemoveCategory(cat)}>Remove</button>
+                   </div>
               ))}
             </ul>
           </div>
@@ -240,6 +246,7 @@ console.log(errors)
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
+            className='form-date'
             required
           />
           {/* {errors.startDate && <span className="error">{errors.startDate}</span>} */}
@@ -252,6 +259,7 @@ console.log(errors)
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
+            className='form-date'
             required
           />
           {/* {errors.endDate && <span className="error">{errors.endDate}</span>} */}
@@ -303,7 +311,7 @@ console.log(errors)
         </div>
       </div>
 
-      <button onClick={handleSubmit}>Create Campaign</button>
+      <button className='launch-campaign'onClick={handleSubmit}>LAUNCH CAMPAIGN</button>
     </div>
   );
 };
