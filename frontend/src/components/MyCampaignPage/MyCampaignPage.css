@@ -38,6 +38,8 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
   }
 
   .campaign-container1 img {

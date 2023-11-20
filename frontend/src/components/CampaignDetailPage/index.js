@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
 import {fetchCampaignDetailsAsync} from '../../store/campaignReducer'
+import { fetchAllCampaignsAsync } from '../../store/campaignReducer';
+import { fetchAllCategoryAsync } from '../../store/categoryReducer';
 import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import './CampaignDetailPage.css'
@@ -9,11 +11,16 @@ const CampaignDetailPage = () => {
 const dispatch = useDispatch();
 const { campaignId } = useParams();
 const [isFavorited, setIsFavorited] = useState(false);
-  const singleCampaign = useSelector((state) => state.campaign.campaignDetails);
-    console.log(singleCampaign)
-    const allCampaigns = useSelector((state) => state.campaign.campaigns);
-    const allCategories = useSelector((state)=> state.category.category)
+const singleCampaign = useSelector((state) => state.campaign.campaignDetails);
 
+const allCampaigns = useSelector((state) => state.campaign.campaigns);
+const allCategories = useSelector((state)=> state.category.category)
+console.log(allCampaigns)
+
+useEffect(() => {
+  dispatch(fetchAllCampaignsAsync());
+  dispatch(fetchAllCategoryAsync())
+}, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchCampaignDetailsAsync(campaignId))
@@ -57,10 +64,10 @@ const [isFavorited, setIsFavorited] = useState(false);
 
   const relatedCampaigns = allCampaigns.filter(
     (campaign) =>
-      campaign.id !== singleCampaign.id &&
-      campaign.categories.some((category) =>
-        singleCampaign.categories.map((cat) => cat.id).includes(category.id)
-      )
+     campaign.id !== singleCampaign.id
+      // campaign.categories.some((category) =>
+      //   singleCampaign.categories.map((cat) => cat.id).includes(category.id)
+      //)
   )
 
   return (
@@ -81,7 +88,7 @@ const [isFavorited, setIsFavorited] = useState(false);
           <p className="campaign-stat">Backers: {singleCampaign.numBackers}</p>
           <div className='funding-percentage-info-container'>
                   <div className='usd-container'>
-                    <div className="funding-details">${singleCampaign.currentFunding.toLocaleString()}</div>
+                    <div className="funding-details">${singleCampaign.currentFunding}</div>
                     <div className='usd-raised'>USD raised </div>
                   </div>
                     <div className='funding-percentage'>{((singleCampaign.currentFunding / singleCampaign.fundingGoal) * 100).toFixed(2)}%</div>
@@ -109,9 +116,12 @@ const [isFavorited, setIsFavorited] = useState(false);
     </div>
     </div>
     <div className='may-interest-container-background-grey'>
+
+      <div className='campaign-column-container'>
       <div className='may-interest-container'>
       <p className='may-interest'>You may also be interested in</p>
       </div>
+    <div className='campaign-column-campaign-detail'>
       {relatedCampaigns.map((campaign, index) => (
         <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
           <img src={campaign.imgUrl} alt="Campaign" className="campaign-image" />
@@ -150,6 +160,8 @@ const [isFavorited, setIsFavorited] = useState(false);
           </div>
         </Link>
       ))}
+      </div>
+      </div>
     </div>
     </>
   );

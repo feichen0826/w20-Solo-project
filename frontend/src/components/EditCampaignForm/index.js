@@ -283,7 +283,7 @@ const EditCampaignForm = () => {
         <div className="form-group">
         <label className="form-label">Category</label>
           <p className="form-description">To help backers find your campaign, select a category that best represents your project.</p>
-          <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+          <select value={category} className='category-select' onChange={(e) => setCategory(e.target.value)} required>
             <option value="">Select a Category</option>
             <option value="Technology">Technology</option>
             <option value="Education">Education</option>
@@ -303,10 +303,16 @@ const EditCampaignForm = () => {
             <p>Selected Categories:</p>
             <ul>
               {categories.map((cat) => (
-                <li key={cat}>
+                <div className='category-remove-container'>
+                <div className="campaign-category">
+                <li className="category-info" key={cat}>
                   {cat}
-                  <button onClick={() => handleRemoveCategory(cat)}>Remove</button>
+
                 </li>
+
+                </div>
+                   <button className='remove-categories'onClick={() => handleRemoveCategory(cat)}>Remove</button>
+                   </div>
               ))}
             </ul>
           </div>
@@ -331,6 +337,7 @@ const EditCampaignForm = () => {
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
+            className='form-date'
             required
           />
           {/* {errors.startDate && <span className="error">{errors.startDate}</span>} */}
@@ -343,6 +350,7 @@ const EditCampaignForm = () => {
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
+            className='form-date'
             required
           />
           {/* {errors.endDate && <span className="error">{errors.endDate}</span>} */}
@@ -376,7 +384,7 @@ const EditCampaignForm = () => {
           <p className="form-description">How much money would you like to raise for this campaign?</p>
           <input
             type="number"
-
+            className='form-number'
             value={fundingGoal}
             onChange={(e) => setFundingGoal(e.target.value)}
             required
@@ -389,6 +397,7 @@ const EditCampaignForm = () => {
           <input
             type="number"
             value={currentFunding}
+            className='form-number'
             onChange={(e) => setCurrentFunding(e.target.value)}
             required
           />
@@ -402,6 +411,7 @@ const EditCampaignForm = () => {
           <input
             type="number"
             value={numBackers}
+            className='form-number'
             onChange={(e) => setNumBackers(e.target.value)}
             required
           />

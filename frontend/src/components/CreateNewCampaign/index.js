@@ -192,7 +192,7 @@ console.log(errors)
         <div className="form-group">
         <label className="form-label">Category</label>
           <p className="form-description">To help backers find your campaign, select a category that best represents your project.</p>
-          <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+          <select value={category} className='category-select' onChange={(e) => setCategory(e.target.value)} required>
             <option value="">Select a Category</option>
             <option value="Technology">Technology</option>
             <option value="Education">Education</option>
@@ -277,7 +277,7 @@ console.log(errors)
           <p className="form-description">How much money would you like to raise for this campaign?</p>
           <input
             type="number"
-
+            className='form-number'
             value={fundingGoal}
             onChange={(e) => setFundingGoal(e.target.value)}
             required
@@ -291,6 +291,7 @@ console.log(errors)
           <input
             type="number"
             value={currentFunding}
+            className='form-number'
             onChange={(e) => setCurrentFunding(e.target.value)}
             required
           />
@@ -304,6 +305,7 @@ console.log(errors)
           <input
             type="number"
             value={numBackers}
+            className='form-number'
             onChange={(e) => setNumBackers(e.target.value)}
             required
           />

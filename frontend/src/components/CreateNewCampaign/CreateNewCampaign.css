@@ -4,7 +4,7 @@ input {
   width: 100%;
   box-sizing: border-box;
 }
-select {
+.category-select {
   padding: 10px;
   width: 50%;
 }
@@ -117,4 +117,8 @@ select {
 
   .campaign-category{
     margin-top: 10px;
+  }
+
+  .form-number{
+    width: 50%;
   }

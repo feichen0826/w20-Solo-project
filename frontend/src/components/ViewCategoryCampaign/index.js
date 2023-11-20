@@ -4,20 +4,32 @@ import { useHistory, useParams } from 'react-router-dom';
 import { fetchAllCampaignsAsync } from '../../store/campaignReducer';
 import { fetchAllCategoryAsync } from '../../store/categoryReducer';
 import { Link } from "react-router-dom";
+import technology from './technology.png'
+import business from './business.png'
+import education from './education.png'
+import health from './health.png'
+import environment from './environment.png'
+import sport from './sport.png'
 
 const ViewCategoryCampaign = () => {
   const dispatch = useDispatch();
+  const paramId = useParams();
+
+  const categoryId = parseInt(paramId.categoryId)
+
   const allCampaigns = useSelector((state) => state.campaign.campaigns);
   const allCategories = useSelector((state)=> state.category.category)
   const [searchTerm, setSearchTerm] = useState('');
-const [sortOption, setSortOption] = useState('mostFunded');
+  const [sortOption, setSortOption] = useState('mostFunded');
 const [filteredCampaigns, setFilteredCampaigns] = useState([]);
 const [isFavorited, setIsFavorited] = useState(false);
 const [activeCategory, setActiveCategory] = useState(null);
-  console.log(allCampaigns)
+const categoryCampaigns = allCategories.filter((category) => category.id === categoryId);
 
+const currentCategory = allCategories.filter((category) => category.id === categoryId)
+console.log(currentCategory[0].name)
   useEffect(() => {
-     dispatch(fetchAllCampaignsAsync());
+    dispatch(fetchAllCampaignsAsync());
      dispatch(fetchAllCategoryAsync())
   }, [dispatch]);
 
@@ -76,24 +88,41 @@ const [activeCategory, setActiveCategory] = useState(null);
       setFilteredCampaigns(sortedCampaigns);
     }, [allCampaigns, sortOption, searchTerm, allCategories]);
 
-    const uppercaseCategories = (categories) => {
-      return categories.map((category) => category.toUpperCase()).join(', ');
-    };
+    // const uppercaseCategories = (categories) => {
+    //   return categories.map((category) => category.toUpperCase()).join(', ');
+    // };
 
     const handleCategoryClick = (index) => {
       setActiveCategory(index);
     };
+
+    const banners = [
+      { title: 'Education', description: 'Education & learning for every path in life', image: education },
+      { title: 'Technology', description: 'Emerging tech starts here', image: technology },
+      { title: 'Environment', description: 'Where earth comes first', image: environment },
+      { title: 'Sports', description: 'For healthy & mindful living', image: sport },
+      { title: 'Health', description: 'Living fit & full of life', image: health },
+      { title: 'Business', description: 'Main Street, Inc.', image: business},
+    ];
+
+    const filteredBanner = banners.filter((banner)=> banner.title === currentCategory[0].name)
+console.log(filteredBanner)
   return (
     <>
     <div className="banner">
-      {/* <img src={banner} className= 'banner-bg-image'></img>
-      <h1 className="banner-title">{banner-title}</h1>
-      <p className="banner-description">{banner-description}</p> */}
+
+    <div className="banner">
+    <img src={filteredBanner[0].image} className='banner-bg-image' alt={`Banner ${activeCategory + 1}`} />
+    <h1 className="banner-title">{filteredBanner[0].title}</h1>
+    <p className="banner-description">{filteredBanner[0].description}</p>
+  </div>
+
+
+
     </div>
     <div className="view-campaigns-list">
-
-      <div className="campaigns-grid">
-        <div className='left-column-container'>
+    <div className="campaigns-grid">
+    <div className='left-column-container'>
         <div className="search-bar-sort-by-container">
         <div className="search-container">
             <i className="fas fa-search search-icon"></i>
@@ -115,7 +144,7 @@ const [activeCategory, setActiveCategory] = useState(null);
           </div>
           </div>
           <div className='campaign-column'>
-          {filteredCampaigns.map((campaign, index) => (
+          {categoryCampaigns[0].Campaigns.map((campaign, index) => (
             <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
             <img src={campaign.imgUrl} alt="Campaign" className="campaign-image" />
             <div className="campaign-info-container">
@@ -127,13 +156,11 @@ const [activeCategory, setActiveCategory] = useState(null);
               </div>
               <div className='campaign-copy-container'>
 
-                  <h3 className="campaign-title">{campaign.title}</h3>
-                  <p className="campaign-description">{campaign.description}</p>
-
-
+              <h3 className="campaign-title">{campaign.title}</h3>
+              <p className="campaign-description">{campaign.description}</p>
               </div>
               <div className='funding-details-container'>
-                  <p className="campaign-categories">{uppercaseCategories(campaign.categories)}</p>
+                  {/* <p className="campaign-categories">{uppercaseCategories(campaign.categories)}</p> */}
                   <div className='funding-percentage-info-container'>
                     <div className='usd-container'>
                       <div className="funding-details">${campaign.currentFunding.toLocaleString()}</div>
@@ -157,8 +184,7 @@ const [activeCategory, setActiveCategory] = useState(null);
         </div>
 
         <div className="right-column">
-
-          <div className="category-list">
+        <div className="category-list">
             <p className='filter-result'>Filter results</p>
             <p className='filter-result-category'>CATEGORY</p>
             <div className='all-categories-container'>
@@ -172,7 +198,7 @@ const [activeCategory, setActiveCategory] = useState(null);
               </Link>
             ))}
           </div>
-        </div>
+          </div>
       </div>
     </div>
     </>
