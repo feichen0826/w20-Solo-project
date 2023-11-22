@@ -250,7 +250,7 @@ const handleNextClickConstrained = () => {
 </div>
 
 
-<div className='success-story-container'>
+{/* <div className='success-story-container'>
 <div>
       <h2>Success Stories</h2>
       <img src={allCampaigns[19].imgUrl} alt="Random Campaign" />
@@ -267,7 +267,7 @@ const handleNextClickConstrained = () => {
         <a href="#">Learn More</a>
       </p>
     </div>
-</div>
+</div> */}
 
     <footer className="footer">
       <div className="container">
