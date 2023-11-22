@@ -83,13 +83,13 @@ useEffect(() => {
     return categories.map((category) => category.toUpperCase()).join(', ');
   };
 
-  const relatedCampaigns = allCampaigns.filter(
-    (campaign) =>
-     campaign.id !== singleCampaign.id
-      // campaign.categories.some((category) =>
-      //   singleCampaign.categories.map((cat) => cat.id).includes(category.id)
-      //)
-  )
+  // const relatedCampaigns = allCampaigns.filter(
+  //   (campaign) =>
+  //    campaign.id !== singleCampaign.id
+  //     // campaign.categories.some((category) =>
+  //     //   singleCampaign.categories.map((cat) => cat.id).includes(category.id)
+  //     //)
+  // )
   const handleBackClick = () => {
     setStartIndex((prevIndex) => Math.min(prevIndex + 4, allCampaigns.length - 4));
   };
@@ -192,7 +192,7 @@ useEffect(() => {
       <div className= "campaign-columns-container">
 
 <div className='campaign-columns-container2'>
-      {relatedCampaigns.slice(startIndex, startIndex + 4).map((campaign, index) => (
+      {allCampaigns.slice(startIndex, startIndex + 4).map((campaign, index) => (
         <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
           <img src={campaign.imgUrl} alt="Campaign" className="campaign-image" />
           <div className="campaign-info-container">
