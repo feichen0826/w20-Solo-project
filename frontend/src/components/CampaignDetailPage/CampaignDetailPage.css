@@ -55,10 +55,26 @@
     margin-bottom: 10px;
   }
 
+  .campaign-stats-container{
+    margin-top: 163px;
+  }
   .see-options-button {
     background-color:#a253fc; ;
+    margin-top: 30px;
     color: #fff;
     border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  .follow-button{
+    margin-left: 20px;
+    background-color:#ffffff; ;
+    margin-top: 30px;
+    color: #959595;
+    border: 1px solid #959595;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
@@ -105,8 +121,7 @@
     background-color: #f8f9fa;
     margin-top: 50px;
     width: 100%;
-    display: flex;
-    flex-direction: row;
+
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -122,6 +137,22 @@
     max-width: 1200px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: start;
+  }
+
+  .may-interest{
+    font-size: 22px;
+  }
+
+  .campaign-columns-container2{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .icon-container{
+    display: flex;
+    flex-direction: row;
+    margin:  auto;
   }

@@ -120,7 +120,7 @@ const handleNextClickConstrained = () => {
     </Link>
 
     <div className="rotating-images-container">
-    <div className="overlay"></div>
+      <div className="overlay"></div>
       <img src={allCampaigns[currentIndex].imgUrl} alt="Random Campaign" className="campaign-image1" />
 
       <div className="campaign-info1">
@@ -131,9 +131,7 @@ const handleNextClickConstrained = () => {
         <Link to={`/campaign/${allCampaigns[currentIndex].id}`} className="see-campaign-link">
           See Campaign
         </Link>
-        <div>
 
-        </div>
         <div className='arrow-container'>
         <div className="arrow-icons">
         <span className="arrow-left" onClick={handlePrevClickConstrained}>
@@ -255,6 +253,7 @@ const handleNextClickConstrained = () => {
 <div className='success-story-container'>
 <div>
       <h2>Success Stories</h2>
+      <img src={allCampaigns[19].imgUrl} alt="Random Campaign" />
       <p>
         The NOMATIC travel bag is shipping their products worldwide to 7K backers after raising $3M in crowdfunding on Indiegogo.
         <a href="#">Learn More</a>

@@ -27,7 +27,9 @@ const [activeCategory, setActiveCategory] = useState(null);
 const categoryCampaigns = allCategories.filter((category) => category.id === categoryId);
 
 const currentCategory = allCategories.filter((category) => category.id === categoryId)
-console.log(currentCategory[0].name)
+console.log(allCampaigns)
+const filteredCampaignsByCategory = allCampaigns.filter((campaign)=> campaign.categories === currentCategory)
+console.log(filteredCampaignsByCategory)
   useEffect(() => {
     dispatch(fetchAllCampaignsAsync());
      dispatch(fetchAllCategoryAsync())

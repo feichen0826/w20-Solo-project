@@ -163,14 +163,14 @@
   .category-name{
     font-weight: lighter;
     text-decoration: none;
-    color: #333; /* Set the initial color */
+    color: #333;
     transition: font-weight 0.3s, color 0.3s;
   }
 
-  .category-name.active {
+  /* .category-name.active {
     font-weight: bold;
-    color: #555; /* Set the color for the active state */
-  }
+    color: #555;
+  } */
 
   .all-categories-container{
     text-decoration: none

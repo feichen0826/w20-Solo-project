@@ -26,20 +26,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
  }
-
-
 
    .popular-project-title-container{
     text-align: left;
    }
 
-
    .popular-projects-title {
     font-size: 25px;
     margin-top: 30px;
-
   }
 
   .horizontal-scrollable-bar {
@@ -223,6 +218,9 @@
 
   .rotating-images-container {
     margin: 40px 0;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
   }
 
   .explore-button {
@@ -262,9 +260,26 @@
     width: 100%;
     height:400px;
     object-fit: cover;
+
+    top: 0;
+    left: 0;
+
     z-index: -1;
   }
 
+  .campaign-image1 {
+    opacity: 1;
+
+  }
+
+  @keyframes fadeInOut {
+    0%, 100% {
+      opacity: 1;
+    }
+    25%, 75% {
+      opacity: 0.9;
+    }
+  }
   .arrow-container{
     display: flex;
     flex-direction: row;
@@ -292,9 +307,8 @@
 
   .campaign-info1 {
   position: absolute;
-  top: 55%;
-  left: 35%;
-  transform: translate(-50%, -50%);
+  top: 40%;
+  left: 25%;
 
   text-align: left;
   color: #fff;

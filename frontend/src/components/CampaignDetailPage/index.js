@@ -5,10 +5,19 @@ import { fetchAllCampaignsAsync } from '../../store/campaignReducer';
 import { fetchAllCategoryAsync } from '../../store/categoryReducer';
 import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import OpenModalButton from "../OpenModalButton";
+import BackThisProject from '../BackThisProject';
+import arrow from './arrow.png'
+import black from './black.png'
+import { Modal, useModal } from "../../context/Modal";
+
 import './CampaignDetailPage.css'
 
 const CampaignDetailPage = () => {
+    const [currentIndex, setCurrentIndex] = useState(9);
+
 const dispatch = useDispatch();
+const { closeModal } = useModal();
 const { campaignId } = useParams();
 const [isFavorited, setIsFavorited] = useState(false);
 const singleCampaign = useSelector((state) => state.campaign.campaignDetails);
@@ -16,6 +25,18 @@ const singleCampaign = useSelector((state) => state.campaign.campaignDetails);
 const allCampaigns = useSelector((state) => state.campaign.campaigns);
 const allCategories = useSelector((state)=> state.category.category)
 console.log(allCampaigns)
+const [isPopupOpen, setPopupOpen] = useState(false);
+const [startIndex, setStartIndex] = useState(0);
+const [visibleCampaigns, setVisibleCampaigns] = useState(4);
+
+const handleSeeOptionsClick = () => {
+  setPopupOpen(true);
+};
+
+const handleClosePopup = () => {
+  // e.preventDefault();
+    closeModal();
+};
 
 useEffect(() => {
   dispatch(fetchAllCampaignsAsync());
@@ -69,11 +90,19 @@ useEffect(() => {
       //   singleCampaign.categories.map((cat) => cat.id).includes(category.id)
       //)
   )
+  const handleBackClick = () => {
+    setStartIndex((prevIndex) => Math.min(prevIndex + 4, allCampaigns.length - 4));
+  };
+
+  const handleForwardClick = () => {
+    setStartIndex((prevIndex) => Math.max(0, prevIndex - 4));
+  };
 
   return (
     <>
     <div className="campaign-detail-page">
     <div className="campaign-image-container">
+
       <div>
       <img src={singleCampaign.imgUrl ? singleCampaign.imgUrl : singleCampaign.image} alt="Campaign" className="campaign-image3" />
       </div>
@@ -82,6 +111,7 @@ useEffect(() => {
         <p className='campaign-detail-funding'>FUNDING</p>
         <h2 className="campaign-title1">{singleCampaign.title}</h2>
         <p className="campaign-description">{singleCampaign.description}</p>
+        <div className='campaign-stats-container'>
         <div className="campaign-stats">
           <p className="campaign-stat">Username: {singleCampaign.userId}</p>
 
@@ -100,6 +130,23 @@ useEffect(() => {
                   <i className="far fa-clock"></i>
                   <p className="days-left">{calculateDaysLeft(singleCampaign.startDate, singleCampaign.endDate)}</p>
                 </div>
+        </div>
+        <div className='buttons-container'>
+           {/* <button onClick={handleSeeOptionsClick}>See Options</button> */}
+        {/* <button className='see-options-button'>See options</button> */}
+        <OpenModalButton
+                  buttonText="See options"cd
+                  className="see-options-button"
+                  onClick={handleSeeOptionsClick}
+                  modalComponent= {
+                    <BackThisProject
+                    onClose={handleClosePopup} />
+                  }
+
+                />
+                 {isPopupOpen && <BackThisProject onClose={handleClosePopup} />}
+        <button className='follow-button'><i className="far fa-heart"></i> Follow</button>
+        </div>
         </div>
         {/* <button className="see-options-button">See Options</button> */}
       </div>
@@ -120,9 +167,32 @@ useEffect(() => {
       <div className='campaign-column-container'>
       <div className='may-interest-container'>
       <p className='may-interest'>You may also be interested in</p>
+      <div className='icon-container'>
+      <div className="navigation-icons">
+          <span className="back-icon" onClick={handleForwardClick}>
+          <img className="go-back-button" src={black} alt="Go Back" />
+
+          </span>
+
+        </div>
+        <div className="navigation-icons">
+
+        <span className="next-icon" onClick={handleBackClick}>
+
+        <img className="move-forward-button" src={black} alt="Move Forward" />
+        </span>
+      </div>
+      </div>
       </div>
     <div className='campaign-column-campaign-detail'>
-      {relatedCampaigns.map((campaign, index) => (
+
+
+      </div>
+      </div>
+      <div className= "campaign-columns-container">
+
+<div className='campaign-columns-container2'>
+      {relatedCampaigns.slice(startIndex, startIndex + 4).map((campaign, index) => (
         <Link to={`/campaign/${campaign.id}`} key={index} className="campaign-container">
           <img src={campaign.imgUrl} alt="Campaign" className="campaign-image" />
           <div className="campaign-info-container">
@@ -161,6 +231,7 @@ useEffect(() => {
         </Link>
       ))}
       </div>
+
       </div>
     </div>
     </>
