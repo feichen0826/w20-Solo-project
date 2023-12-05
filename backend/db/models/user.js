@@ -27,6 +27,12 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
+      profileImage:{
+        type: DataTypes.STRING,
+      },
+      city:{
+        type: DataTypes.STRING,
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,

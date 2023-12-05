@@ -77,7 +77,9 @@ router.post(
           email: user.email,
           username: user.username,
           firstName: user.firstName,
-          lastName: user.lastName
+          lastName: user.lastName,
+          profileImage:user.profileImage,
+          city:user.city,
         };
         return res.json({
           user: safeUser

@@ -45,7 +45,7 @@ module.exports = {
 
           Be a part of the tech revolution and help us shape the future of gadgets. Your contribution fuels our passion for innovation, and together, we can create products that change the way we live and work.
         `,
-        imgUrl: 'https://c0.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/rputlrha5gc0dnkz69v0',
+        imgUrl: 'https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8VGVjaCUyMEdhZGdldHN8ZW58MHx8MHx8fDA%3D',
       },
       {
         userId: 3,
@@ -63,7 +63,7 @@ module.exports = {
 
           Join us in the journey towards a more sustainable and stylish future. Your support is not just for fashion; it's for a greener world where style meets sustainability.
         `,
-        imgUrl: 'https://c0.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/murf6tkaeweesjyntkyg',
+        imgUrl: 'https://images.unsplash.com/photo-1501127122-f385ca6ddd9d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8RWNvJTIwRnJpZW5kbHklMjBGYXNoaW9ufGVufDB8fDB8fHww',
       },
       {
         userId: 3,
@@ -77,7 +77,7 @@ module.exports = {
         story: `
           Technology can be a powerful force for good. Our hackathon brings together tech enthusiasts to develop innovative solutions that address social challenges. By participating, you contribute to making the world a better place through technology.
         `,
-        imgUrl: 'https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/cqvmrxx5hkjkzmdxzxvx',
+        imgUrl: 'https://plus.unsplash.com/premium_photo-1678566111481-8e275550b700?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         userId: 1,
@@ -133,7 +133,7 @@ module.exports = {
         story: `
           Mobile apps are shaping the digital landscape. Our course equips you with the skills to create your own mobile applications. Join us in this educational journey to become a proficient app developer.
         `,
-        imgUrl: 'https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/jfakatosvjlcfablawmj',
+        imgUrl: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bW9iaWxlJTIwYXBwfGVufDB8fDB8fHww',
       },
       {
         userId: 2,
@@ -189,7 +189,7 @@ module.exports = {
         story: `
           Art has the power to transcend boundaries and bring communities together. Our project aims to create a vibrant and inclusive art installation that reflects the diversity and unity of our community. Join us in this creative journey.
         `,
-        imgUrl: 'https://c2.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fit,w_auto,g_center,q_auto:best,dpr_1.0,f_auto/tsuynyzj4dahrzerah9g',
+        imgUrl: 'https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         userId: 3,
@@ -231,7 +231,7 @@ module.exports = {
         story: `
           Mental health matters. Our campaign aims to create awareness, reduce stigma, and support mental health initiatives. Join us in this crucial effort to make mental well-being a priority.
         `,
-        imgUrl: 'https://media.gettyimages.com/id/1395851060/video/an-unrecognizable-woman-having-a-therapy-session-with-a-psychologist-closeup-of-a-patient.jpg?s=640x640&k=20&c=uXG_5EXxnWbdrsqHYgnBfoLznIl15tURwWkmtzweITQ=',
+        imgUrl: 'https://images.unsplash.com/photo-1500099817043-86d46000d58f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         userId: 3,
@@ -245,7 +245,7 @@ module.exports = {
         story: `
           The universe is our final frontier. Our project is dedicated to advancing scientific research and exploration in space. By contributing, you become a part of humanity's quest to understand the cosmos.
         `,
-        imgUrl: 'https://media.gettyimages.com/id/530185374/photo/man-sitting-under-the-milky-way-galaxy.jpg?s=612x612&w=0&k=20&c=c1V-IkpM0TsKcskJgg8cYvp1OcpjDxAbF_c1GSMBh0g=',
+        imgUrl: 'https://images.unsplash.com/photo-1667264920644-b119acc173d5?q=80&w=1748&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         userId: 1,
@@ -322,10 +322,10 @@ module.exports = {
         title: 'Local Arts and Crafts Fair',
         description: 'Celebrate local creativity and craftsmanship at our art fair.',
         fundingGoal: 2200.00,
-        currentFunding: 1200.00,
+        currentFunding: 8200.00,
         numBackers: 20,
-        startDate: new Date('2025-02-01'),
-        endDate: new Date('2025-02-28'),
+        startDate: new Date('2023-02-01'),
+        endDate: new Date('2023-03-28'),
         story: `
           Local artisans and creators come together in a celebration of art and craftsmanship. Our art fair is a showcase of the talents in our community. Support local artists and find unique, handmade treasures.
         `,
@@ -378,7 +378,7 @@ module.exports = {
         title: 'Historical Documentary Project',
         description: 'Preserve the past by supporting our historical documentary project.',
         fundingGoal: 3500.00,
-        currentFunding: 1600.00,
+        currentFunding: 5500.00,
         numBackers: 22,
         startDate: new Date('2023-10-01'),
         endDate: new Date('2023-10-31'),
@@ -392,10 +392,10 @@ module.exports = {
         title: 'Culinary Exploration Tour',
         description: 'Savor the flavors of the world through our culinary exploration tour.',
         fundingGoal: 2800.00,
-        currentFunding: 1100.00,
+        currentFunding: 7600.00,
         numBackers: 18,
-        startDate: new Date('2023-11-01'),
-        endDate: new Date('2023-11-30'),
+        startDate: new Date('2023-10-01'),
+        endDate: new Date('2023-11-01'),
         story: `
           Food is a universal language, and we're here to take you on a culinary journey. Our exploration tour will introduce you to diverse cuisines from around the globe. Taste, learn, and immerse yourself in the art of cooking and eating.
         `,

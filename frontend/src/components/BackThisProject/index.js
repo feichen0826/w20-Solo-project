@@ -1,36 +1,32 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './BackThisProject.css';
 import { Modal, useModal } from "../../context/Modal";
+import { useHistory } from 'react-router-dom';
 
-const BackThisProject = () => {
-  const [pledgeAmount, setPledgeAmount] = useState('');
+const BackThisProject = ({campaignId}) => {
+  const [pledgeAmount, setPledgeAmount] = useState(0);
   const { closeModal } = useModal();
-  const modalRef = useRef(null);
+  const history = useHistory();
 
-  const handleInputChange = (event) => {
-    setPledgeAmount(event.target.value);
-  };
 
-  const handleContinueClick = () => {
 
-    console.log(`Pledge Amount: ${pledgeAmount}`);
-    closeModal();
-  };
-
-    const handleClickOutside = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
+  const handleContinueClick = (e) => {
+    e.preventDefault();
+    if (pledgeAmount > 0) {
+      console.log(`Pledge Amount: ${pledgeAmount}`);
       closeModal();
+      history.push(`/campaign/${campaignId}/contributions`);
+    } else {
+
+      alert('Please enter a pledge amount greater than 0.');
     }
   };
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [modalRef]);
+
+
 
   return (
+
     <div className="popup-container">
       <div className="popup-content">
         <h2>Back this project</h2>
@@ -42,8 +38,9 @@ const BackThisProject = () => {
           <input
             type="number"
             value={pledgeAmount}
-            onChange={handleInputChange}
+            onChange={(e)=> setPledgeAmount(e.target.value)}
             placeholder="Enter your pledge"
+            required
           />
           <span className="currency">USD</span>
         </div>

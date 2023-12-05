@@ -223,7 +223,7 @@ const handleNextClickConstrained = () => {
       </div>
       <div className="statistic">
         <h3>223</h3>
-        <p>Countries & territories are home to Indiegogo users.</p>
+        <p>Countries & territories are home to VisionFund users.</p>
       </div>
       <div className="statistic">
         <h3>18,983%</h3>

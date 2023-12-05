@@ -3,6 +3,7 @@ import {  useDispatch, useSelector } from 'react-redux';
 import {fetchCampaignDetailsAsync} from '../../store/campaignReducer'
 import { fetchAllCampaignsAsync } from '../../store/campaignReducer';
 import { fetchAllCategoryAsync } from '../../store/categoryReducer';
+import {fetchUserDetailsAsync} from '../../store/session'
 import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
@@ -24,10 +25,12 @@ const singleCampaign = useSelector((state) => state.campaign.campaignDetails);
 
 const allCampaigns = useSelector((state) => state.campaign.campaigns);
 const allCategories = useSelector((state)=> state.category.category)
-console.log(allCampaigns)
+const currentUser = useSelector((state)=> state.session.user)
+console.log(currentUser)
 const [isPopupOpen, setPopupOpen] = useState(false);
 const [startIndex, setStartIndex] = useState(0);
 const [visibleCampaigns, setVisibleCampaigns] = useState(4);
+const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(true);
 
 const handleSeeOptionsClick = () => {
   setPopupOpen(true);
@@ -41,6 +44,7 @@ const handleClosePopup = () => {
 useEffect(() => {
   dispatch(fetchAllCampaignsAsync());
   dispatch(fetchAllCategoryAsync())
+  dispatch(fetchUserDetailsAsync())
 }, [dispatch]);
 
   useEffect(() => {
@@ -98,6 +102,10 @@ useEffect(() => {
     setStartIndex((prevIndex) => Math.max(0, prevIndex - 4));
   };
 
+  const percentage = (singleCampaign.currentFunding / singleCampaign.fundingGoal) * 100;
+const progressBarWidth = percentage > 100 ? 100 : percentage;
+
+
   return (
     <>
     <div className="campaign-detail-page">
@@ -111,20 +119,35 @@ useEffect(() => {
         <p className='campaign-detail-funding'>FUNDING</p>
         <h2 className="campaign-title1">{singleCampaign.title}</h2>
         <p className="campaign-description">{singleCampaign.description}</p>
+          <div className='campaign-user-container'>
+          {currentUser && currentUser.profileImage && (
+            <div className='campaign-profile-image-container'>
+              <img className='campaign-profile-image' src={currentUser.profileImage} alt='profile' />
+            </div>
+          )}
+            <div className='campaign-username-city-container'>
+            {currentUser && currentUser.username && (
+            <div className="campaign-username">{currentUser.username}</div>
+            )}
+             {currentUser && currentUser.city && (
+            <div className="campaign-city">{currentUser.city}, United States</div>
+            )}
+            </div>
+          </div>
         <div className='campaign-stats-container'>
+        <p className="campaign-stat">{singleCampaign.numBackers} backers</p>
         <div className="campaign-stats">
-          <p className="campaign-stat">Username: {singleCampaign.userId}</p>
 
-          <p className="campaign-stat">Backers: {singleCampaign.numBackers}</p>
+
           <div className='funding-percentage-info-container'>
                   <div className='usd-container'>
                     <div className="funding-details">${singleCampaign.currentFunding}</div>
                     <div className='usd-raised'>USD raised </div>
                   </div>
-                    <div className='funding-percentage'>{((singleCampaign.currentFunding / singleCampaign.fundingGoal) * 100).toFixed(2)}%</div>
+                    <div className='funding-percentage2'>{((singleCampaign.currentFunding / singleCampaign.fundingGoal) * 100).toFixed(2)}%</div>
                 </div>
                 <div className="percentage-bar">
-                  <div className="fill" style={{ width: `${((singleCampaign.currentFunding / singleCampaign.fundingGoal) * 100).toFixed(2)}%`}}></div>
+                <div className="fill" style={{ width: `${progressBarWidth.toFixed(2)}%` }}></div>
                 </div>
                 <div className="days-left-container">
                   <i className="far fa-clock"></i>
@@ -134,17 +157,20 @@ useEffect(() => {
         <div className='buttons-container'>
            {/* <button onClick={handleSeeOptionsClick}>See Options</button> */}
         {/* <button className='see-options-button'>See options</button> */}
+
         <OpenModalButton
-                  buttonText="See options"cd
-                  className="see-options-button"
-                  onClick={handleSeeOptionsClick}
+                  buttonText="See options"
+
                   modalComponent= {
                     <BackThisProject
-                    onClose={handleClosePopup} />
+                    campaignId={singleCampaign.id}
+                    currentUser={currentUser}
+                    />
                   }
 
                 />
-                 {isPopupOpen && <BackThisProject onClose={handleClosePopup} />}
+
+
         <button className='follow-button'><i className="far fa-heart"></i> Follow</button>
         </div>
         </div>

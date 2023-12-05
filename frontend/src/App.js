@@ -11,6 +11,8 @@ import CreateNewCampaign from "./components/CreateNewCampaign";
 import MyCampaignPage from "./components/MyCampaignPage";
 import EditCampaignForm from "./components/EditCampaignForm"
 import ViewCategoryCampaign from './components/ViewCategoryCampaign'
+import ContributionPayment from './components/ContributionPayment'
+import MyContributionsPage from "./components/MyContributionsPage";
 
 
 function App() {
@@ -30,8 +32,10 @@ function App() {
           <Route exact path='/campaign/:campaignId' component={CampaignDetailPage} />
           <Route exact path='/create-campaign' component={CreateNewCampaign} />
           <Route path = '/my-campaigns' component={MyCampaignPage} />
+          <Route path = '/my-contributions' component={MyContributionsPage} />
           <Route exact path = '/campaigns/:campaignId/edit' component={EditCampaignForm} />
           <Route path = '/:categoryId/campaigns' component={ViewCategoryCampaign}/>
+          <Route path ='/:campaign/:campaignId/contributions' component={ContributionPayment} />
         </Switch>
       )}
     </>

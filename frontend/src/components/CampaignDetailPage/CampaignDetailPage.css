@@ -1,4 +1,14 @@
-/* Add this to your CSS file */
+
+.button-container .see-options-button{
+  background-color:#a253fc; ;
+  margin-top: 30px;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
 
 .campaign-detail-page {
     max-width: 1200px;
@@ -38,7 +48,36 @@
     margin-bottom: 10px;
     word-break: break-all;
   }
+  .campaign-profile-image-container{
 
+
+  }
+  .campaign-username-city-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .campaign-username{
+    margin-left: 20px;
+    font-weight: bold;
+  }
+  .campaign-city{
+    margin-left: 20px;
+  }
+  .campaign-user-container{
+    display: flex;
+    flex-direction: row;
+  }
+.campaign-profile-image{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+
+}
+.funding-percentage2{
+  margin-left: 255px;
+}
   /* .campaign-description {
     font-size: 1.2em;
     margin-bottom: 20px;
@@ -54,20 +93,14 @@
     flex: 0 0 50%;
     margin-bottom: 10px;
   }
+  .campaign-user-container{
+    margin-top: 100px;
+  }
 
   .campaign-stats-container{
-    margin-top: 163px;
-  }
-  .see-options-button {
-    background-color:#a253fc; ;
     margin-top: 30px;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
   }
+
 
   .follow-button{
     margin-left: 20px;
