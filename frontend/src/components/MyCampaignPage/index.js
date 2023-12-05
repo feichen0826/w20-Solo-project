@@ -43,9 +43,9 @@ if(allCampaigns.length === 0 || !currentUser ){
         <NavLink to="/my-campaigns" id="campaigns-link">
           Campaigns
         </NavLink>
-        <NavLink to="/my-contributions" id="contributions-link">
+        {/* <NavLink to="/my-contributions" id="contributions-link">
           Contributions
-        </NavLink>
+        </NavLink> */}
       </nav>
 
       <div className="campaign-list">

@@ -157,7 +157,7 @@ const progressBarWidth = percentage > 100 ? 100 : percentage;
         <div className='buttons-container'>
            {/* <button onClick={handleSeeOptionsClick}>See Options</button> */}
         {/* <button className='see-options-button'>See options</button> */}
-
+{/*
         <OpenModalButton
                   buttonText="See options"
 
@@ -171,7 +171,7 @@ const progressBarWidth = percentage > 100 ? 100 : percentage;
                 />
 
 
-        <button className='follow-button'><i className="far fa-heart"></i> Follow</button>
+        <button className='follow-button'><i className="far fa-heart"></i> Follow</button> */}
         </div>
         </div>
         {/* <button className="see-options-button">See Options</button> */}
