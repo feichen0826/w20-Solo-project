@@ -83,7 +83,7 @@ export const restoreUser = () => async (dispatch) => {
     return response;
   };
 
-const initialState = { user: null };
+const initialState = {  user: { profileImage: null, city: null } };
 
 const sessionReducer = (state = initialState, action) => {
   let newState;
@@ -95,6 +95,9 @@ const sessionReducer = (state = initialState, action) => {
     case REMOVE_USER:
       newState = Object.assign({}, state);
       newState.user = null;
+      return newState;
+    case FETCH_USER_DETAILS:
+      newState = { ...state, user: { ...state.user, ...action.userDetails } };
       return newState;
     default:
       return state;

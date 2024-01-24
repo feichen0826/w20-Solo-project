@@ -41,11 +41,17 @@ const handleClosePopup = () => {
     closeModal();
 };
 
+useEffect(()=>{
+  dispatch(fetchUserDetailsAsync())
+},[])
+
 useEffect(() => {
   dispatch(fetchAllCampaignsAsync());
   dispatch(fetchAllCategoryAsync())
-  dispatch(fetchUserDetailsAsync())
+
 }, [dispatch]);
+
+
 
   useEffect(() => {
     dispatch(fetchCampaignDetailsAsync(campaignId))
@@ -105,7 +111,7 @@ useEffect(() => {
   const percentage = (singleCampaign.currentFunding / singleCampaign.fundingGoal) * 100;
 const progressBarWidth = percentage > 100 ? 100 : percentage;
 
-
+console.log(currentUser)
   return (
     <>
     <div className="campaign-detail-page">
@@ -120,17 +126,17 @@ const progressBarWidth = percentage > 100 ? 100 : percentage;
         <h2 className="campaign-title1">{singleCampaign.title}</h2>
         <p className="campaign-description">{singleCampaign.description}</p>
           <div className='campaign-user-container'>
-          {currentUser && currentUser.profileImage && (
+          {currentUser && currentUser.user && currentUser.user.profileImage && (
             <div className='campaign-profile-image-container'>
-              <img className='campaign-profile-image' src={currentUser.profileImage} alt='profile' />
+              <img className='campaign-profile-image' src={currentUser.user.profileImage} alt='profile' />
             </div>
           )}
             <div className='campaign-username-city-container'>
             {currentUser && currentUser.username && (
             <div className="campaign-username">{currentUser.username}</div>
             )}
-             {currentUser && currentUser.city && (
-            <div className="campaign-city">{currentUser.city}, United States</div>
+             {currentUser && currentUser.user && currentUser.user.city && (
+            <div className="campaign-city">{currentUser.user.city}, United States</div>
             )}
             </div>
           </div>
@@ -157,7 +163,7 @@ const progressBarWidth = percentage > 100 ? 100 : percentage;
         <div className='buttons-container'>
            {/* <button onClick={handleSeeOptionsClick}>See Options</button> */}
         {/* <button className='see-options-button'>See options</button> */}
-{/*
+
         <OpenModalButton
                   buttonText="See options"
 
@@ -168,10 +174,10 @@ const progressBarWidth = percentage > 100 ? 100 : percentage;
                     />
                   }
 
-                />
+        />
 
 
-        <button className='follow-button'><i className="far fa-heart"></i> Follow</button> */}
+        {/* <button className='follow-button'><i className="far fa-heart"></i> Follow</button> */}
         </div>
         </div>
         {/* <button className="see-options-button">See Options</button> */}

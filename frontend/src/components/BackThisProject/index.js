@@ -1,19 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './BackThisProject.css';
-import { Modal, useModal } from "../../context/Modal";
+import { useModal } from "../../context/Modal";
 import { useHistory } from 'react-router-dom';
 
 const BackThisProject = ({campaignId}) => {
   const [pledgeAmount, setPledgeAmount] = useState(0);
-  const { closeModal } = useModal();
   const history = useHistory();
+  const { closeModal } = useModal();
 
 
 
   const handleContinueClick = (e) => {
     e.preventDefault();
     if (pledgeAmount > 0) {
+
       console.log(`Pledge Amount: ${pledgeAmount}`);
+
       closeModal();
       history.push(`/campaign/${campaignId}/contributions`);
     } else {
@@ -27,7 +29,7 @@ const BackThisProject = ({campaignId}) => {
 
   return (
 
-    <div className="popup-container">
+
       <div className="popup-content">
         <h2>Back this project</h2>
 
@@ -52,7 +54,7 @@ const BackThisProject = ({campaignId}) => {
           Support this project by entering your pledge amount below. You can change or cancel it at any time.
         </p>
       </div>
-    </div>
+
   );
 };
 

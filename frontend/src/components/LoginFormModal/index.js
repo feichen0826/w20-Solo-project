@@ -24,12 +24,7 @@ function LoginFormModal() {
           setErrors(data.errors);
         }
       });
-    // const data = await dispatch(login(credential, password));
-    // if (!data) {
-    //   closeModal();
-    // } else {
-    //   setErrors(data);
-    // }
+
   };
 
   const handleDemoUser = async (e) => {
@@ -37,7 +32,7 @@ function LoginFormModal() {
 
     return dispatch(login("demo@user.io", "password")).then(() => {
       closeModal();
-      // history.push("/");
+
     });
   };
 

@@ -1,0 +1,23 @@
+
+
+.contribution-payment-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+
+
+  .left-column {
+    width: 40%;
+    margin: 20px;
+    padding: 20px;
+  }
+  .campaign-user-container{
+    margin-top: 20px;
+  }
+
+  .right-column {
+    width: 55%;
+    margin: 20px;
+    padding: 20px;
+  }

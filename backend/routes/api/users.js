@@ -48,14 +48,16 @@ router.post(
       // Hash the password
 
       const hashedPassword = bcrypt.hashSync(password);
-      const user = await User.create({ email, username, firstName, lastName, hashedPassword });
+      const user = await User.create({ email, username, firstName, lastName,  profileImage, city, hashedPassword });
 
       const safeUser = {
         id: user.id,
         email: user.email,
         username: user.username,
         firstName: user.firstName,
-        lastName: user.lastName
+        lastName: user.lastName,
+        profileImage: user.profileImage,
+        city: user.city,
       };
 
       await setTokenCookie(res, safeUser);
