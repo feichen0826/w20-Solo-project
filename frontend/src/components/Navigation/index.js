@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
+  console.log(sessionUser)
   const history=useHistory()
   return (
     <div className="navigation">
@@ -25,15 +26,15 @@ function Navigation({ isLoaded }) {
 
     <div className="navbar-auth">
       <div className='navbar-user'>
-        {sessionUser && isLoaded ? (
-          <>
-          <div onClick={()=>{history.push('/create-campaign')}}  className='start-a-campaign'>Start a campaign</div>
-          {sessionUser.username}
-          <div>
-            <ProfileButton user={sessionUser} />
-          </div>
+      {sessionUser && isLoaded ? (
+            <>
 
-          </>
+              <div onClick={() => { history.push('/create-campaign') }} className='start-a-campaign'>Start a campaign</div>
+              {sessionUser.username}
+              <div>
+                <ProfileButton user={sessionUser} />
+              </div>
+            </>
 
         ) : (
           <div className='login-and-signup'>

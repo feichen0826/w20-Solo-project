@@ -41,9 +41,15 @@ const handleClosePopup = () => {
     closeModal();
 };
 
-useEffect(()=>{
-  dispatch(fetchUserDetailsAsync())
-},[])
+const [userDetailsFetched, setUserDetailsFetched] = useState(false);
+
+useEffect(() => {
+  if (currentUser && !userDetailsFetched) {
+    dispatch(fetchUserDetailsAsync());
+    setUserDetailsFetched(true);
+  }
+}, [dispatch, currentUser, userDetailsFetched]);
+
 
 useEffect(() => {
   dispatch(fetchAllCampaignsAsync());
@@ -165,18 +171,20 @@ console.log(currentUser)
         <div className='buttons-container'>
            {/* <button onClick={handleSeeOptionsClick}>See Options</button> */}
         {/* <button className='see-options-button'>See options</button> */}
+        {currentUser && currentUser.user && (
+            <OpenModalButton
+            buttonText="See options"
 
-        <OpenModalButton
-                  buttonText="See options"
+            modalComponent= {
+              <BackThisProject
+              campaignId={singleCampaign.id}
+              currentUser={currentUser}
+              />
+            }
 
-                  modalComponent= {
-                    <BackThisProject
-                    campaignId={singleCampaign.id}
-                    currentUser={currentUser}
-                    />
-                  }
+  />
+            )}
 
-        />
 
 
         {/* <button className='follow-button'><i className="far fa-heart"></i> Follow</button> */}
