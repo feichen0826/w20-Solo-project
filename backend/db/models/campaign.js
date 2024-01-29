@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       Campaign.belongsTo(models.User,{
         foreignKey:'userId',
       })
+
+      Campaign.hasMany(models.Contribution,{
+        foreignKey:'campaignId'
+      })
     }
   }
   Campaign.init({

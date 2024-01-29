@@ -4,7 +4,7 @@ import { useModal } from "../../context/Modal";
 import { useHistory } from 'react-router-dom';
 
 const BackThisProject = ({campaignId}) => {
-  const [pledgeAmount, setPledgeAmount] = useState(0);
+  const [pledgeAmount, setPledgeAmount] = useState('');
   const history = useHistory();
   const { closeModal } = useModal();
 
@@ -13,11 +13,8 @@ const BackThisProject = ({campaignId}) => {
   const handleContinueClick = (e) => {
     e.preventDefault();
     if (pledgeAmount > 0) {
-
-      console.log(`Pledge Amount: ${pledgeAmount}`);
-
       closeModal();
-      history.push(`/campaign/${campaignId}/contributions`);
+      history.push(`/campaign/${campaignId}/contributions?pledgeAmount=${pledgeAmount}`);
     } else {
 
       alert('Please enter a pledge amount greater than 0.');
@@ -38,12 +35,17 @@ const BackThisProject = ({campaignId}) => {
         <div className="input-container">
           <span className="dollar-sign">$</span>
           <input
-            type="number"
-            value={pledgeAmount}
-            onChange={(e)=> setPledgeAmount(e.target.value)}
-            placeholder="Enter your pledge"
-            required
-          />
+      className="input-field"
+      type="text"
+      placeholder="0.00"
+      value={pledgeAmount}
+      onChange={(e) => {
+        const inputValue = e.target.value;
+        if (/^\d*\.?\d*$/.test(inputValue)) {
+          setPledgeAmount(inputValue);
+        }
+      }}
+    />
           <span className="currency">USD</span>
         </div>
         <button className="continue-button" onClick={handleContinueClick}>

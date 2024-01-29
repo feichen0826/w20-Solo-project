@@ -8,8 +8,8 @@
 
 
   .left-column {
-    width: 40%;
-    margin: 20px;
+
+    margin: 50px 140px;
     padding: 20px;
   }
   .campaign-user-container{
@@ -20,4 +20,10 @@
     width: 55%;
     margin: 20px;
     padding: 20px;
+  }
+
+  .dollar-sign {
+    margin-right: 5px;
+    font-size: 1.2em;
+    color: #333;
   }

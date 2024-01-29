@@ -40,12 +40,13 @@ if(allCampaigns.length === 0 || !currentUser ){
     <div className="my-campaign-page">
       <h1 id="username">{currentUser.username}</h1>
       <nav>
-        <NavLink to="/my-campaigns" id="campaigns-link">
+        <NavLink to="/my-campaigns" id="campaigns-link" activeClassName="active-link">
           Campaigns
         </NavLink>
-        {/* <NavLink to="/my-contributions" id="contributions-link">
+        {/* <NavLink to="/my-contributions" id="contributions-link" activeClassName="active-link">
           Contributions
         </NavLink> */}
+
       </nav>
 
       <div className="campaign-list">

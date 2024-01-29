@@ -125,6 +125,7 @@ console.log(currentUser)
         <p className='campaign-detail-funding'>FUNDING</p>
         <h2 className="campaign-title1">{singleCampaign.title}</h2>
         <p className="campaign-description">{singleCampaign.description}</p>
+        <div className='campaign-user-container-box'>
           <div className='campaign-user-container'>
           {currentUser && currentUser.user && currentUser.user.profileImage && (
             <div className='campaign-profile-image-container'>
@@ -139,6 +140,7 @@ console.log(currentUser)
             <div className="campaign-city">{currentUser.user.city}, United States</div>
             )}
             </div>
+          </div>
           </div>
         <div className='campaign-stats-container'>
         <p className="campaign-stat">{singleCampaign.numBackers} backers</p>

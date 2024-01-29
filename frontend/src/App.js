@@ -13,7 +13,7 @@ import EditCampaignForm from "./components/EditCampaignForm"
 import ViewCategoryCampaign from './components/ViewCategoryCampaign'
 import ContributionPayment from './components/ContributionPayment'
 import MyContributionsPage from "./components/MyContributionsPage";
-
+import PaymentSuccess from './components/PaymentSuccess'
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ function App() {
           <Route exact path = '/campaigns/:campaignId/edit' component={EditCampaignForm} />
           <Route path = '/:categoryId/campaigns' component={ViewCategoryCampaign}/>
           <Route path ='/:campaign/:campaignId/contributions' component={ContributionPayment} />
+          <Route path = '/payment-success' component={PaymentSuccess} />
         </Switch>
       )}
     </>

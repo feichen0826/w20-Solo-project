@@ -16,12 +16,45 @@
     margin-bottom: 20px;
   }
 
-  nav a {
+
+#campaigns-link {
     text-decoration: none;
-    color: #3498db;
-    margin-right: 20px;
+    color: #181818;
+    margin-right: 40px;
     font-size: 1.2em;
+
+
+    &:hover {
+      color: #007bff;
+
+    }
+
+    &.active-link {
+      color: #aa68c1;
+
+    }
   }
+
+
+#contributions-link{
+  text-decoration: none;
+    color: #181818;
+
+    font-size: 1.2em;
+
+
+    &:hover {
+      color: #007bff;
+
+
+    }
+
+    &.active-link {
+      color: #aa68c1;
+
+    }
+}
+
 
   nav a:hover {
     color: #555;
