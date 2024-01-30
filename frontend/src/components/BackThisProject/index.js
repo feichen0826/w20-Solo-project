@@ -2,18 +2,22 @@ import React, { useState, useRef, useEffect } from 'react';
 import './BackThisProject.css';
 import { useModal } from "../../context/Modal";
 import { useHistory } from 'react-router-dom';
+import { fetchCampaignDetailsAsync } from '../../store/campaignReducer';
+import { useDispatch } from 'react-redux';
 
 const BackThisProject = ({campaignId}) => {
   const [pledgeAmount, setPledgeAmount] = useState('');
   const history = useHistory();
+  const  dispatch = useDispatch()
   const { closeModal } = useModal();
 
 
 
-  const handleContinueClick = (e) => {
+  const handleContinueClick = async (e) => {
     e.preventDefault();
     if (pledgeAmount > 0) {
       closeModal();
+      // await dispatch(fetchCampaignDetailsAsync(campaignId));
       history.push(`/campaign/${campaignId}/contributions?pledgeAmount=${pledgeAmount}`);
     } else {
 
