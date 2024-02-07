@@ -72,12 +72,11 @@
     color:#333;
     height: 600px;
 
-
-    &:hover {
-      transform: scale(1.05);
-    }
   }
 
+  .campaign-container:hover{
+    transform: scale(1.05);
+  }
   .campaign-image {
     width: 100%;
     overflow: hidden;
