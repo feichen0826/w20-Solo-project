@@ -22,7 +22,9 @@ module.exports = (sequelize, DataTypes) => {
       })
 
       Campaign.hasMany(models.Contribution,{
-        foreignKey:'campaignId'
+        foreignKey:'campaignId',
+        onDelete:'CASCADE',
+        hooks:true,
       })
     }
   }
