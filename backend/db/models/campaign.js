@@ -21,11 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey:'userId',
       })
 
-      Campaign.hasMany(models.Contribution,{
-        foreignKey:'campaignId',
-        onDelete:'CASCADE',
-        hooks:true,
-      })
+      // Campaign.hasMany(models.Contribution,{
+      //   foreignKey:'campaignId',
+      //   onDelete:'CASCADE',
+      //   hooks:true,
+      // })
     }
   }
   Campaign.init({
